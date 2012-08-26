@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MessageCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="messagecollection.xsd">
+
+	<Plugin>
+		<ShortDescription>FindBugs SLF4J Plugin</ShortDescription>
+		<Details>This plugin provides detector for SLF4J</Details>
+	</Plugin>
+
+	<Detector class="jp.skypencil.findbugs.slf4j.WrongPlaceholderDetector">
+		<Details>
+			Finds message format which has wrong format string.
+		</Details>
+	</Detector>
+
+	<BugPattern type="SLF4J_PLACE_HOLDER_MISMATCH">
+		<ShortDescription>Count of placeholder does not equal to count of
+			parameter</ShortDescription>
+		<LongDescription>Count of placeholder({1}) does not equal to count of
+			parameter({2})</LongDescription>
+		<Details>
+<![CDATA[
+<p>Count of placeholder should equal to count of parameter.</p>
+]]>
+		</Details>
+	</BugPattern>
+
+	<BugCode abbrev="SLF4J">SLF4J</BugCode>
+</MessageCollection>
