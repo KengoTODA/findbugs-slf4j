@@ -43,6 +43,10 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 				&& TARGET_METHOD_NAMES.contains(getNameConstantOperand())
 				&& !NON_TARGET_SIGS.contains(signature)) {
 			String formatString = getFormatString(stack, signature);
+			if (formatString == null) {
+				return;
+			}
+
 			int placeholderCount = countPlaceholder(formatString);
 			int parameterCount = countParameter(stack, signature);
 
@@ -89,7 +93,11 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 		int stackIndex = indexOf(signature, "Ljava/lang/String;");
 		Object constant = stack.getStackItem(stackIndex).getConstant();
 		if (constant == null) {
-			throw new UnsupportedOperationException("formatString should be constant");
+			BugInstance bug = new BugInstance(this,
+					"SLF4J_FORMAT_SHOULD_BE_CONST", HIGH_PRIORITY)
+					.addSourceLine(this).addClassAndMethod(this)
+					.addCalledMethod(this);
+			bugReporter.reportBug(bug);
 		}
 		return constant.toString();
 	}
