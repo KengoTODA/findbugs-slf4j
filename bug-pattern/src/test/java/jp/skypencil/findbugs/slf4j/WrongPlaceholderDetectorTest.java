@@ -22,7 +22,7 @@ public class WrongPlaceholderDetectorTest {
 		assertThat(detector.indexOf("(Ljava/lang/String;)V", "Ljava/lang/String;"), is(0));
 		assertThat(detector.indexOf("(Ljava/lang/String;Ljava/lang/String;)V", "Ljava/lang/String;"), is(1));
 		assertThat(detector.indexOf("(Ljava/lang/String;Ljava/lang/Throwable;)V", "Ljava/lang/String;"), is(1));
-		assertThat(detector.indexOf("(I,Ljava/lang/String;)V", "Ljava/lang/String;"), is(0));
+		assertThat(detector.indexOf("(Ljava/lang/Object;Ljava/lang/String;)V", "Ljava/lang/String;"), is(0));
 		assertThat(detector.indexOf("(Ljava/lang/String;)V", "Ljava/lang/Throwable;"), is(-1));
 	}
 
