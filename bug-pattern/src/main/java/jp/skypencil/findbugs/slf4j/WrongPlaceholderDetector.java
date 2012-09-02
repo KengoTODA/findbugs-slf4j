@@ -18,6 +18,8 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 
 	private final BugReporter bugReporter;
 
+	private int arraySize = Integer.MIN_VALUE;
+
 	private static final Set<String> TARGET_METHOD_NAMES = new HashSet<String>(
 			Arrays.asList("trace", "debug", "info", "warn", "error"));
 
@@ -34,45 +36,61 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 
 	@Override
 	public void sawOpcode(int seen) {
-		if (seen != INVOKEINTERFACE) {
+		if (seen == ANEWARRAY) {
+			memoryArraySize();
+		} else if (seen == INVOKEINTERFACE) {
+			checkLogger();
+		}
+	}
+
+	private void memoryArraySize() {
+		Item givenValue = stack.getStackItem(0);
+		if (givenValue == null || !(givenValue.getConstant() instanceof Number)) {
+			throw new AssertionError("wrong byte code: anewarray should get int as 0th oprand stack entry");
+		}
+		Number arraySize = (Number) givenValue.getConstant();
+		this.arraySize = arraySize.intValue();
+	}
+
+	private void checkLogger() {
+		String signature = getSigConstantOperand();
+		if (!"org/slf4j/Logger".equals(getClassConstantOperand())
+				|| !TARGET_METHOD_NAMES.contains(getNameConstantOperand())
+				|| NON_TARGET_SIGS.contains(signature)) {
 			return;
 		}
 
-		String signature = getSigConstantOperand();
-		if ("org/slf4j/Logger".equals(getClassConstantOperand())
-				&& TARGET_METHOD_NAMES.contains(getNameConstantOperand())
-				&& !NON_TARGET_SIGS.contains(signature)) {
-			String formatString = getFormatString(stack, signature);
-			if (formatString == null) {
-				return;
-			}
+		String formatString = getFormatString(stack, signature);
+		if (formatString == null) {
+			return;
+		}
 
-			int placeholderCount = countPlaceholder(formatString);
-			int parameterCount = countParameter(stack, signature);
+		int placeholderCount = countPlaceholder(formatString);
+		int parameterCount = countParameter(stack, signature);
 
-			if (placeholderCount != parameterCount) {
-				BugInstance bug = new BugInstance(this,
-						"SLF4J_PLACE_HOLDER_MISMATCH", HIGH_PRIORITY)
-						.addInt(placeholderCount).addInt(parameterCount)
-						.addSourceLine(this).addClassAndMethod(this)
-						.addCalledMethod(this);
-				bugReporter.reportBug(bug);
-			}
+		if (placeholderCount != parameterCount) {
+			BugInstance bug = new BugInstance(this,
+					"SLF4J_PLACE_HOLDER_MISMATCH", HIGH_PRIORITY)
+					.addInt(placeholderCount).addInt(parameterCount)
+					.addSourceLine(this).addClassAndMethod(this)
+					.addCalledMethod(this);
+			bugReporter.reportBug(bug);
 		}
 	}
 
 	int countParameter(OpcodeStack stack, String methodSignature) {
 		String[] signatures = splitSignature(methodSignature);
+		if (signatures[signatures.length - 1].equals("[Ljava/lang/Object;")) {
+			if (arraySize < 0) {
+				throw new IllegalStateException("no array initializer found");
+			}
+			return arraySize;
+		}
+
 		int parameterCount = signatures.length - 1; // -1 means 'formatString'
 													// is not parameter
 		if (signatures[0].equals("Lorg/slf4j/Maker;")) {
 			--parameterCount;
-		}
-		if (signatures[signatures.length - 1].equals("[Ljava/lang/Object;")) {
-			Item array = stack.getStackItem(0);
-			if (array.isArray()) {
-				throw new UnsupportedOperationException("Object[] argument is not supported yet");
-			}
 		}
 		return parameterCount;
 	}
@@ -98,6 +116,7 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 					.addSourceLine(this).addClassAndMethod(this)
 					.addCalledMethod(this);
 			bugReporter.reportBug(bug);
+			return null;
 		}
 		return constant.toString();
 	}
