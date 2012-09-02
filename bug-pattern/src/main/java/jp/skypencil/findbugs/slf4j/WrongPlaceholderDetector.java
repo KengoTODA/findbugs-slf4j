@@ -23,8 +23,6 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 
 	private final BugReporter bugReporter;
 
-	private int arraySize = Integer.MIN_VALUE;
-
 	private JavaClass throwable;
 
 	private static final Set<String> TARGET_METHOD_NAMES = new HashSet<String>(
@@ -48,16 +46,32 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 
 	@Override
 	public void sawOpcode(int seen) {
-		if (seen == ANEWARRAY) {
-			memoryArraySize();
-		} else if (seen == INVOKEINTERFACE) {
+		if (seen == INVOKEINTERFACE) {
 			checkLogger();
 		}
 	}
 
 	@Override
 	public void afterOpcode(int seen) {
+		if (seen == ANEWARRAY) {
+			Number arraySize;
+			try {
+				Item arraySizeItem = stack.getStackItem(0);
+				if (arraySizeItem == null || !(arraySizeItem.getConstant() instanceof Number)) {
+					throw new AssertionError("wrong byte code: anewarray should get int as 0th oprand stack entry");
+				}
+				arraySize = (Number) arraySizeItem.getConstant();
+			} finally {
+				super.afterOpcode(seen);
+			}
+
+			Item createdArray = stack.getStackItem(0);
+			createdArray.setUserValue(arraySize);
+			return;
+		}
+
 		super.afterOpcode(seen);
+
 		if (seen != NEW) {
 			return;
 		}
@@ -70,15 +84,6 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 		} catch (ClassNotFoundException e) {
 			throw new IllegalStateException("class not found", e);
 		}
-	}
-
-	private void memoryArraySize() {
-		Item givenValue = stack.getStackItem(0);
-		if (givenValue == null || !(givenValue.getConstant() instanceof Number)) {
-			throw new AssertionError("wrong byte code: anewarray should get int as 0th oprand stack entry");
-		}
-		Number arraySize = (Number) givenValue.getConstant();
-		this.arraySize = arraySize.intValue();
 	}
 
 	private void checkLogger() {
@@ -110,11 +115,12 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 	int countParameter(OpcodeStack stack, String methodSignature) {
 		String[] signatures = splitSignature(methodSignature);
 		if (signatures[signatures.length - 1].equals("[Ljava/lang/Object;")) {
-			if (arraySize < 0) {
+			Number arraySize = (Number) stack.getStackItem(0).getUserValue();
+			if (arraySize.intValue() < 0) {
 				throw new IllegalStateException("no array initializer found");
 			}
 			// TODO -1 if array contains a Throwable at last
-			return arraySize;
+			return arraySize.intValue();
 		}
 
 		int parameterCount = signatures.length - 1; // -1 means 'formatString'
