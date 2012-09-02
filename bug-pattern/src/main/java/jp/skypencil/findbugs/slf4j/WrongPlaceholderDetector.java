@@ -6,6 +6,9 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.JavaClass;
+
 import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
 import edu.umd.cs.findbugs.OpcodeStack;
@@ -13,12 +16,16 @@ import edu.umd.cs.findbugs.OpcodeStack.Item;
 import edu.umd.cs.findbugs.bcel.OpcodeStackDetector;
 
 public class WrongPlaceholderDetector extends OpcodeStackDetector {
+	private static final String IS_THROWABLE = "IS_THROWABLE";
+
 	private static final Pattern PLACEHOLDER_PATTERN = Pattern
 			.compile("(.?)(\\\\\\\\)*\\{\\}");
 
 	private final BugReporter bugReporter;
 
 	private int arraySize = Integer.MIN_VALUE;
+
+	private JavaClass throwable;
 
 	private static final Set<String> TARGET_METHOD_NAMES = new HashSet<String>(
 			Arrays.asList("trace", "debug", "info", "warn", "error"));
@@ -32,6 +39,11 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 
 	public WrongPlaceholderDetector(BugReporter bugReporter) {
 		this.bugReporter = bugReporter;
+		try {
+			this.throwable = Repository.lookupClass("java/lang/Throwable");
+		} catch (ClassNotFoundException e) {
+			throw new AssertionError(e);
+		}
 	}
 
 	@Override
@@ -40,6 +52,23 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 			memoryArraySize();
 		} else if (seen == INVOKEINTERFACE) {
 			checkLogger();
+		}
+	}
+
+	@Override
+	public void afterOpcode(int seen) {
+		super.afterOpcode(seen);
+		if (seen != NEW) {
+			return;
+		}
+
+		try {
+			JavaClass clazz = Repository.lookupClass(getClassConstantOperand());
+			if (clazz.instanceOf(throwable)) {
+				stack.getStackItem(0).setUserValue(IS_THROWABLE);
+			}
+		} catch (ClassNotFoundException e) {
+			throw new IllegalStateException("class not found", e);
 		}
 	}
 
@@ -84,12 +113,17 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 			if (arraySize < 0) {
 				throw new IllegalStateException("no array initializer found");
 			}
+			// TODO -1 if array contains a Throwable at last
 			return arraySize;
 		}
 
 		int parameterCount = signatures.length - 1; // -1 means 'formatString'
 													// is not parameter
 		if (signatures[0].equals("Lorg/slf4j/Maker;")) {
+			--parameterCount;
+		}
+		Item lastItem = stack.getStackItem(0);
+		if (IS_THROWABLE.equals(lastItem.getUserValue())) {
 			--parameterCount;
 		}
 		return parameterCount;
