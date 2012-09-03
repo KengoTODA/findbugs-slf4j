@@ -58,7 +58,8 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 			try {
 				Item arraySizeItem = stack.getStackItem(0);
 				if (arraySizeItem == null || !(arraySizeItem.getConstant() instanceof Number)) {
-					throw new AssertionError("wrong byte code: anewarray should get int as 0th oprand stack entry");
+					throw new AssertionError("wrong byte code: anewarray should get int as 0th oprand stack entry, " +
+							"but given value is: " + arraySizeItem.getConstant());
 				}
 				arraySize = (Number) arraySizeItem.getConstant();
 			} finally {
