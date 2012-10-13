@@ -10,7 +10,7 @@
 	<artifactId>findbugs-slf4j</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<url>https://github.com/eller86/findbugs-slf4j</url>
-	<description>This plugin provides detector for SLF4J.</description>
+	<description>FindBugs plugin for SLF4J</description>
 	<packaging>pom</packaging>
 	<modules>
 		<module>bug-pattern</module>
@@ -39,6 +39,10 @@
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>2.5.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.6</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>

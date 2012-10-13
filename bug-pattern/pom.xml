@@ -32,7 +32,6 @@
 					Note: You should execute "clean" phase before you execute "test" phase.
 				-->
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.6</version>
 				<executions>
 					<execution>
 						<phase>prepare-package</phase>
