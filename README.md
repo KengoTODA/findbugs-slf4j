@@ -45,17 +45,12 @@ Alert if format is not CONST.
 class Foo {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     void method() {
-        // invalid: this logging method has 2 placeholders, but given parameter is only 1.
-        logger.info("{}, {}.", "Hello");
+        // invalid: format is not CONST
+        String format = "Hello, ";
+        logger.info(format + "{}.", "World");
 
         // valid
-        logger.info("{}, {}.", "Hello", "World");
-
-        // invalid: Throwable instance does not need placeholder
-        logger.error("{}, {}", "Hello", new RuntimeException());
-
-        // valid
-        logger.error("{}", "Hello", new RuntimeException());
+        logger.info("Hello, {}.", "World");
     }
 }
 ```
