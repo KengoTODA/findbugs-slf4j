@@ -7,12 +7,39 @@ Check [PMD ruleset for SLF4J](https://github.com/eller86/ruleset-for-SLF4J) if y
 
 # bug pattern
 
-Currently this product provides you only 1 pattern.
+Currently this product provides you 2 patterns.
 
-## wrong placeholder
+## SLF4J_PLACE_HOLDER_MISMATCH
 
 This pattern checks how placeholder is used.
 Alert if count of placeholder does not match to count of parameter.
+
+  Note:
+  Format should be CONST to use this bug pattern. Use SLF4J_FORMAT_SHOULD_BE_CONST bug pattern to check it.
+
+```java
+class Foo {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+    void method() {
+        // invalid: this logging method has 2 placeholders, but given parameter is only 1.
+        logger.info("{}, {}.", "Hello");
+
+        // valid
+        logger.info("{}, {}.", "Hello", "World");
+
+        // invalid: Throwable instance does not need placeholder
+        logger.error("{}, {}", "Hello", new RuntimeException());
+
+        // valid
+        logger.error("{}", "Hello", new RuntimeException());
+    }
+}
+```
+
+## SLF4J_FORMAT_SHOULD_BE_CONST
+
+This pattern checks given format is CONST or not.
+Alert if format is not CONST.
 
 ```java
 class Foo {
@@ -37,7 +64,8 @@ class Foo {
 
 ## 0.1
 
-- "wrong placeholder" bug pattern
+- SLF4J_PLACE_HOLDER_MISMATCH bug pattern
+- SLF4J_FORMAT_SHOULD_BE_CONST bug pattern
 
 # copyright and license
 Copyright 2012 Kengo TODA (eller86)
