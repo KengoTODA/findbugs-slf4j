@@ -23,7 +23,7 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 
 	private final BugReporter bugReporter;
 
-	private JavaClass throwable;
+	private final JavaClass throwable;
 
 	private static final Set<String> TARGET_METHOD_NAMES = new HashSet<String>(
 			Arrays.asList("trace", "debug", "info", "warn", "error"));
