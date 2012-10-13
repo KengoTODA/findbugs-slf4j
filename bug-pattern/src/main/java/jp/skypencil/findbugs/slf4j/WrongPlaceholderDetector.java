@@ -54,31 +54,18 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 	@Override
 	public void afterOpcode(int seen) {
 		if (seen == ANEWARRAY) {
-			Number arraySize;
-			try {
-				Item arraySizeItem = stack.getStackItem(0);
-				if (arraySizeItem != null && arraySizeItem.getConstant() instanceof Number) {
-					// save array size as "user value"
-					arraySize = (Number) arraySizeItem.getConstant();
-				} else {
-					// currently we ignore array which gets variable as array size
-					arraySize = null;
-				}
-			} finally {
-				super.afterOpcode(seen);
-			}
-
-			Item createdArray = stack.getStackItem(0);	// we can get created array after `super.afterOpcode(seen)` is called
-			createdArray.setUserValue(arraySize);
+			tryToDetectArraySize(seen);
 			return;
 		}
 
 		super.afterOpcode(seen);
 
-		if (seen != NEW) {
-			return;
+		if (seen == NEW) {
+			markThrowableInstance();
 		}
+	}
 
+	private void markThrowableInstance() {
 		try {
 			JavaClass clazz = Repository.lookupClass(getClassConstantOperand());
 			if (clazz.instanceOf(throwable)) {
@@ -87,6 +74,25 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 		} catch (ClassNotFoundException e) {
 			throw new IllegalStateException("class not found", e);
 		}
+	}
+
+	private void tryToDetectArraySize(int seen) {
+		Number arraySize;
+		try {
+			Item arraySizeItem = stack.getStackItem(0);
+			if (arraySizeItem != null && arraySizeItem.getConstant() instanceof Number) {
+				// save array size as "user value"
+				arraySize = (Number) arraySizeItem.getConstant();
+			} else {
+				// currently we ignore array which gets variable as array size
+				arraySize = null;
+			}
+		} finally {
+			super.afterOpcode(seen);
+		}
+
+		Item createdArray = stack.getStackItem(0);	// we can get created array after `super.afterOpcode(seen)` is called
+		createdArray.setUserValue(arraySize);
 	}
 
 	private void checkLogger() {
