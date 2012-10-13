@@ -1,77 +1,77 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>jp.skypencil.findbugs.slf4j</groupId>
-		<artifactId>findbugs-slf4j</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
-	<artifactId>bug-pattern</artifactId>
-	<url>https://github.com/eller86/findbugs-slf4j</url>
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<!--
-					Copy meta files to default outputDirectory at "prepare-package" phase.
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>jp.skypencil.findbugs.slf4j</groupId>
+    <artifactId>findbugs-slf4j</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>bug-pattern</artifactId>
+  <url>https://github.com/eller86/findbugs-slf4j</url>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <!--
+          Copy meta files to default outputDirectory at "prepare-package" phase.
 
-					Because of findbugs specification, an edu.umd.cs.findbugs.PluginDoesntContainMetadataException
-					instance would be thrown at "test" phase if we put these meta files on '/src/main/resources'.
-					We have to copy these meta files after testing.
+          Because of findbugs specification, an edu.umd.cs.findbugs.PluginDoesntContainMetadataException
+          instance would be thrown at "test" phase if we put these meta files on '/src/main/resources'.
+          We have to copy these meta files after testing.
 
-					See "How to build FindBugs plugin with Maven" thread in FindBugs mailing list
-					(findbugs-discuss@cs.umd.edu) to get detail and other solution.
+          See "How to build FindBugs plugin with Maven" thread in FindBugs mailing list
+          (findbugs-discuss@cs.umd.edu) to get detail and other solution.
 
-					Note: You should execute "clean" phase before you execute "test" phase.
-				-->
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.outputDirectory}</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src/main/meta</directory>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
-	<dependencies>
-		<dependency>
-			<groupId>com.google.code.findbugs</groupId>
-			<artifactId>findbugs</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-library</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit-dep</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>1.9.0</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+          Note: You should execute "clean" phase before you execute "test" phase.
+        -->
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/meta</directory>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>findbugs</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-library</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit-dep</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <version>1.9.0</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 </project>
