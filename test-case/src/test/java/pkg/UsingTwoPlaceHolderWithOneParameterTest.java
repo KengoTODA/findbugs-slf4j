@@ -31,7 +31,7 @@ public class UsingTwoPlaceHolderWithOneParameterTest {
 			NamedNodeMap attr = node.getAttributes();
 			if (attr.getNamedItem("path").getNodeValue().equals("pkg/UsingTwoPlaceHolderWithOneParameter.java")) {
 				String bugCount = attr.getNamedItem("bugCount").getNodeValue();
-				assertThat("UsingTwoPlaceHolderWithOneParameter.java should have no bug", bugCount, is("2"));
+				assertThat("UsingTwoPlaceHolderWithOneParameter.java should have 2 bugs", bugCount, is("2"));
 				return;
 			}
 		}
