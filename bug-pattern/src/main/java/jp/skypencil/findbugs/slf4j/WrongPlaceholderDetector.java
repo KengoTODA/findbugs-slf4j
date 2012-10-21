@@ -25,11 +25,13 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 
 	private final JavaClass throwable;
 
+	private boolean withoutFormat;
+
 	private static final Set<String> TARGET_METHOD_NAMES = new HashSet<String>(
 			Arrays.asList("trace", "debug", "info", "warn", "error"));
 
 	// these methods do not use formatter
-	private static final Set<String> NON_TARGET_SIGS = new HashSet<String>(
+	private static final Set<String> SIGS_WITHOUT_FORMAT = new HashSet<String>(
 			Arrays.asList("(Ljava/lang/String;)V",
 					"(Lorg/slf4j/Maker;Ljava/lang/String;)V",
 					"(Ljava/lang/String;Ljava/lang/Throwable;)V",
@@ -98,13 +100,13 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 	private void checkLogger() {
 		String signature = getSigConstantOperand();
 		if (!"org/slf4j/Logger".equals(getClassConstantOperand())
-				|| !TARGET_METHOD_NAMES.contains(getNameConstantOperand())
-				|| NON_TARGET_SIGS.contains(signature)) {
+				|| !TARGET_METHOD_NAMES.contains(getNameConstantOperand())) {
 			return;
 		}
+		withoutFormat = SIGS_WITHOUT_FORMAT.contains(signature);
 
 		String formatString = getFormatString(stack, signature);
-		if (formatString == null) {
+		if (formatString == null || withoutFormat) {
 			return;
 		}
 
