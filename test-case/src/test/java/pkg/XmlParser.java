@@ -35,7 +35,7 @@ class XmlParser {
 					if (bugCount.equals("0")) {
 						message = filePath + " should have no bug";
 					} else {
-						message = filePath + " should have " + bugCount + " bugs";
+						message = filePath + " should have " + expectedBugs + " bugs";
 					}
 
 					assertThat(message, bugCount, is(Integer.toString(expectedBugs)));
