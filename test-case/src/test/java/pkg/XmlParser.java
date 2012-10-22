@@ -32,7 +32,7 @@ class XmlParser {
 				if (attr.getNamedItem("path").getNodeValue().equals(filePath)) {
 					final String bugCount = attr.getNamedItem("bugCount").getNodeValue();
 					final String message;
-					if (bugCount.equals("0")) {
+					if (expectedBugs == 0) {
 						message = filePath + " should have no bug";
 					} else {
 						message = filePath + " should have " + expectedBugs + " bugs";
