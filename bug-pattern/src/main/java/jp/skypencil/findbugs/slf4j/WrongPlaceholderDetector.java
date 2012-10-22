@@ -79,22 +79,23 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 	}
 
 	private void tryToDetectArraySize(int seen) {
-		Number arraySize;
+		final int arraySize;
 		try {
 			Item arraySizeItem = stack.getStackItem(0);
 			if (arraySizeItem != null && arraySizeItem.getConstant() instanceof Number) {
 				// save array size as "user value"
-				arraySize = (Number) arraySizeItem.getConstant();
+				arraySize = ((Number) arraySizeItem.getConstant()).intValue();
 			} else {
 				// currently we ignore array which gets variable as array size
-				arraySize = null;
+				arraySize = -1;
 			}
 		} finally {
 			super.afterOpcode(seen);
 		}
 
+		final ArrayData arrayData = new ArrayData(arraySize);
 		Item createdArray = stack.getStackItem(0);	// we can get created array after `super.afterOpcode(seen)` is called
-		createdArray.setUserValue(arraySize);
+		createdArray.setUserValue(arrayData);
 	}
 
 	private void checkLogger() {
@@ -126,12 +127,12 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 	int countParameter(OpcodeStack stack, String methodSignature) {
 		String[] signatures = splitSignature(methodSignature);
 		if (signatures[signatures.length - 1].equals("[Ljava/lang/Object;")) {
-			Number arraySize = (Number) stack.getStackItem(0).getUserValue();
-			if (arraySize.intValue() < 0) {
+			ArrayData arrayData = (ArrayData) stack.getStackItem(0).getUserValue();
+			if (arrayData.getSize() < 0) {
 				throw new IllegalStateException("no array initializer found");
 			}
 			// TODO -1 if array contains a Throwable at last
-			return arraySize.intValue();
+			return arrayData.getSize();
 		}
 
 		int parameterCount = signatures.length - 1; // -1 means 'formatString'
