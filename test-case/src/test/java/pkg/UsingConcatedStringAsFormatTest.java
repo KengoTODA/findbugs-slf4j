@@ -6,7 +6,7 @@ public class UsingConcatedStringAsFormatTest {
 
 	@Test
 	public void test() {
-		new XmlParser().expectBugs(UsingConcatedStringAsFormat.class.getSimpleName(), 4);
+		new XmlParser().expectBugs(UsingConcatedStringAsFormat.class, 4);
 	}
 
 }

@@ -11,7 +11,7 @@ public class UsingNonConstantAsFormatTest {
 
 	@Test
 	public void test() throws SAXException, IOException, ParserConfigurationException {
-		new XmlParser().expectBugs(UsingNonConstantAsFormat.class.getSimpleName(), 2);
+		new XmlParser().expectBugs(UsingNonConstantAsFormat.class, 2);
 	}
 
 }

@@ -11,7 +11,7 @@ public class MessageOnlyTest {
 
 	@Test
 	public void test() throws SAXException, IOException, ParserConfigurationException {
-		new XmlParser().expectBugs(MessageOnly.class.getSimpleName(), 0);
+		new XmlParser().expectBugs(MessageOnly.class, 0);
 	}
 
 }

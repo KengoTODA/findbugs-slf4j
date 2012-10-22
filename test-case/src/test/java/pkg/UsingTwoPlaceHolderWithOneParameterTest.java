@@ -11,7 +11,7 @@ public class UsingTwoPlaceHolderWithOneParameterTest {
 
 	@Test
 	public void test() throws SAXException, IOException, ParserConfigurationException {
-		new XmlParser().expectBugs(UsingTwoPlaceHolderWithOneParameter.class.getSimpleName(), 2);
+		new XmlParser().expectBugs(UsingTwoPlaceHolderWithOneParameter.class, 2);
 	}
 
 }

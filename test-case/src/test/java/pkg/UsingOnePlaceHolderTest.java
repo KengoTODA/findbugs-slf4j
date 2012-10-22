@@ -11,7 +11,7 @@ public class UsingOnePlaceHolderTest {
 
 	@Test
 	public void test() throws SAXException, IOException, ParserConfigurationException {
-		new XmlParser().expectBugs(UsingOnePlaceHolder.class.getSimpleName(), 0);
+		new XmlParser().expectBugs(UsingOnePlaceHolder.class, 0);
 	}
 
 }

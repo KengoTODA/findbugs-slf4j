@@ -11,7 +11,7 @@ public class UsingThrowableWithParameterTest {
 
 	@Test
 	public void test() throws SAXException, IOException, ParserConfigurationException {
-		new XmlParser().expectBugs(UsingThrowableWithParameter.class.getSimpleName(), 0);
+		new XmlParser().expectBugs(UsingThrowableWithParameter.class, 0);
 	}
 
 }

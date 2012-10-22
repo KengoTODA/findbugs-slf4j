@@ -18,7 +18,8 @@ import org.xml.sax.SAXException;
 
 class XmlParser {
 
-	void expectBugs(String className, int expectedBugs) {
+	void expectBugs(Class<?> clazz, int expectedBugs) {
+		final String className = clazz.getSimpleName();
 		final String filePath = "pkg/" + className + ".java";
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();

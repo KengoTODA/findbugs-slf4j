@@ -6,7 +6,7 @@ public class UsingConstantAsFormatTest {
 
 	@Test
 	public void test() {
-		new XmlParser().expectBugs(UsingConstantAsFormat.class.getSimpleName(), 0);
+		new XmlParser().expectBugs(UsingConstantAsFormat.class, 0);
 	}
 
 }
