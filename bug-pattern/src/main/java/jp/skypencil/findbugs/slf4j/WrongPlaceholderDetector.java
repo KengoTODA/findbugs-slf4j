@@ -50,6 +50,23 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 	public void sawOpcode(int seen) {
 		if (seen == INVOKEINTERFACE) {
 			checkLogger();
+		} else if (seen == AASTORE) {
+			checkStoredInstance();
+		}
+	}
+
+	private void checkStoredInstance() {
+		Item storedValue = stack.getStackItem(0);
+		Item arrayIndexItem = stack.getStackItem(1);
+		Item targetArray = stack.getStackItem(2);
+		ArrayData data = (ArrayData) targetArray.getUserValue();
+		Object arrayIndex = arrayIndexItem.getConstant();
+
+		if (arrayIndex instanceof Number) {
+			Number index = (Number) arrayIndex;
+			if (data.getSize() - 1 == index.intValue()) {
+				data.setThrowableAtLast(IS_THROWABLE.equals(storedValue.getUserValue()));
+			}
 		}
 	}
 
@@ -57,7 +74,7 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 	public void afterOpcode(int seen) {
 		if (seen == ANEWARRAY) {
 			tryToDetectArraySize(seen);
-			return;
+			return;	// `super.afterOpcode(seen)` has been called in #tryToDetectArraySize
 		}
 
 		super.afterOpcode(seen);
@@ -131,8 +148,11 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 			if (arrayData.getSize() < 0) {
 				throw new IllegalStateException("no array initializer found");
 			}
-			// TODO -1 if array contains a Throwable at last
-			return arrayData.getSize();
+			int parameterCount = arrayData.getSize();
+			if (arrayData.hasThrowableAtLast()) {
+				--parameterCount;
+			}
+			return parameterCount;
 		}
 
 		int parameterCount = signatures.length - 1; // -1 means 'formatString'
