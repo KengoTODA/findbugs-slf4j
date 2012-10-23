@@ -16,7 +16,7 @@ import edu.umd.cs.findbugs.OpcodeStack.Item;
 import edu.umd.cs.findbugs.bcel.OpcodeStackDetector;
 
 public class WrongPlaceholderDetector extends OpcodeStackDetector {
-    private static final String IS_THROWABLE = "IS_THROWABLE";
+    static final String IS_THROWABLE = "IS_THROWABLE";
 
     private static final Pattern PLACEHOLDER_PATTERN = Pattern
             .compile("(.?)(\\\\\\\\)*\\{\\}");
@@ -26,6 +26,8 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
     private final JavaClass throwable;
 
     private boolean withoutFormat;
+
+    private final ArrayDataHandler arrayDataHandler;
 
     private static final Set<String> TARGET_METHOD_NAMES = new HashSet<String>(
             Arrays.asList("trace", "debug", "info", "warn", "error"));
@@ -44,41 +46,26 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
         } catch (ClassNotFoundException e) {
             throw new AssertionError(e);
         }
+        this.arrayDataHandler = new ArrayDataHandler();
     }
 
     @Override
     public void sawOpcode(int seen) {
         if (seen == INVOKEINTERFACE) {
             checkLogger();
-        } else if (seen == AASTORE) {
-            checkStoredInstance();
         }
-    }
-
-    private void checkStoredInstance() {
-        Item storedValue = stack.getStackItem(0);
-        Item arrayIndexItem = stack.getStackItem(1);
-        Item targetArray = stack.getStackItem(2);
-        Object arrayIndex = arrayIndexItem.getConstant();
-
-        if (arrayIndex instanceof Number) {
-            ArrayData data = (ArrayData) targetArray.getUserValue();
-            Number index = (Number) arrayIndex;
-            if (data != null && data.getSize() - 1 == index.intValue()) {
-                data.setThrowableAtLast(IS_THROWABLE.equals(storedValue.getUserValue()));
-            }
-        }
+        arrayDataHandler.sawOpcode(stack, seen);
     }
 
     @Override
     public void afterOpcode(int seen) {
-        if (seen == ANEWARRAY) {
-            tryToDetectArraySize(seen);
-            return;    // `super.afterOpcode(seen)` has been called in #tryToDetectArraySize
-        }
+        ArrayData newUserValueToSet = arrayDataHandler.afterOpcode(stack, seen);
 
         super.afterOpcode(seen);
 
+        if (newUserValueToSet != null) {
+            getStack().getStackItem(0).setUserValue(newUserValueToSet);
+        }
         if (seen == NEW) {
             markThrowableInstance();
         }
@@ -93,26 +80,6 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
         } catch (ClassNotFoundException e) {
             throw new IllegalStateException("class not found", e);
         }
-    }
-
-    private void tryToDetectArraySize(int seen) {
-        final int arraySize;
-        try {
-            Item arraySizeItem = stack.getStackItem(0);
-            if (arraySizeItem != null && arraySizeItem.getConstant() instanceof Number) {
-                // save array size as "user value"
-                arraySize = ((Number) arraySizeItem.getConstant()).intValue();
-            } else {
-                // currently we ignore array which gets variable as array size
-                arraySize = -1;
-            }
-        } finally {
-            super.afterOpcode(seen);
-        }
-
-        final ArrayData arrayData = new ArrayData(arraySize);
-        Item createdArray = stack.getStackItem(0);    // we can get created array after `super.afterOpcode(seen)` is called
-        createdArray.setUserValue(arrayData);
     }
 
     private void checkLogger() {
