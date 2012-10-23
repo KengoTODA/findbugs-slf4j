@@ -64,7 +64,8 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
         super.afterOpcode(seen);
 
         if (newUserValueToSet != null) {
-            getStack().getStackItem(0).setUserValue(newUserValueToSet);
+            Item createdArray = stack.getStackItem(0);
+            createdArray.setUserValue(newUserValueToSet);
         }
         if (seen == NEW) {
             markThrowableInstance();
