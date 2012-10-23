@@ -55,12 +55,30 @@ class Foo {
 }
 ```
 
+## SLF4J_UNKNOWN_ARRAY
+
+This pattern reports a bug if your code is using array which is provided as method argument or returned from other method.
+It makes our verification harder, so please stop using it.
+
+```java
+class Foo {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+    void method(Object[] args) {
+        // invalid: using method argument as parameter
+        logger.info("Hello, {}.", args);
+
+        // valid
+        logger.info("Hello, {}.", new Object[]{ "World" });
+    }
+}
+
 # history
 
 ## 0.1
 
 - SLF4J_PLACE_HOLDER_MISMATCH bug pattern
 - SLF4J_FORMAT_SHOULD_BE_CONST bug pattern
+- SLF4J_UNKNOWN_ARRAY bug pattern
 
 # copyright and license
 Copyright 2012 Kengo TODA (eller86)

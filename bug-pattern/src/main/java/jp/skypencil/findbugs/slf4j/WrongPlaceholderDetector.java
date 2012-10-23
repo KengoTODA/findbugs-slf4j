@@ -59,12 +59,12 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 		Item storedValue = stack.getStackItem(0);
 		Item arrayIndexItem = stack.getStackItem(1);
 		Item targetArray = stack.getStackItem(2);
-		ArrayData data = (ArrayData) targetArray.getUserValue();
 		Object arrayIndex = arrayIndexItem.getConstant();
 
 		if (arrayIndex instanceof Number) {
+			ArrayData data = (ArrayData) targetArray.getUserValue();
 			Number index = (Number) arrayIndex;
-			if (data.getSize() - 1 == index.intValue()) {
+			if (data != null && data.getSize() - 1 == index.intValue()) {
 				data.setThrowableAtLast(IS_THROWABLE.equals(storedValue.getUserValue()));
 			}
 		}
@@ -129,7 +129,18 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 		}
 
 		int placeholderCount = countPlaceholder(formatString);
-		int parameterCount = countParameter(stack, signature);
+		int parameterCount;
+		try {
+			parameterCount = countParameter(stack, signature);
+		} catch (IllegalStateException e) {
+			// Using unknown array as parameter. In this case, we cannot check number of parameter.
+			BugInstance bug = new BugInstance(this,
+					"SLF4J_UNKNOWN_ARRAY", HIGH_PRIORITY)
+					.addSourceLine(this).addClassAndMethod(this)
+					.addCalledMethod(this);
+			bugReporter.reportBug(bug);
+			return;
+		}
 
 		if (placeholderCount != parameterCount) {
 			BugInstance bug = new BugInstance(this,
@@ -145,7 +156,7 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 		String[] signatures = splitSignature(methodSignature);
 		if (signatures[signatures.length - 1].equals("[Ljava/lang/Object;")) {
 			ArrayData arrayData = (ArrayData) stack.getStackItem(0).getUserValue();
-			if (arrayData.getSize() < 0) {
+			if (arrayData == null || arrayData.getSize() < 0) {
 				throw new IllegalStateException("no array initializer found");
 			}
 			int parameterCount = arrayData.getSize();

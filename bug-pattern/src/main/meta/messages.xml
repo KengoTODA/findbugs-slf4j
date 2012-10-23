@@ -35,5 +35,19 @@
     </Details>
   </BugPattern>
 
+  <BugPattern type="SLF4J_UNKNOWN_ARRAY">
+    <ShortDescription>Using unknown array as parameter</ShortDescription>
+    <LongDescription>
+      Using unknown array as parameter.
+      You cannot use array which is provided as method argument or returned from other method.
+    </LongDescription>
+    <Details>
+<![CDATA[
+<p>Using unknown array as parameter.
+You cannot use array which is provided as method argument or returned from other method.</p>
+]]>
+    </Details>
+  </BugPattern>
+
   <BugCode abbrev="SLF4J">SLF4J</BugCode>
 </MessageCollection>
