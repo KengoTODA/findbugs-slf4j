@@ -71,6 +71,7 @@ class Foo {
         logger.info("Hello, {}.", new Object[]{ "World" });
     }
 }
+```
 
 # history
 
