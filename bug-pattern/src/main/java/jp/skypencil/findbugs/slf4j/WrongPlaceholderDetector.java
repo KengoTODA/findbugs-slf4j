@@ -51,6 +51,10 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 
     @Override
     public void sawOpcode(int seen) {
+        if (atCatchBlock()) {
+            // the head of stack should be a Throwable instance
+            stack.getStackItem(0).setUserValue(IS_THROWABLE);
+        }
         if (seen == INVOKEINTERFACE) {
             checkLogger();
         }
