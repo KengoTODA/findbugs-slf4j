@@ -3,7 +3,7 @@ jdk:
   - oraclejdk7
   - openjdk6
   - openjdk7
-script: "mvn clean test"
+script: "mvn clean install"
 notifications:
   email:
     recipients:
