@@ -73,6 +73,28 @@ class Foo {
 }
 ```
 
+# how to use with Maven
+
+To use this product, please configure your findbugs-maven-plugin like below.
+
+```xml
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>2.5.2</version>
+        <configuration>
+          <plugins>
+            <plugin>
+              <groupId>jp.skypencil.findbugs.slf4j</groupId>
+              <artifactId>bug-pattern</artifactId>
+              <version>0.0.1-SNAPSHOT</version>
+            </plugin>
+          </plugins>
+        </configuration>
+      </plugin>
+```
+
+
 # history
 
 ## 0.1
