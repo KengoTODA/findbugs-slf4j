@@ -1,4 +1,4 @@
-package pkg;
+package jp.skypencil.findbugs.slf4j;
 
 import java.io.IOException;
 
@@ -7,11 +7,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-public class UsingCaughtExceptionToLogTest {
+import pkg.UsingReturnedArrayAsParameter;
+
+public class UsingReturnedArrayAsParameterTest {
 
 	@Test
 	public void test() throws SAXException, IOException, ParserConfigurationException {
-		new XmlParser().expectBugs(UsingCaughtExceptionToLog.class, 0);
+		new XmlParser().expectBugs(UsingReturnedArrayAsParameter.class, 2);
 	}
 
 }

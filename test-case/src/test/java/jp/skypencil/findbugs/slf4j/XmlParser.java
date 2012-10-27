@@ -1,4 +1,4 @@
-package pkg;
+package jp.skypencil.findbugs.slf4j;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
