@@ -18,8 +18,6 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 
     private final BugReporter bugReporter;
 
-    private boolean withoutFormat;
-
     private final ArrayDataHandler arrayDataHandler;
 
     private final ThrowableHandler throwableHandler;
@@ -68,7 +66,7 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
                 || !TARGET_METHOD_NAMES.contains(getNameConstantOperand())) {
             return;
         }
-        withoutFormat = SIGS_WITHOUT_FORMAT.contains(signature);
+        boolean withoutFormat = SIGS_WITHOUT_FORMAT.contains(signature);
 
         String formatString = getFormatString(stack, signature);
         if (formatString == null || withoutFormat) {
