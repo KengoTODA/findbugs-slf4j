@@ -6,9 +6,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.bcel.Repository;
-import org.apache.bcel.classfile.JavaClass;
-
 import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
 import edu.umd.cs.findbugs.OpcodeStack;
@@ -16,18 +13,16 @@ import edu.umd.cs.findbugs.OpcodeStack.Item;
 import edu.umd.cs.findbugs.bcel.OpcodeStackDetector;
 
 public class WrongPlaceholderDetector extends OpcodeStackDetector {
-    static final String IS_THROWABLE = "IS_THROWABLE";
-
     private static final Pattern PLACEHOLDER_PATTERN = Pattern
             .compile("(.?)(\\\\\\\\)*\\{\\}");
 
     private final BugReporter bugReporter;
 
-    private final JavaClass throwable;
-
     private boolean withoutFormat;
 
     private final ArrayDataHandler arrayDataHandler;
+
+    private final ThrowableHandler throwableHandler;
 
     private static final Set<String> TARGET_METHOD_NAMES = new HashSet<String>(
             Arrays.asList("trace", "debug", "info", "warn", "error"));
@@ -41,20 +36,13 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 
     public WrongPlaceholderDetector(BugReporter bugReporter) {
         this.bugReporter = bugReporter;
-        try {
-            this.throwable = Repository.lookupClass("java/lang/Throwable");
-        } catch (ClassNotFoundException e) {
-            throw new AssertionError(e);
-        }
-        this.arrayDataHandler = new ArrayDataHandler();
+        this.throwableHandler = new ThrowableHandler();
+        this.arrayDataHandler = new ArrayDataHandler(throwableHandler);
     }
 
     @Override
     public void sawOpcode(int seen) {
-        if (atCatchBlock()) {
-            // the head of stack should be a Throwable instance
-            stack.getStackItem(0).setUserValue(IS_THROWABLE);
-        }
+        throwableHandler.sawOpcode(this, seen);
         if (seen == INVOKEINTERFACE) {
             checkLogger();
         }
@@ -71,20 +59,7 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
             Item createdArray = stack.getStackItem(0);
             createdArray.setUserValue(newUserValueToSet);
         }
-        if (seen == NEW) {
-            markThrowableInstance();
-        }
-    }
-
-    private void markThrowableInstance() {
-        try {
-            JavaClass clazz = Repository.lookupClass(getClassConstantOperand());
-            if (clazz.instanceOf(throwable)) {
-                stack.getStackItem(0).setUserValue(IS_THROWABLE);
-            }
-        } catch (ClassNotFoundException e) {
-            throw new IllegalStateException("class not found", e);
-        }
+        throwableHandler.afterOpcode(this, seen);
     }
 
     private void checkLogger() {
@@ -143,7 +118,7 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
             --parameterCount;
         }
         Item lastItem = stack.getStackItem(0);
-        if (IS_THROWABLE.equals(lastItem.getUserValue())) {
+        if (throwableHandler.checkThrowable(lastItem)) {
             --parameterCount;
         }
         return parameterCount;

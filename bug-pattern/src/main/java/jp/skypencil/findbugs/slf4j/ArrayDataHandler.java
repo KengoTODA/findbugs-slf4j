@@ -9,6 +9,12 @@ import edu.umd.cs.findbugs.OpcodeStack.Item;
  * This class is responsible to create/update ArrayData instance in userValue.
  */
 class ArrayDataHandler {
+    private final ThrowableHandler throwableHandler;
+
+	ArrayDataHandler (ThrowableHandler throwableHandler) {
+        this.throwableHandler = throwableHandler;
+    }
+
     void sawOpcode(OpcodeStack stack, int seen) {
         if (seen == Constants.AASTORE) {
             checkStoredInstance(stack);
@@ -39,7 +45,7 @@ class ArrayDataHandler {
             ArrayData data = (ArrayData) targetArray.getUserValue();
             Number index = (Number) arrayIndex;
             if (data != null && data.getSize() - 1 == index.intValue()) {
-                data.setThrowableAtLast(WrongPlaceholderDetector.IS_THROWABLE.equals(storedValue.getUserValue()));
+                data.setThrowableAtLast(throwableHandler.checkThrowable(storedValue));
             }
         }
     }
