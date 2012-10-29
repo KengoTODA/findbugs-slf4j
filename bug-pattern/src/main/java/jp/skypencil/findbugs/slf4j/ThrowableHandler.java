@@ -33,10 +33,24 @@ class ThrowableHandler {
      */
     void afterOpcode(OpcodeStackDetector detector, int seen) {
         try {
+            OpcodeStack stack = detector.getStack();
             if (seen == Constants.NEW && lookupClass(detector.getClassConstantOperand()).instanceOf(throwable)) {
-                OpcodeStack stack = detector.getStack();
                 Item createdThrowable = stack.getStackItem(0);
                 createdThrowable.setUserValue(IS_THROWABLE);
+            } else if (seen == Constants.INVOKEINTERFACE || seen == Constants.INVOKEVIRTUAL) {
+                String signature = detector.getMethodDescriptorOperand().getSignature();
+                String returnType = signature.substring(1 + signature.lastIndexOf(')'));
+                if (!returnType.startsWith("L")) {
+                    // primitive value should be non-throwable
+                    return;
+                }
+
+                returnType = returnType.substring(1, returnType.length() - 1).replaceAll("/", ".");
+                JavaClass returnClass = lookupClass(returnType);
+                if (returnClass.instanceOf(throwable)) {
+                    Item returnedThrowable = stack.getStackItem(0);
+                    returnedThrowable.setUserValue(IS_THROWABLE);
+                }
             }
         } catch (ClassNotFoundException e) {
             throw new IllegalStateException("class not found", e);

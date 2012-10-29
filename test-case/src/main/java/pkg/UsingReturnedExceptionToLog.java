@@ -34,7 +34,7 @@ public class UsingReturnedExceptionToLog {
 		Throwable utility();
 	}
 
-	private class Utility implements UtilityInterface {
+	private static class Utility implements UtilityInterface {
 		@Override
 		public Throwable utility() {
 			return new RuntimeException();
