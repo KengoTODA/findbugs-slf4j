@@ -46,7 +46,7 @@ class Foo {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     void method() {
         // invalid: format is not CONST
-        String format = "Hello, ";
+        String format = new String("Hello, ");
         logger.info(format + "{}.", "World");
 
         // valid
