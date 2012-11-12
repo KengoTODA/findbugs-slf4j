@@ -102,7 +102,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
             <plugin>
               <groupId>jp.skypencil.findbugs.slf4j</groupId>
               <artifactId>bug-pattern</artifactId>
-              <version>0.1</version>
+              <version>0.2</version>
             </plugin>
           </plugins>
         </configuration>
