@@ -7,7 +7,7 @@ Check [PMD ruleset for SLF4J](https://github.com/eller86/ruleset-for-SLF4J) if y
 
 # bug pattern
 
-Currently this product provides you 2 patterns.
+Currently this product provides you 4 patterns.
 
 ## SLF4J_PLACE_HOLDER_MISMATCH
 
