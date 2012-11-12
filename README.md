@@ -73,6 +73,21 @@ class Foo {
 }
 ```
 
+## SLF4J_LOGGER_SHOULD_BE_PRIVATE
+
+This pattern reports non private field whose type is org.slf4j.Logger.
+
+```java
+class Foo {
+    // invalid: field is not private
+    public final Logger logger = LoggerFactory.getLogger(getClass());
+
+    // valid
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+}
+```
+
+
 # how to use with Maven
 
 To use this product, please configure your findbugs-maven-plugin like below.
@@ -102,6 +117,11 @@ To use this product, please configure your findbugs-maven-plugin like below.
 - SLF4J_PLACE_HOLDER_MISMATCH bug pattern
 - SLF4J_FORMAT_SHOULD_BE_CONST bug pattern
 - SLF4J_UNKNOWN_ARRAY bug pattern
+
+## 0.2
+
+- [bug fix] fixed findbugs.xml
+- SLF4J_LOGGER_SHOULD_BE_PRIVATE bug pattern
 
 # copyright and license
 Copyright 2012 Kengo TODA (eller86)
