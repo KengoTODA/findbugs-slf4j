@@ -3,7 +3,7 @@ package pkg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PublishLogger {
+public class UsingPublicLogger {
 	public Logger logger = LoggerFactory.getLogger(getClass());
 	void method() {
 		logger.info("using log message");

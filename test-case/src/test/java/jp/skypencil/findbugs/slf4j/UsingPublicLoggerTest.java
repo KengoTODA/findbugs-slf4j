@@ -7,13 +7,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import pkg.PublishLogger;
+import pkg.UsingPublicLogger;
 
-public class PublishLoggerTest {
+public class UsingPublicLoggerTest {
 
 	@Test
 	public void test() throws SAXException, IOException, ParserConfigurationException {
-		new XmlParser().expectBugs(PublishLogger.class, 1);
+		new XmlParser().expectBugs(UsingPublicLogger.class, 1);
 	}
 
 }

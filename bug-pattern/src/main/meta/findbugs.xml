@@ -6,8 +6,10 @@
         website="https://github.com/eller86/findbugs-slf4j">
 
         <Detector class="jp.skypencil.findbugs.slf4j.WrongPlaceholderDetector" reports="SLF4J_WRONG_PLACE_HOLDER" speed="fast" />
+        <Detector class="jp.skypencil.findbugs.slf4j.PublishedLoggerDetector" reports="SLF4J_LOGGER_SHOULD_BE_PRIVATE" speed="fast" />
         <BugPattern type="SLF4J_PLACE_HOLDER_MISMATCH" abbrev="SLF4J" category="CORRECTNESS" />
         <BugPattern type="SLF4J_FORMAT_SHOULD_BE_CONST" abbrev="SLF4J" category="CORRECTNESS" />
         <BugPattern type="SLF4J_UNKNOWN_ARRAY" abbrev="SLF4J" category="CORRECTNESS" />
+        <BugPattern type="SLF4J_LOGGER_SHOULD_BE_PRIVATE" abbrev="SLF4J" category="CORRECTNESS" />
 
 </FindbugsPlugin>
