@@ -68,5 +68,24 @@ You cannot use array which is provided as method argument or returned from other
     </Details>
   </BugPattern>
 
+  <Detector class="jp.skypencil.findbugs.slf4j.NonFinalLoggerDetector">
+    <Details>
+      Finds non-final logger field.
+    </Details>
+  </Detector>
+
+  <BugPattern type="SLF4J_LOGGER_SHOULD_BE_FINAL">
+    <ShortDescription>Logger should be final field</ShortDescription>
+    <LongDescription>
+      Logger should be final field.
+      Change this field ({0}) to final field.
+    </LongDescription>
+    <Details>
+<![CDATA[
+<p>Logger should be final field.
+]]>
+    </Details>
+  </BugPattern>
+
   <BugCode abbrev="SLF4J">SLF4J</BugCode>
 </MessageCollection>

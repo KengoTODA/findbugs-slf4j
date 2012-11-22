@@ -7,7 +7,7 @@ Check [PMD ruleset for SLF4J](https://github.com/eller86/ruleset-for-SLF4J) if y
 
 # bug pattern
 
-Currently this product provides you 4 patterns.
+Currently this product provides you 5 patterns.
 
 ## SLF4J_PLACE_HOLDER_MISMATCH
 
@@ -87,6 +87,20 @@ class Foo {
 }
 ```
 
+## SLF4J_LOGGER_SHOULD_BE_FINAL
+
+This pattern reports non final field whose type is org.slf4j.Logger.
+
+```java
+class Foo {
+    // invalid: field is not final
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
+    // valid
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+}
+```
+
 
 # how to use with Maven
 
@@ -102,7 +116,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
             <plugin>
               <groupId>jp.skypencil.findbugs.slf4j</groupId>
               <artifactId>bug-pattern</artifactId>
-              <version>0.2</version>
+              <version>0.3</version>
             </plugin>
           </plugins>
         </configuration>
@@ -122,6 +136,10 @@ To use this product, please configure your findbugs-maven-plugin like below.
 
 - [bug fix] fixed findbugs.xml
 - SLF4J_LOGGER_SHOULD_BE_PRIVATE bug pattern
+
+## 0.3
+
+- SLF4J_LOGGER_SHOULD_BE_FINAL bug pattern
 
 # copyright and license
 Copyright 2012 Kengo TODA (eller86)
