@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 
 public class UsingReturnedExceptionToLog {
-	private Logger logger = LoggerFactory.getLogger(getClass());
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 	void methodWithClass() {
 		Utility utility = new Utility();
 		logger.warn("log exception", utility.utility());

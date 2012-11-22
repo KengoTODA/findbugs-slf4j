@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class UsingConcatedStringAsFormat {
-	private Logger logger = LoggerFactory.getLogger(getClass());
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 	void method() {
 		logger.info("This {} is in " + getClass().getName(), "method");
 		LoggerFactory.getLogger(getClass()).info("This {} is in " + getClass().getName(), "method");

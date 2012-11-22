@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 
 public class UsingCaughtExceptionToLog {
-	private Logger logger = LoggerFactory.getLogger(getClass());
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 	void method() {
 		try {
 			System.out.println("Hello, world");

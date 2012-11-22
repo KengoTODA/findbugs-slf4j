@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
  * @see https://github.com/eller86/findbugs-slf4j/issues/2
  */
 public class Issue2 {
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     void method() {
         final RuntimeException ex = new RuntimeException();

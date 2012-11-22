@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class UsingReturnedArrayAsParameter {
-	private Logger logger = LoggerFactory.getLogger(getClass());
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 	void method() {
 		logger.info("Hello, {}.", createParameter());
 		LoggerFactory.getLogger(getClass()).info("Hello, {}.", createParameter());
