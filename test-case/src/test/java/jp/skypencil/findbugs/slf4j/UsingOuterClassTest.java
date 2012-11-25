@@ -13,7 +13,7 @@ public class UsingOuterClassTest {
 
 	@Test
 	public void test() throws SAXException, IOException, ParserConfigurationException {
-		new XmlParser().expectBugs(UsingOuterClass.class, 2);
+		new XmlParser().expectBugs(UsingOuterClass.class, 0);
 	}
 
 }
