@@ -7,7 +7,7 @@ Check [PMD ruleset for SLF4J](https://github.com/eller86/ruleset-for-SLF4J) if y
 
 # bug pattern
 
-Currently this product provides you 5 patterns.
+Currently this product provides 6 patterns.
 
 ## SLF4J_PLACE_HOLDER_MISMATCH
 
@@ -101,6 +101,21 @@ class Foo {
 }
 ```
 
+## SLF4J_ILLEGAL_PASSED_CLASS
+
+This pattern reports that illegal class is passed to LoggerFactory.getLogger(Class)
+
+```java
+class Foo {
+    // invalid: illegal class is passed to Factory
+    private final Logger logger = LoggerFactory.getLogger(Bar.class);
+
+    // valid
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(Foo.class);
+}
+```
+
 
 # how to use with Maven
 
@@ -140,6 +155,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
 ## 0.3
 
 - SLF4J_LOGGER_SHOULD_BE_FINAL bug pattern
+- SLF4J_ILLEGAL_PASSED_CLASS bug pattern
 
 # copyright and license
 Copyright 2012 Kengo TODA (eller86)
