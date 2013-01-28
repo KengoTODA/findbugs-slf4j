@@ -7,7 +7,7 @@ Check [PMD ruleset for SLF4J](https://github.com/eller86/ruleset-for-SLF4J) if y
 
 # bug pattern
 
-Currently this product provides 6 patterns.
+Currently this product provides 7 patterns.
 
 ## SLF4J_PLACE_HOLDER_MISMATCH
 
@@ -116,6 +116,23 @@ class Foo {
 }
 ```
 
+## SLF4J_SIGN_ONLY_FORMAT
+
+This pattern reports that log format which contains only sign and spaces.
+To make log readable, you have to use letter to explain your log.
+
+```java
+class Foo {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+    void method() {
+        // invalid: bad readability
+        logger.info("{}", id);
+
+        // valid
+        logger.info("{} signed in", userId);
+    }
+}
+```
 
 # how to use with Maven
 
@@ -131,7 +148,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
             <plugin>
               <groupId>jp.skypencil.findbugs.slf4j</groupId>
               <artifactId>bug-pattern</artifactId>
-              <version>0.3</version>
+              <version>0.4</version>
             </plugin>
           </plugins>
         </configuration>
@@ -156,6 +173,11 @@ To use this product, please configure your findbugs-maven-plugin like below.
 
 - SLF4J_LOGGER_SHOULD_BE_FINAL bug pattern
 - SLF4J_ILLEGAL_PASSED_CLASS bug pattern
+
+## 0.4
+
+- SLF4J_SIGN_ONLY_FORMAT bug pattern
+
 
 # copyright and license
 Copyright 2012 Kengo TODA (eller86)
