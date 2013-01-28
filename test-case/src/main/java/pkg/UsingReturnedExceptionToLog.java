@@ -14,7 +14,7 @@ public class UsingReturnedExceptionToLog {
 		logger.warn("something {}", "happen", utility.utility());
 		LoggerFactory.getLogger(getClass()).warn("something {}", "happen", utility.utility());
 
-		logger.warn("{} {}", new Object[]{ "something", "happen", utility.utility() });
+		logger.warn("{} has been {}", new Object[]{ "something", "happened", utility.utility() });
 		LoggerFactory.getLogger(getClass()).warn("{} {}", new Object[]{ "something", "happen", utility.utility() });
 	}
 
@@ -26,8 +26,8 @@ public class UsingReturnedExceptionToLog {
 		logger.warn("something {}", "happen", utility.utility());
 		LoggerFactory.getLogger(getClass()).warn("something {}", "happen", utility.utility());
 
-		logger.warn("{} {}", new Object[]{ "something", "happen", utility.utility() });
-		LoggerFactory.getLogger(getClass()).warn("{} {}", new Object[]{ "something", "happen", utility.utility() });
+		logger.warn("{} has been {}", new Object[]{ "something", "happened", utility.utility() });
+		LoggerFactory.getLogger(getClass()).warn("{} has been {}", new Object[]{ "something", "happened", utility.utility() });
 	}
 
 	private static interface UtilityInterface {
