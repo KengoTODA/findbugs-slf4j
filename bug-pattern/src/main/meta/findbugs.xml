@@ -5,7 +5,7 @@
         provider="Kengo TODA (@eller86)" 
         website="https://github.com/eller86/findbugs-slf4j">
 
-        <Detector class="jp.skypencil.findbugs.slf4j.WrongPlaceholderDetector" reports="SLF4J_PLACE_HOLDER_MISMATCH,SLF4J_UNKNOWN_ARRAY,SLF4J_UNKNOWN_ARRAY" speed="fast" />
+        <Detector class="jp.skypencil.findbugs.slf4j.WrongPlaceholderDetector" reports="SLF4J_PLACE_HOLDER_MISMATCH,SLF4J_UNKNOWN_ARRAY,SLF4J_UNKNOWN_ARRAY,SLF4J_SIGN_ONLY_FORMAT" speed="fast" />
         <Detector class="jp.skypencil.findbugs.slf4j.PublishedLoggerDetector" reports="SLF4J_LOGGER_SHOULD_BE_PRIVATE" speed="fast" />
         <Detector class="jp.skypencil.findbugs.slf4j.NonFinalLoggerDetector" reports="SLF4J_LOGGER_SHOULD_BE_FINAL" speed="fast" />
         <Detector class="jp.skypencil.findbugs.slf4j.IllegalPassedClassDetector" reports="SLF4J_ILLEGAL_PASSED_CLASS" speed="fast" />
@@ -15,5 +15,6 @@
         <BugPattern type="SLF4J_LOGGER_SHOULD_BE_PRIVATE" abbrev="SLF4J" category="CORRECTNESS" />
         <BugPattern type="SLF4J_LOGGER_SHOULD_BE_FINAL" abbrev="SLF4J" category="CORRECTNESS" />
         <BugPattern type="SLF4J_ILLEGAL_PASSED_CLASS" abbrev="SLF4J" category="CORRECTNESS" />
+        <BugPattern type="SLF4J_SIGN_ONLY_FORMAT" abbrev="SLF4J" category="CORRECTNESS" />
 
 </FindbugsPlugin>

@@ -72,6 +72,7 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
         if (formatString == null || withoutFormat) {
             return;
         }
+        verifyFormat(formatString);
 
         int placeholderCount = countPlaceholder(formatString);
         int parameterCount;
@@ -95,6 +96,23 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
                     .addCalledMethod(this);
             bugReporter.reportBug(bug);
         }
+    }
+
+    private void verifyFormat(String formatString) {
+        CodepointIterator iterator = new CodepointIterator(formatString);
+        while (iterator.hasNext()) {
+            if (Character.isLetter(iterator.next().intValue())) {
+                // found non-sign character.
+                return;
+            }
+        }
+
+        BugInstance bug = new BugInstance(this,
+                "SLF4J_SIGN_ONLY_FORMAT", NORMAL_PRIORITY)
+                .addString(formatString)
+                .addSourceLine(this).addClassAndMethod(this)
+                .addCalledMethod(this);
+        bugReporter.reportBug(bug);
     }
 
     int countParameter(OpcodeStack stack, String methodSignature) {

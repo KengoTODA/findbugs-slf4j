@@ -49,6 +49,18 @@ You cannot use array which is provided as method argument or returned from other
     </Details>
   </BugPattern>
 
+  <BugPattern type="SLF4J_SIGN_ONLY_FORMAT">
+    <ShortDescription>Log format should contain non-sign character</ShortDescription>
+    <LongDescription>
+      To make log readable, log format ({0}) should contain non-sign character.
+    </LongDescription>
+    <Details>
+<![CDATA[
+<p>To make log readable, log format should contain non-sign character.</p>
+]]>
+    </Details>
+  </BugPattern>
+
   <Detector class="jp.skypencil.findbugs.slf4j.PublishedLoggerDetector">
     <Details>
       Finds published logger field.
