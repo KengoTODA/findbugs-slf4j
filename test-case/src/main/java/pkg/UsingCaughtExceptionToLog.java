@@ -16,8 +16,8 @@ public class UsingCaughtExceptionToLog {
 			logger.warn("something {}", "happen", e);
 			LoggerFactory.getLogger(getClass()).warn("something {}", "happen", e);
 
-			logger.warn("{} {}", new Object[]{ "something", "happen", e });
-			LoggerFactory.getLogger(getClass()).warn("{} {}", new Object[]{ "something", "happen", e });
+			logger.warn("{} has been {}", new Object[]{ "something", "happened", e });
+			LoggerFactory.getLogger(getClass()).warn("{} has been {}", new Object[]{ "something", "happened", e });
 		}
 	}
 }

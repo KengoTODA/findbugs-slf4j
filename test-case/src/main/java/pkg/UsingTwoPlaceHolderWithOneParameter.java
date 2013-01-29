@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 public class UsingTwoPlaceHolderWithOneParameter {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	void method() {
-		logger.info("{} {}", "using");
-		LoggerFactory.getLogger(getClass()).info("{} {}", "using");
+		logger.info("we are {} {}", "using");
+		LoggerFactory.getLogger(getClass()).info("we are {} {}", "using");
 	}
 }
