@@ -7,6 +7,9 @@
   </parent>
   <artifactId>test-case</artifactId>
   <url>https://github.com/eller86/findbugs-slf4j</url>
+  <properties>
+    <gmaven.runtime>2.0</gmaven.runtime> <!-- read by gmaven -->
+  </properties>
   <build>
     <plugins>
       <plugin>
