@@ -7,6 +7,9 @@
   </parent>
   <artifactId>test-case</artifactId>
   <url>https://github.com/eller86/findbugs-slf4j</url>
+  <properties>
+    <gmaven.runtime>2.0</gmaven.runtime> <!-- read by gmaven -->
+  </properties>
   <build>
     <plugins>
       <plugin>
@@ -58,6 +61,20 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.gmaven</groupId>
+        <artifactId>gmaven-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>default-testCompile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
@@ -75,7 +92,13 @@
     </dependency>
     <dependency>
       <groupId>junit</groupId>
-      <artifactId>junit-dep</artifactId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <version>2.0.6</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>
