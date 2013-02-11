@@ -3,11 +3,9 @@ This product helps you to verify your product which uses SLF4J. Both of SLF4J 1.
 
 [![Build Status](https://secure.travis-ci.org/eller86/findbugs-slf4j.png)](http://travis-ci.org/eller86/findbugs-slf4j)
 
-Check [PMD ruleset for SLF4J](https://github.com/eller86/ruleset-for-SLF4J) if you need more help.
-
 # bug pattern
 
-Currently this product provides 7 patterns.
+Currently this product provides 8 patterns.
 
 ## SLF4J_PLACE_HOLDER_MISMATCH
 
@@ -101,6 +99,24 @@ class Foo {
 }
 ```
 
+## SLF4J_LOGGER_SHOULD_BE_NON_STATIC
+
+This pattern reports static field whose type is org.slf4j.Logger.
+
+Sometimes using static logger is better than using non-static one. See [official FAQ](http://www.slf4j.org/faq.html#declared_static) for detail.
+
+If you need to use static logger, you can use [PMD's default rule for logger](http://pmd.sourceforge.net/pmd-5.0.0/rules/java/logging-java.html#LoggerIsNotStaticFinal) instead.
+
+```java
+class Foo {
+    // invalid: field is static
+    private static final Logger LOGGER = LoggerFactory.getLogger(Foo.class);
+
+    // valid
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+}
+```
+
 ## SLF4J_ILLEGAL_PASSED_CLASS
 
 This pattern reports that illegal class is passed to LoggerFactory.getLogger(Class)
@@ -178,9 +194,13 @@ To use this product, please configure your findbugs-maven-plugin like below.
 
 - SLF4J_SIGN_ONLY_FORMAT bug pattern
 
+## 1.0
+
+- SLF4J_LOGGER_SHOULD_BE_NON_STATIC bug pattern
+
 
 # copyright and license
-Copyright 2012 Kengo TODA (eller86)
+Copyright 2012-2013 Kengo TODA (eller86)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
