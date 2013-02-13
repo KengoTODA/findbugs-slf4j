@@ -14,6 +14,7 @@
   <modules>
     <module>bug-pattern</module>
     <module>test-case</module>
+    <module>sonar-plugin</module>
   </modules>
   <scm>
     <connection>scm:git:git@github.com:eller86/findbugs-slf4j.git</connection>
