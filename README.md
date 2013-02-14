@@ -1,5 +1,5 @@
 # FindBugs bug pattern for SLF4J
-This product helps you to verify your product which uses SLF4J. Both of SLF4J 1.6 and 1.7 are supported.
+This product helps you to verify your product which uses SLF4J. Both of SLF4J 1.6 and 1.7 are supported. To use this plugin with Sonar, see [here](sonar-plugin/README.md).
 
 [![Build Status](https://secure.travis-ci.org/eller86/findbugs-slf4j.png)](http://travis-ci.org/eller86/findbugs-slf4j)
 
