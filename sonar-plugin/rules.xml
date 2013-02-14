@@ -19,19 +19,19 @@
   </rule>
   <rule key="SLF4J_LOGGER_SHOULD_BE_PRIVATE">
     <priority>MAJOR</priority>
-    <name><![CDATA[Correctness - Logger should be private field]]></name>
+    <name><![CDATA[Style - Logger should be private field]]></name>
     <description><![CDATA[[SLF4J] Logger should be private field]]></description>
     <configKey><![CDATA[SLF4J_LOGGER_SHOULD_BE_PRIVATE]]></configKey>
   </rule>
   <rule key="SLF4J_LOGGER_SHOULD_BE_FINAL">
     <priority>MAJOR</priority>
-    <name><![CDATA[Correctness - Logger should be final field]]></name>
+    <name><![CDATA[Style - Logger should be final field]]></name>
     <description><![CDATA[[SLF4J] Logger should be final field]]></description>
     <configKey><![CDATA[SLF4J_LOGGER_SHOULD_BE_FINAL]]></configKey>
   </rule>
   <rule key="SLF4J_LOGGER_SHOULD_BE_NON_STATIC">
     <priority>INFO</priority>
-    <name><![CDATA[Correctness - Logger should be non-static field]]></name>
+    <name><![CDATA[Bad practice - Logger should be non-static field]]></name>
     <description><![CDATA[[SLF4J] Logger should be non-static field]]></description>
     <configKey><![CDATA[SLF4J_LOGGER_SHOULD_BE_NON_STATIC]]></configKey>
   </rule>
@@ -43,7 +43,7 @@
   </rule>
   <rule key="SLF4J_SIGN_ONLY_FORMAT">
     <priority>MAJOR</priority>
-    <name><![CDATA[Correctness - Log format should contain non-sign character]]></name>
+    <name><![CDATA[Bad practice - Log format should contain non-sign character]]></name>
     <description><![CDATA[[SLF4J] Log format should contain non-sign character]]></description>
     <configKey><![CDATA[SLF4J_SIGN_ONLY_FORMAT]]></configKey>
   </rule>
