@@ -17,7 +17,7 @@ public class StaticLoggerDetector extends OpcodeStackDetector {
     public void visit(Field field) {
         if (field.isStatic() && field.getSignature().equals("Lorg/slf4j/Logger;")) {
             BugInstance bug = new BugInstance(this,
-                    "SLF4J_LOGGER_SHOULD_BE_NON_STATIC", NORMAL_PRIORITY)
+                    "SLF4J_LOGGER_SHOULD_BE_NON_STATIC", LOW_PRIORITY)
                     .addString(field.getName())
                     .addField(this)
                     .addClass(this);

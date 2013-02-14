@@ -17,7 +17,7 @@ public class PublishedLoggerDetector extends OpcodeStackDetector {
     public void visit(Field field) {
         if (!field.isPrivate() && field.getSignature().equals("Lorg/slf4j/Logger;")) {
             BugInstance bug = new BugInstance(this,
-                    "SLF4J_LOGGER_SHOULD_BE_PRIVATE", HIGH_PRIORITY)
+                    "SLF4J_LOGGER_SHOULD_BE_PRIVATE", NORMAL_PRIORITY)
                     .addString(field.getName())
                     .addField(this)
                     .addClass(this);
