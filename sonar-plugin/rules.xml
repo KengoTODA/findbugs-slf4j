@@ -6,44 +6,44 @@
     <configKey><![CDATA[SLF4J_PLACE_HOLDER_MISMATCH]]></configKey>
   </rule>
   <rule key="SLF4J_FORMAT_SHOULD_BE_CONST">
-    <priority>BLOCKER</priority>
+    <priority>BLOCKER</priority><!-- because this bug hides SLF4J_PLACE_HOLDER_MISMATCH and others -->
     <name><![CDATA[Correctness - Format should be constant]]></name>
     <description><![CDATA[[SLF4J] Format should be constant]]></description>
     <configKey><![CDATA[SLF4J_FORMAT_SHOULD_BE_CONST]]></configKey>
   </rule>
   <rule key="SLF4J_UNKNOWN_ARRAY">
-    <priority>BLOCKER</priority>
+    <priority>CRITICAL</priority>
     <name><![CDATA[Correctness - Using unknown array as parameter]]></name>
     <description><![CDATA[[SLF4J] Using unknown array as parameter]]></description>
     <configKey><![CDATA[SLF4J_UNKNOWN_ARRAY]]></configKey>
   </rule>
   <rule key="SLF4J_LOGGER_SHOULD_BE_PRIVATE">
-    <priority>BLOCKER</priority>
-    <name><![CDATA[Correctness - Logger should be private field]]></name>
+    <priority>MAJOR</priority>
+    <name><![CDATA[Style - Logger should be private field]]></name>
     <description><![CDATA[[SLF4J] Logger should be private field]]></description>
     <configKey><![CDATA[SLF4J_LOGGER_SHOULD_BE_PRIVATE]]></configKey>
   </rule>
   <rule key="SLF4J_LOGGER_SHOULD_BE_FINAL">
-    <priority>BLOCKER</priority>
-    <name><![CDATA[Correctness - Logger should be final field]]></name>
+    <priority>MAJOR</priority>
+    <name><![CDATA[Style - Logger should be final field]]></name>
     <description><![CDATA[[SLF4J] Logger should be final field]]></description>
     <configKey><![CDATA[SLF4J_LOGGER_SHOULD_BE_FINAL]]></configKey>
   </rule>
   <rule key="SLF4J_LOGGER_SHOULD_BE_NON_STATIC">
-    <priority>BLOCKER</priority>
-    <name><![CDATA[Correctness - Logger should be non-static field]]></name>
+    <priority>INFO</priority>
+    <name><![CDATA[Bad practice - Logger should be non-static field]]></name>
     <description><![CDATA[[SLF4J] Logger should be non-static field]]></description>
     <configKey><![CDATA[SLF4J_LOGGER_SHOULD_BE_NON_STATIC]]></configKey>
   </rule>
   <rule key="SLF4J_ILLEGAL_PASSED_CLASS">
-    <priority>BLOCKER</priority>
+    <priority>CRITICAL</priority>
     <name><![CDATA[Correctness - Illegal class is passed to LoggerFactory.getLogger(Class)]]></name>
     <description><![CDATA[[SLF4J] Illegal class is passed to LoggerFactory.getLogger(Class)]]></description>
     <configKey><![CDATA[SLF4J_ILLEGAL_PASSED_CLASS]]></configKey>
   </rule>
   <rule key="SLF4J_SIGN_ONLY_FORMAT">
-    <priority>BLOCKER</priority>
-    <name><![CDATA[Correctness - Log format should contain non-sign character]]></name>
+    <priority>MAJOR</priority>
+    <name><![CDATA[Bad practice - Log format should contain non-sign character]]></name>
     <description><![CDATA[[SLF4J] Log format should contain non-sign character]]></description>
     <configKey><![CDATA[SLF4J_SIGN_ONLY_FORMAT]]></configKey>
   </rule>

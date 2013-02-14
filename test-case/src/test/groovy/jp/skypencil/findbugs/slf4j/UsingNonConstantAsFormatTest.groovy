@@ -6,7 +6,8 @@ class UsingNonConstantAsFormatTest {
   @Test
   void test() {
     new XmlParser().expect(pkg.UsingNonConstantAsFormat, [
-      'SLF4J_FORMAT_SHOULD_BE_CONST': 2
+      'SLF4J_FORMAT_SHOULD_BE_CONST': 2,
+      'DM_CONVERT_CASE': 1
     ])
   }
 }
