@@ -26,11 +26,11 @@
   </BugPattern>
 
   <BugPattern type="SLF4J_FORMAT_SHOULD_BE_CONST">
-    <ShortDescription>1st argument should be constant</ShortDescription>
-    <LongDescription>1st argument should be constant</LongDescription>
+    <ShortDescription>Format should be constant</ShortDescription>
+    <LongDescription>Format should be constant</LongDescription>
     <Details>
 <![CDATA[
-<p>1st argument should be constant</p>
+<p>Format should be constant</p>
 ]]>
     </Details>
   </BugPattern>

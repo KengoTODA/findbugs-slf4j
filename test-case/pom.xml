@@ -33,6 +33,7 @@
           </execution>
         </executions>
         <configuration>
+          <threshold>Low</threshold>
           <plugins>
             <plugin>
               <groupId>${project.groupId}</groupId>

@@ -13,10 +13,10 @@
         <BugPattern type="SLF4J_PLACE_HOLDER_MISMATCH" abbrev="SLF4J" category="CORRECTNESS" />
         <BugPattern type="SLF4J_FORMAT_SHOULD_BE_CONST" abbrev="SLF4J" category="CORRECTNESS" />
         <BugPattern type="SLF4J_UNKNOWN_ARRAY" abbrev="SLF4J" category="CORRECTNESS" />
-        <BugPattern type="SLF4J_LOGGER_SHOULD_BE_PRIVATE" abbrev="SLF4J" category="CORRECTNESS" />
-        <BugPattern type="SLF4J_LOGGER_SHOULD_BE_FINAL" abbrev="SLF4J" category="CORRECTNESS" />
-        <BugPattern type="SLF4J_LOGGER_SHOULD_BE_NON_STATIC" abbrev="SLF4J" category="CORRECTNESS" />
+        <BugPattern type="SLF4J_LOGGER_SHOULD_BE_PRIVATE" abbrev="SLF4J" category="STYLE" />
+        <BugPattern type="SLF4J_LOGGER_SHOULD_BE_FINAL" abbrev="SLF4J" category="STYLE" />
+        <BugPattern type="SLF4J_LOGGER_SHOULD_BE_NON_STATIC" abbrev="SLF4J" category="BAD_PRACTICE" />
         <BugPattern type="SLF4J_ILLEGAL_PASSED_CLASS" abbrev="SLF4J" category="CORRECTNESS" />
-        <BugPattern type="SLF4J_SIGN_ONLY_FORMAT" abbrev="SLF4J" category="CORRECTNESS" />
+        <BugPattern type="SLF4J_SIGN_ONLY_FORMAT" abbrev="SLF4J" category="BAD_PRACTICE" />
 
 </FindbugsPlugin>
