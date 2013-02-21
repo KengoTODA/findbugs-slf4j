@@ -197,6 +197,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
 ## 1.0
 
 - SLF4J_LOGGER_SHOULD_BE_NON_STATIC bug pattern
+- Redesigned priority
 
 
 # copyright and license
