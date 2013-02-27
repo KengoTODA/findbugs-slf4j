@@ -6,6 +6,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.generic.Type;
 
 import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
@@ -27,12 +28,10 @@ public class IllegalPassedClassDetector extends OpcodeStackDetector {
             if (code != LDC_W) {
                 super.afterOpcode(code);
             } else {
-                JavaClass storedClass;
+                JavaType storedClass;
                 try {
                     String storedClassName = getClassConstantOperand();
-                    storedClass = lookupClass(storedClassName);
-                } catch (ClassNotFoundException e) {
-                    throw new AssertionError(e);
+                    storedClass = findClass(storedClassName);
                 } finally {
                     super.afterOpcode(code);
                 }
@@ -43,9 +42,9 @@ public class IllegalPassedClassDetector extends OpcodeStackDetector {
         }
 
         Item caller = getStack().getStackItem(0);
-        JavaClass classOfCaller;
+        JavaType classOfCaller;
         try {
-            classOfCaller = caller.getJavaClass();
+            classOfCaller = new JavaType(caller.getJavaClass());
         } catch (ClassNotFoundException e) {
             throw new AssertionError(e);
         } finally {
@@ -53,6 +52,16 @@ public class IllegalPassedClassDetector extends OpcodeStackDetector {
         }
         Item returnedClass = getStack().getStackItem(0);
         returnedClass.setUserValue(classOfCaller);
+    }
+
+    private JavaType findClass(String storedClassName) {
+        try {
+            return new JavaType(lookupClass(storedClassName));
+        } catch (ClassNotFoundException e){
+            // it might be int[] or others
+            Type type = Type.getType(storedClassName);
+            return new JavaType(type);
+        }
     }
 
     @Override
@@ -65,11 +74,11 @@ public class IllegalPassedClassDetector extends OpcodeStackDetector {
             return;
         }
         final Item passedClass = getStack().getStackItem(0);
-        if (!(passedClass.getUserValue() instanceof JavaClass)) {
+        if (!(passedClass.getUserValue() instanceof JavaType)) {
             return;
         }
 
-        final String passedClassName = ((JavaClass) passedClass.getUserValue()).getClassName();
+        final String passedClassName = ((JavaType) passedClass.getUserValue()).toString();
         String callerClassName = getDottedClassName();
         Deque<String> acceptableClasses = new LinkedList<String>();
         while (!callerClassName.isEmpty()) {
@@ -90,5 +99,21 @@ public class IllegalPassedClassDetector extends OpcodeStackDetector {
                 .addSourceLine(this)
                 .addClass(this);
         bugReporter.reportBug(bug);
+    }
+
+    private static final class JavaType {
+        private final String name;
+        JavaType(Type type) {
+            this.name = type.toString();
+        }
+
+        JavaType(JavaClass clazz) {
+            this.name = clazz.getClassName();
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
     }
 }
