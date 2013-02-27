@@ -164,7 +164,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
             <plugin>
               <groupId>jp.skypencil.findbugs.slf4j</groupId>
               <artifactId>bug-pattern</artifactId>
-              <version>1.0</version>
+              <version>1.0.1</version>
             </plugin>
           </plugins>
         </configuration>
@@ -199,6 +199,9 @@ To use this product, please configure your findbugs-maven-plugin like below.
 - SLF4J_LOGGER_SHOULD_BE_NON_STATIC bug pattern
 - Redesigned priority
 
+## 1.0.1
+
+- Fixed ClassNotFoundException problem (issue #12)
 
 # copyright and license
 Copyright 2012-2013 Kengo TODA (eller86)
