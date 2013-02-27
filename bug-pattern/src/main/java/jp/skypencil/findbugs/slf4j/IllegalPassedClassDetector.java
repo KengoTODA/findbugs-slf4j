@@ -58,6 +58,7 @@ public class IllegalPassedClassDetector extends OpcodeStackDetector {
         try {
             return new JavaType(lookupClass(storedClassName));
         } catch (ClassNotFoundException e){
+            // it might be int[] or others
             Type type = Type.getType(storedClassName);
             return new JavaType(type);
         }
