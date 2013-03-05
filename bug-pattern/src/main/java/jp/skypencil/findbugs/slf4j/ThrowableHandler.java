@@ -37,7 +37,7 @@ class ThrowableHandler {
             if (seen == Constants.NEW && lookupClass(detector.getClassConstantOperand()).instanceOf(throwable)) {
                 Item createdThrowable = stack.getStackItem(0);
                 createdThrowable.setUserValue(IS_THROWABLE);
-            } else if (seen == Constants.INVOKEINTERFACE || seen == Constants.INVOKEVIRTUAL) {
+            } else if (seen == Constants.INVOKEINTERFACE || seen == Constants.INVOKEVIRTUAL || seen == Constants.INVOKESPECIAL || seen == Constants.INVOKESTATIC) {
                 String signature = detector.getMethodDescriptorOperand().getSignature();
                 String returnType = signature.substring(1 + signature.lastIndexOf(')'));
                 if (!returnType.startsWith("L")) {
