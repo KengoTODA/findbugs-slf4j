@@ -41,8 +41,8 @@ public class WrongPlaceholderDetectorTest {
 
 		assertThat(detector.countParameter(stack, "(Ljava/lang/String;Ljava/lang/Object;)V"), is(1));
 		assertThat(detector.countParameter(stack, "(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V"), is(2));
-		assertThat(detector.countParameter(stack, "(Lorg/slf4j/Maker;Ljava/lang/String;Ljava/lang/Object;)V"), is(1));
-		assertThat(detector.countParameter(stack, "(Lorg/slf4j/Maker;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V"), is(2));
+		assertThat(detector.countParameter(stack, "(Lorg/slf4j/Marker;Ljava/lang/String;Ljava/lang/Object;)V"), is(1));
+		assertThat(detector.countParameter(stack, "(Lorg/slf4j/Marker;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V"), is(2));
 
 		Item exceptionInStack = mock(Item.class);
 		doReturn("IS_THROWABLE").when(exceptionInStack).getUserValue();
@@ -50,7 +50,7 @@ public class WrongPlaceholderDetectorTest {
 
 		assertThat(detector.countParameter(stack, "(Ljava/lang/String;Ljava/lang/Object;)V"), is(0));
 		assertThat(detector.countParameter(stack, "(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V"), is(1));
-		assertThat(detector.countParameter(stack, "(Lorg/slf4j/Maker;Ljava/lang/String;Ljava/lang/Object;)V"), is(0));
-		assertThat(detector.countParameter(stack, "(Lorg/slf4j/Maker;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V"), is(1));
+		assertThat(detector.countParameter(stack, "(Lorg/slf4j/Marker;Ljava/lang/String;Ljava/lang/Object;)V"), is(0));
+		assertThat(detector.countParameter(stack, "(Lorg/slf4j/Marker;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V"), is(1));
 	}
 }
