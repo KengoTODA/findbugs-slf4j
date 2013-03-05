@@ -130,7 +130,7 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
         }
 
         int parameterCount = signatures.length - 1; // -1 means 'formatString' is not parameter
-        if (signatures[0].equals("Lorg/slf4j/Maker;")) {
+        if (signatures[0].equals("Lorg/slf4j/Marker;")) {
             --parameterCount;
         }
         Item lastItem = stack.getStackItem(0);
