@@ -164,7 +164,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
             <plugin>
               <groupId>jp.skypencil.findbugs.slf4j</groupId>
               <artifactId>bug-pattern</artifactId>
-              <version>1.0.1</version>
+              <version>1.0.2</version>
             </plugin>
           </plugins>
         </configuration>
@@ -202,6 +202,12 @@ To use this product, please configure your findbugs-maven-plugin like below.
 ## 1.0.1
 
 - Fixed ClassNotFoundException problem (issue #12)
+
+## 1.0.2
+
+- Fixed bug around Marker handling (issue #15)
+- Fixed bug about returned value of private/static method cannot be marked as throwable
+- Started to build with SLF4J 1.6.6 on Travis CI
 
 # copyright and license
 Copyright 2012-2013 Kengo TODA (eller86)
