@@ -16,6 +16,23 @@
     <module>test-case</module>
     <module>sonar-plugin</module>
   </modules>
+  <profiles>
+    <profile>
+      <id>build-with-1.7.2</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <version.slf4j>1.7.2</version.slf4j>
+      </properties>
+    </profile>
+    <profile>
+      <id>build-with-1.6.6</id>
+      <properties>
+        <version.slf4j>1.6.6</version.slf4j>
+      </properties>
+    </profile>
+  </profiles>
   <scm>
     <connection>scm:git:git@github.com:eller86/findbugs-slf4j.git</connection>
     <developerConnection>scm:git:git@github.com:eller86/findbugs-slf4j.git</developerConnection>
@@ -53,12 +70,12 @@
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>1.6.6</version>
+        <version>${version.slf4j}</version>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-jdk14</artifactId>
-        <version>1.6.6</version>
+        <version>${version.slf4j}</version>
         <scope>test</scope>
       </dependency>
       <dependency>

@@ -3,7 +3,12 @@ jdk:
   - oraclejdk7
   - openjdk6
   - openjdk7
-script: "mvn clean install"
+env:
+  matrix:
+    - SLF4J_VERSION=1.7.2
+    - SLF4J_VERSION=1.6.6
+
+script: "mvn clean install -P build-with-${SLF4J_VERSION}"
 notifications:
   email:
     recipients:
