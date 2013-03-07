@@ -4,6 +4,7 @@ import static org.apache.bcel.Repository.lookupClass;
 
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.generic.Type;
 
 import edu.umd.cs.findbugs.OpcodeStack;
 import edu.umd.cs.findbugs.OpcodeStack.Item;
@@ -51,9 +52,47 @@ class ThrowableHandler {
                     Item returnedThrowable = stack.getStackItem(0);
                     returnedThrowable.setUserValue(IS_THROWABLE);
                 }
+            } else if (seen == Constants.ALOAD || seen == Constants.ALOAD_0 || seen == Constants.ALOAD_1 || seen == Constants.ALOAD_2 || seen == Constants.ALOAD_3) {
+                final int index;
+                switch (seen) {
+                case Constants.ALOAD_0: index = 0; break;
+                case Constants.ALOAD_1: index = 1; break;
+                case Constants.ALOAD_2: index = 2; break;
+                case Constants.ALOAD_3: index = 3; break;
+                default:
+                    index = detector.getIntConstant();
+                }
+                JavaType typeOfLocalVar = loadLocalVar(detector, index);
+                if (typeOfLocalVar != null) {
+                    JavaClass javaClass = typeOfLocalVar.toJavaClass();
+                    if (javaClass != null && javaClass.instanceOf(throwable)) {
+                        Item localThrowable = stack.getStackItem(0);
+                        localThrowable.setUserValue(IS_THROWABLE);
+                    }
+                }
             }
         } catch (ClassNotFoundException e) {
             throw new IllegalStateException("class not found", e);
+        }
+    }
+
+    private JavaType loadLocalVar(OpcodeStackDetector detector, int index) {
+        boolean isStaticMethod = detector.getMethodDescriptor().isStatic();
+        if (!isStaticMethod && index == 0) {
+            // "this"
+            return new JavaType(detector.getThisClass());
+        }
+
+        if (!isStaticMethod) {
+            index--;
+        }
+        Type[] arguments = detector.getMethod().getArgumentTypes();
+        if (index >= arguments.length) {
+            // we do not have to care about local variable, because other mechanism will mark it as exception
+            return null;
+        } else {
+            // method argument
+            return new JavaType(arguments[index]);
         }
     }
 
