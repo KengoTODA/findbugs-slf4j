@@ -25,12 +25,12 @@ public class UsingExceptionFromArgument extends Exception {
 
     // use aload_3 to load exception
     public void useAload3(String one, int two, Exception three) {
-        logger.error("Hello, {} and {}", one, two, three);
+        logger.error("Hello, {} and {}", new Object[]{one, two, three});
     }
 
     // use aload to load exception
     public void useAload(String one, int two, byte[] three, Exception four) {
-        logger.error("Hello {}, {} and {}", one, two, three, four);
+        logger.error("Hello {}, {} and {}", new Object[]{one, two, three, four});
     }
 
     public static void staticMethod(Exception e) {
