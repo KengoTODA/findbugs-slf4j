@@ -5,7 +5,6 @@ import static org.apache.bcel.Repository.lookupClass;
 import java.util.Deque;
 import java.util.LinkedList;
 
-import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.generic.Type;
 
 import edu.umd.cs.findbugs.BugInstance;
@@ -99,21 +98,5 @@ public class IllegalPassedClassDetector extends OpcodeStackDetector {
                 .addSourceLine(this)
                 .addClass(this);
         bugReporter.reportBug(bug);
-    }
-
-    private static final class JavaType {
-        private final String name;
-        JavaType(Type type) {
-            this.name = type.toString();
-        }
-
-        JavaType(JavaClass clazz) {
-            this.name = clazz.getClassName();
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
     }
 }
