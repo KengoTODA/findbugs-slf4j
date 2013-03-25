@@ -218,6 +218,10 @@ To use this product, please configure your findbugs-maven-plugin like below.
 - Fixed IllegalStateException bug (issue #17)
 - Fixed NullPointerException bug (issue #19)
 
+## 1.0.5
+
+- Fixed GETFIELD/GETSTATIC bug (issue #16)
+
 # copyright and license
 Copyright 2012-2013 Kengo TODA (eller86)
 
