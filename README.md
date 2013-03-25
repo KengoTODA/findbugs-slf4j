@@ -164,7 +164,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
             <plugin>
               <groupId>jp.skypencil.findbugs.slf4j</groupId>
               <artifactId>bug-pattern</artifactId>
-              <version>1.0.3</version>
+              <version>1.0.4</version>
             </plugin>
           </plugins>
         </configuration>
@@ -212,6 +212,11 @@ To use this product, please configure your findbugs-maven-plugin like below.
 ## 1.0.3
 
 - Fixed exception handling bug (issue #14)
+
+## 1.0.4
+
+- Fixed IllegalStateException bug (issue #17)
+- Fixed NullPointerException bug (issue #19)
 
 # copyright and license
 Copyright 2012-2013 Kengo TODA (eller86)
