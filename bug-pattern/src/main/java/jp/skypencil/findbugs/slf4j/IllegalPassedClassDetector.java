@@ -43,7 +43,7 @@ public class IllegalPassedClassDetector extends OpcodeStackDetector {
         Item caller = getStack().getStackItem(0);
         JavaType classOfCaller;
         try {
-            classOfCaller = new JavaType(caller.getJavaClass());
+            classOfCaller = JavaType.from(caller.getJavaClass());
         } catch (ClassNotFoundException e) {
             throw new AssertionError(e);
         } finally {

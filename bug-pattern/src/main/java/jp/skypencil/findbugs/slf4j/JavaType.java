@@ -7,6 +7,15 @@ import org.apache.bcel.generic.Type;
 final class JavaType {
     private final String name;  // "java.lang.String" etc.
     private final JavaClass javaClass;
+
+    static JavaType from(JavaClass clazz) {
+        if (clazz == null) {
+            return null;
+        } else {
+            return new JavaType(clazz);
+        }
+    }
+
     JavaType(Type type) {
         this.name = type.toString();
         this.javaClass = null;
