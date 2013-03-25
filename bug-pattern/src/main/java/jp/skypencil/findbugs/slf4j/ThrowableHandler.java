@@ -78,21 +78,21 @@ class ThrowableHandler {
 
     private JavaType loadLocalVar(OpcodeStackDetector detector, int index) {
         boolean isStaticMethod = detector.getMethodDescriptor().isStatic();
-        if (!isStaticMethod && index == 0) {
-            // "this"
-            return new JavaType(detector.getThisClass());
-        }
-
         if (!isStaticMethod) {
+            if (index == 0) {
+                // "this"
+                return JavaType.from(detector.getThisClass());
+            }
             index--;
         }
+
         Type[] arguments = detector.getMethod().getArgumentTypes();
         if (index >= arguments.length) {
             // we do not have to care about local variable, because other mechanism will mark it as exception
             return null;
         } else {
             // method argument
-            return new JavaType(arguments[index]);
+            return JavaType.from(arguments[index]);
         }
     }
 
