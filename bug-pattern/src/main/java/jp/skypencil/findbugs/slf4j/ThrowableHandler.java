@@ -9,6 +9,7 @@ import org.apache.bcel.generic.Type;
 import edu.umd.cs.findbugs.OpcodeStack;
 import edu.umd.cs.findbugs.OpcodeStack.Item;
 import edu.umd.cs.findbugs.bcel.OpcodeStackDetector;
+import edu.umd.cs.findbugs.classfile.FieldDescriptor;
 
 class ThrowableHandler {
     private static final String IS_THROWABLE = "IS_THROWABLE";
@@ -68,6 +69,19 @@ class ThrowableHandler {
                     if (javaClass != null && javaClass.instanceOf(throwable)) {
                         Item localThrowable = stack.getStackItem(0);
                         localThrowable.setUserValue(IS_THROWABLE);
+                    }
+                }
+            } else if (seen == Constants.GETFIELD || seen == Constants.GETSTATIC) {
+                FieldDescriptor targetField = detector.getFieldDescriptorOperand();
+                Type type = Type.getType(targetField.getSignature());
+                if (type != null) {
+                    JavaType javaType = JavaType.from(type);
+                    if (javaType != null) {
+                        JavaClass javaClass = javaType.toJavaClass();
+                        if (javaClass != null && javaClass.instanceOf(throwable)) {
+                            Item localThrowable = stack.getStackItem(0);
+                            localThrowable.setUserValue(IS_THROWABLE);
+                        }
                     }
                 }
             }
