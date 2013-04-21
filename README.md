@@ -222,6 +222,14 @@ To use this product, please configure your findbugs-maven-plugin like below.
 
 - Fixed GETFIELD/GETSTATIC bug (issue #16)
 
+## 1.0.6
+
+- Fixed bugs which depends on compiler
+    - when use LDC_W to push String from constant pool
+    - when use LDC to push class from constant pool
+- Switch version of SLF4J from 1.7.2 to 1.7.5
+- Start depending guava-libraries 14.0.1
+
 # copyright and license
 Copyright 2012-2013 Kengo TODA (eller86)
 
