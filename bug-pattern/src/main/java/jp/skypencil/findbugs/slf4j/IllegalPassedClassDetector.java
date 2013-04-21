@@ -26,7 +26,7 @@ public class IllegalPassedClassDetector extends OpcodeStackDetector {
             && "getClass".equals(getNameConstantOperand())
             && "java/lang/Object".equals(getClassConstantOperand())) {
             memorizeResultOfGetClassMethod(code);
-        } else if (code == LDC_W) {
+        } else if (code == LDC || code == LDC_W) {
             memorizeResultOfClassLiteral(code);
         } else {
             super.afterOpcode(code);
