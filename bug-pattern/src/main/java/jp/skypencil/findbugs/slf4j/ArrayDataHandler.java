@@ -58,7 +58,7 @@ class ArrayDataHandler {
             // save array size as "user value"
             arraySize = ((Number) arraySizeItem.getConstant()).intValue();
         } else {
-            // currently we ignore array which gets variable as array size
+            // currently we ignore array which gets variable as array size (like `new Object[a]`)
             arraySize = -1;
         }
 

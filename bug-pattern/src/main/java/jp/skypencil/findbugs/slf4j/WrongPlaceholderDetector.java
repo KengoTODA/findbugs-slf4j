@@ -1,10 +1,10 @@
 package jp.skypencil.findbugs.slf4j;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.google.common.base.Objects;
+import com.google.common.collect.ImmutableSet;
 
 import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
@@ -22,15 +22,15 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 
     private final ThrowableHandler throwableHandler;
 
-    private static final Set<String> TARGET_METHOD_NAMES = new HashSet<String>(
-            Arrays.asList("trace", "debug", "info", "warn", "error"));
+    private static final ImmutableSet<String> TARGET_METHOD_NAMES = ImmutableSet.of(
+            "trace", "debug", "info", "warn", "error");
 
     // these methods do not use formatter
-    private static final Set<String> SIGS_WITHOUT_FORMAT = new HashSet<String>(
-            Arrays.asList("(Ljava/lang/String;)V",
-                    "(Lorg/slf4j/Maker;Ljava/lang/String;)V",
-                    "(Ljava/lang/String;Ljava/lang/Throwable;)V",
-                    "(Lorg/slf4j/Maker;Ljava/lang/String;Ljava/lang/Throwable;)V"));
+    private static final ImmutableSet<String> SIGS_WITHOUT_FORMAT = ImmutableSet.of(
+            "(Ljava/lang/String;)V",
+            "(Lorg/slf4j/Maker;Ljava/lang/String;)V",
+            "(Ljava/lang/String;Ljava/lang/Throwable;)V",
+            "(Lorg/slf4j/Maker;Ljava/lang/String;Ljava/lang/Throwable;)V");
 
     public WrongPlaceholderDetector(BugReporter bugReporter) {
         this.bugReporter = bugReporter;
@@ -62,7 +62,7 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 
     private void checkLogger() {
         String signature = getSigConstantOperand();
-        if (!"org/slf4j/Logger".equals(getClassConstantOperand())
+        if (!Objects.equal("org/slf4j/Logger", getClassConstantOperand())
                 || !TARGET_METHOD_NAMES.contains(getNameConstantOperand())) {
             return;
         }
@@ -117,7 +117,7 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 
     int countParameter(OpcodeStack stack, String methodSignature) {
         String[] signatures = splitSignature(methodSignature);
-        if (signatures[signatures.length - 1].equals("[Ljava/lang/Object;")) {
+        if (Objects.equal(signatures[signatures.length - 1], "[Ljava/lang/Object;")) {
             ArrayData arrayData = (ArrayData) stack.getStackItem(0).getUserValue();
             if (arrayData == null || arrayData.getSize() < 0) {
                 throw new IllegalStateException("no array initializer found");
@@ -130,7 +130,7 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
         }
 
         int parameterCount = signatures.length - 1; // -1 means 'formatString' is not parameter
-        if (signatures[0].equals("Lorg/slf4j/Marker;")) {
+        if (Objects.equal(signatures[0], "Lorg/slf4j/Marker;")) {
             --parameterCount;
         }
         Item lastItem = stack.getStackItem(0);
@@ -144,7 +144,7 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
         Matcher matcher = PLACEHOLDER_PATTERN.matcher(format);
         int count = 0;
         while (matcher.find()) {
-            if (!"\\".equals(matcher.group(1))) {
+            if (!Objects.equal("\\", matcher.group(1))) {
                 ++count;
             }
         }
@@ -172,7 +172,7 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 
         for (String type : arguments) {
             --index;
-            if (type.equals(targetType)) {
+            if (Objects.equal(type, targetType)) {
                 return index;
             }
         }
