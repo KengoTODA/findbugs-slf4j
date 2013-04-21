@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.generic.Type;
 
+import com.google.common.base.Objects;
+
 import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
 import edu.umd.cs.findbugs.OpcodeStack.Item;
@@ -23,8 +25,8 @@ public class IllegalPassedClassDetector extends OpcodeStackDetector {
     @Override
     public void afterOpcode(int code) {
         if (code == INVOKEVIRTUAL
-            && "getClass".equals(getNameConstantOperand())
-            && "java/lang/Object".equals(getClassConstantOperand())) {
+            && Objects.equal("getClass", getNameConstantOperand())
+            && Objects.equal("java/lang/Object", getClassConstantOperand())) {
             memorizeResultOfGetClassMethod(code);
         } else if (code == LDC || code == LDC_W) {
             memorizeResultOfClassLiteral(code);
@@ -78,9 +80,9 @@ public class IllegalPassedClassDetector extends OpcodeStackDetector {
     @Override
     public void sawOpcode(int code) {
         if (code == INVOKESTATIC
-                && "org/slf4j/LoggerFactory".equals(getClassConstantOperand())
-                && "getLogger".equals(getNameConstantOperand())
-                && "(Ljava/lang/Class;)Lorg/slf4j/Logger;".equals(getSigConstantOperand())) {
+                && Objects.equal("org/slf4j/LoggerFactory", getClassConstantOperand())
+                && Objects.equal("getLogger", getNameConstantOperand())
+                && Objects.equal("(Ljava/lang/Class;)Lorg/slf4j/Logger;", getSigConstantOperand())) {
             final Item passedItem = getStack().getStackItem(0);
             final Object userValue = passedItem.getUserValue();
             if (userValue instanceof JavaType) {

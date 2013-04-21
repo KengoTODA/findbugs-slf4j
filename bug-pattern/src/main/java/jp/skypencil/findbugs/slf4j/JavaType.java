@@ -1,23 +1,21 @@
 package jp.skypencil.findbugs.slf4j;
 import static org.apache.bcel.Repository.lookupClass;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.generic.BasicType;
 import org.apache.bcel.generic.Type;
 
+import com.google.common.collect.ImmutableSet;
+
 final class JavaType {
-    private static final Set<Type> PRIMITIVE_TYPES = new HashSet<Type>();
+    private static final ImmutableSet<BasicType> PRIMITIVE_TYPES;
     private final String name;  // "java.lang.String" etc.
     private final JavaClass javaClass;
 
     static {
-        PRIMITIVE_TYPES.addAll(Arrays.asList(new Type[]{
+        PRIMITIVE_TYPES = ImmutableSet.of(
                 Type.BOOLEAN, Type.BYTE, Type.SHORT, Type.CHAR, Type.INT,
-                Type.LONG, Type.FLOAT, Type.DOUBLE
-        }));
+                Type.LONG, Type.FLOAT, Type.DOUBLE);
     }
 
     static JavaType from(JavaClass clazz) {
