@@ -5,6 +5,7 @@ import static org.apache.bcel.Repository.lookupClass;
 import java.util.Deque;
 import java.util.LinkedList;
 
+import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.generic.Type;
 
 import edu.umd.cs.findbugs.BugInstance;
@@ -33,6 +34,12 @@ public class IllegalPassedClassDetector extends OpcodeStackDetector {
     }
 
     private void memorizeResultOfClassLiteral(int code) {
+        Constant constant = getConstantRefOperand();
+        if (constant.getTag() != CONSTANT_Class) {
+            super.afterOpcode(code);
+            return; 
+        }
+
         JavaType storedClass;
         try {
             String storedClassName = getClassConstantOperand();
