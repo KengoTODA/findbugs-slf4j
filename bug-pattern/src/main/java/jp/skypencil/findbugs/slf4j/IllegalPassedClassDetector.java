@@ -21,25 +21,30 @@ public class IllegalPassedClassDetector extends OpcodeStackDetector {
 
     @Override
     public void afterOpcode(int code) {
-        if (code != INVOKEVIRTUAL
-                || !"getClass".equals(getNameConstantOperand())
-                || !"java/lang/Object".equals(getClassConstantOperand())) {
-            if (code != LDC_W) {
-                super.afterOpcode(code);
-            } else {
-                JavaType storedClass;
-                try {
-                    String storedClassName = getClassConstantOperand();
-                    storedClass = findClass(storedClassName);
-                } finally {
-                    super.afterOpcode(code);
-                }
-                Item returnedClass = getStack().getStackItem(0);
-                returnedClass.setUserValue(storedClass);
-            }
-            return;
+        if (code == INVOKEVIRTUAL
+            && "getClass".equals(getNameConstantOperand())
+            && "java/lang/Object".equals(getClassConstantOperand())) {
+            memorizeResultOfGetClassMethod(code);
+        } else if (code == LDC_W) {
+            memorizeResultOfClassLiteral(code);
+        } else {
+            super.afterOpcode(code);
         }
+    }
 
+    private void memorizeResultOfClassLiteral(int code) {
+        JavaType storedClass;
+        try {
+            String storedClassName = getClassConstantOperand();
+            storedClass = findClass(storedClassName);
+        } finally {
+            super.afterOpcode(code);
+        }
+        Item returnedClass = getStack().getStackItem(0);
+        returnedClass.setUserValue(storedClass);
+    }
+
+    private void memorizeResultOfGetClassMethod(int code) {
         Item caller = getStack().getStackItem(0);
         JavaType classOfCaller;
         try {
