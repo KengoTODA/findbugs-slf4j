@@ -16,8 +16,10 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
 
     public AbstractDetectorForParameterArray() {
         throwableHandler = new ThrowableHandler();
-        arrayDataHandler = new ArrayDataHandler(throwableHandler);
+        arrayDataHandler = new ArrayDataHandler(createArrayCheckStrategy());
     }
+
+    protected abstract ArrayDataHandler.Strategy createArrayCheckStrategy();
 
     @Override
     public final void sawOpcode(int seen) {
@@ -43,5 +45,9 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
             createdArray.setUserValue(newUserValueToSet);
         }
         throwableHandler.afterOpcode(this, seen);
+    }
+
+    protected ThrowableHandler getThrowableHandler() {
+        return throwableHandler;
     }
 }

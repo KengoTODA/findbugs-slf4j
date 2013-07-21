@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import jp.skypencil.findbugs.slf4j.parameter.AbstractDetectorForParameterArray;
 import jp.skypencil.findbugs.slf4j.parameter.ArrayData;
+import jp.skypencil.findbugs.slf4j.parameter.ArrayDataHandler;
 import jp.skypencil.findbugs.slf4j.parameter.ThrowableHandler;
 
 import com.google.common.base.Objects;
@@ -105,7 +106,7 @@ public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray 
                 throw new IllegalStateException("no array initializer found");
             }
             int parameterCount = arrayData.getSize();
-            if (arrayData.hasThrowableAtLast()) {
+            if (arrayData.isMarked()) {
                 --parameterCount;
             }
             return parameterCount;
@@ -174,5 +175,17 @@ public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray 
         } else {
             throw new IllegalArgumentException();
         }
+    }
+
+    @Override
+    protected ArrayDataHandler.Strategy createArrayCheckStrategy() {
+        return new ArrayDataHandler.Strategy() {
+            @Override
+            public void store(Item storedItem, ArrayData data, int index) {
+                if (data != null && data.getSize() - 1 == index) {
+                    data.mark(getThrowableHandler().checkThrowable(storedItem));
+                }
+            }
+        };
     }
 }

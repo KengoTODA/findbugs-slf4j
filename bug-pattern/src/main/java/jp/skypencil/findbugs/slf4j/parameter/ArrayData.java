@@ -2,7 +2,7 @@ package jp.skypencil.findbugs.slf4j.parameter;
 
 public class ArrayData {
     private final int size;
-    private boolean hasThrowableAtLast;
+    private boolean mark;
 
     ArrayData(int size) {
         this.size = size;
@@ -12,11 +12,11 @@ public class ArrayData {
         return size;
     }
 
-    void setThrowableAtLast(boolean hasThrowableAtLast) {
-        this.hasThrowableAtLast = hasThrowableAtLast;
+    public void mark(boolean mark) {
+        this.mark = mark;
     }
 
-    public boolean hasThrowableAtLast() {
-        return hasThrowableAtLast;
+    public boolean isMarked() {
+        return mark;
     }
 }
