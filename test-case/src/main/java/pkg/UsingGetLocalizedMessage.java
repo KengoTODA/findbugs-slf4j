@@ -9,6 +9,6 @@ public class UsingGetLocalizedMessage {
     void method(Throwable t) {
         logger.info("My message is {}", t.getLocalizedMessage());
         logger.info("My {} is {}", "message", t.getLocalizedMessage());
-        logger.info("My {} {} {}", "message", "is", t.getLocalizedMessage());
+        logger.info("My {} {} {}", new Object[]{ "message", "is", t.getLocalizedMessage() });
     }
 }
