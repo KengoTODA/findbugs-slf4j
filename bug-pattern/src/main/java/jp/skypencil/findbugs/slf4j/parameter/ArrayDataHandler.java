@@ -12,7 +12,7 @@ import edu.umd.cs.findbugs.OpcodeStack.Item;
 public class ArrayDataHandler {
     private final Strategy strategy;
 
-	ArrayDataHandler (Strategy strategy) {
+    ArrayDataHandler (Strategy strategy) {
         this.strategy = strategy;
     }
 

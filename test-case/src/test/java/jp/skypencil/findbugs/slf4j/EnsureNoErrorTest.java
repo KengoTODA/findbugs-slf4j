@@ -17,16 +17,16 @@ import org.xml.sax.SAXException;
 
 public class EnsureNoErrorTest {
 
-	@Test
-	public void test() throws SAXException, IOException, ParserConfigurationException {
-		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-		Document doc = docBuilder.parse("target/findbugsXml.xml");
-		NodeList errorsList = doc.getElementsByTagName("Errors");
-		Node errorsNode = errorsList.item(0);
-		String errorCount = errorsNode.getAttributes().getNamedItem("errors").getNodeValue();
+    @Test
+    public void test() throws SAXException, IOException, ParserConfigurationException {
+        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+        Document doc = docBuilder.parse("target/findbugsXml.xml");
+        NodeList errorsList = doc.getElementsByTagName("Errors");
+        Node errorsNode = errorsList.item(0);
+        String errorCount = errorsNode.getAttributes().getNamedItem("errors").getNodeValue();
 
-		assertThat(errorCount, is("0"));
-	}
+        assertThat(errorCount, is("0"));
+    }
 
 }
