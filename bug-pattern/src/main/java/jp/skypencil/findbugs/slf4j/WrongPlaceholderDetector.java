@@ -3,13 +3,14 @@ package jp.skypencil.findbugs.slf4j;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nullable;
+
 import jp.skypencil.findbugs.slf4j.parameter.AbstractDetectorForParameterArray;
 import jp.skypencil.findbugs.slf4j.parameter.ArrayData;
 import jp.skypencil.findbugs.slf4j.parameter.ArrayDataHandler;
 import jp.skypencil.findbugs.slf4j.parameter.ThrowableHandler;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableSet;
 
 import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
@@ -20,54 +21,34 @@ public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray 
     private static final Pattern PLACEHOLDER_PATTERN = Pattern
             .compile("(.?)(\\\\\\\\)*\\{\\}");
 
-    private final BugReporter bugReporter;
-
-    private static final ImmutableSet<String> TARGET_METHOD_NAMES = ImmutableSet.of(
-            "trace", "debug", "info", "warn", "error");
-
-    // these methods do not use formatter
-    private static final ImmutableSet<String> SIGS_WITHOUT_FORMAT = ImmutableSet.of(
-            "(Ljava/lang/String;)V",
-            "(Lorg/slf4j/Maker;Ljava/lang/String;)V",
-            "(Ljava/lang/String;Ljava/lang/Throwable;)V",
-            "(Lorg/slf4j/Maker;Ljava/lang/String;Ljava/lang/Throwable;)V");
-
     public WrongPlaceholderDetector(BugReporter bugReporter) {
-        this.bugReporter = bugReporter;
+        super(bugReporter);
     }
 
     @Override
     public void sawOpcode(int seen, ThrowableHandler throwableHandler) {
-        if (seen == INVOKEINTERFACE) {
-            checkLogger(throwableHandler);
-        }
     }
 
-    private void checkLogger(ThrowableHandler throwableHandler) {
+    @Override
+    protected void onLog(@Nullable String format, @Nullable ArrayData arrayData) {
+        if (format == null) {
+            return;
+        }
+
+        verifyFormat(format);
+
         String signature = getSigConstantOperand();
-        if (!Objects.equal("org/slf4j/Logger", getClassConstantOperand())
-                || !TARGET_METHOD_NAMES.contains(getNameConstantOperand())) {
-            return;
-        }
-        boolean withoutFormat = SIGS_WITHOUT_FORMAT.contains(signature);
-
-        String formatString = getFormatString(stack, signature);
-        if (formatString == null || withoutFormat) {
-            return;
-        }
-        verifyFormat(formatString);
-
-        int placeholderCount = countPlaceholder(formatString);
+        int placeholderCount = countPlaceholder(format);
         int parameterCount;
         try {
-            parameterCount = countParameter(stack, signature, throwableHandler);
+            parameterCount = countParameter(stack, signature, getThrowableHandler());
         } catch (IllegalStateException e) {
             // Using unknown array as parameter. In this case, we cannot check number of parameter.
             BugInstance bug = new BugInstance(this,
                     "SLF4J_UNKNOWN_ARRAY", HIGH_PRIORITY)
                     .addSourceLine(this).addClassAndMethod(this)
                     .addCalledMethod(this);
-            bugReporter.reportBug(bug);
+            getBugReporter().reportBug(bug);
             return;
         }
 
@@ -77,7 +58,7 @@ public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray 
                     .addInt(placeholderCount).addInt(parameterCount)
                     .addSourceLine(this).addClassAndMethod(this)
                     .addCalledMethod(this);
-            bugReporter.reportBug(bug);
+            getBugReporter().reportBug(bug);
         }
     }
 
@@ -95,7 +76,7 @@ public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray 
                 .addString(formatString)
                 .addSourceLine(this).addClassAndMethod(this)
                 .addCalledMethod(this);
-        bugReporter.reportBug(bug);
+        getBugReporter().reportBug(bug);
     }
 
     int countParameter(OpcodeStack stack, String methodSignature, ThrowableHandler throwableHandler) {
@@ -132,34 +113,6 @@ public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray 
             }
         }
         return count;
-    }
-
-    private String getFormatString(OpcodeStack stack, String signature) {
-        // formatString is the first string in argument
-        int stackIndex = indexOf(signature, "Ljava/lang/String;");
-        Object constant = stack.getStackItem(stackIndex).getConstant();
-        if (constant == null) {
-            BugInstance bug = new BugInstance(this,
-                    "SLF4J_FORMAT_SHOULD_BE_CONST", HIGH_PRIORITY)
-                    .addSourceLine(this).addClassAndMethod(this)
-                    .addCalledMethod(this);
-            bugReporter.reportBug(bug);
-            return null;
-        }
-        return constant.toString();
-    }
-
-    int indexOf(String methodSignature, String targetType) {
-        String[] arguments = splitSignature(methodSignature);
-        int index = arguments.length;
-
-        for (String type : arguments) {
-            --index;
-            if (Objects.equal(type, targetType)) {
-                return index;
-            }
-        }
-        return -1;
     }
 
     private static final Pattern SIGNATURE_PATTERN = Pattern.compile("^\\((.*)\\).*$");
