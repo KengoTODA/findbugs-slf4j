@@ -1,4 +1,5 @@
-package jp.skypencil.findbugs.slf4j;
+package jp.skypencil.findbugs.slf4j.parameter;
+
 
 import org.apache.bcel.Constants;
 
@@ -8,11 +9,11 @@ import edu.umd.cs.findbugs.OpcodeStack.Item;
 /**
  * This class is responsible to create/update ArrayData instance in userValue.
  */
-class ArrayDataHandler {
-    private final ThrowableHandler throwableHandler;
+public class ArrayDataHandler {
+    private final Strategy strategy;
 
-	ArrayDataHandler (ThrowableHandler throwableHandler) {
-        this.throwableHandler = throwableHandler;
+	ArrayDataHandler (Strategy strategy) {
+        this.strategy = strategy;
     }
 
     void sawOpcode(OpcodeStack stack, int seen) {
@@ -44,9 +45,7 @@ class ArrayDataHandler {
         if (arrayIndex instanceof Number) {
             ArrayData data = (ArrayData) targetArray.getUserValue();
             Number index = (Number) arrayIndex;
-            if (data != null && data.getSize() - 1 == index.intValue()) {
-                data.setThrowableAtLast(throwableHandler.checkThrowable(storedValue));
-            }
+            strategy.store(storedValue, data, index.intValue());
         }
     }
 
@@ -63,5 +62,9 @@ class ArrayDataHandler {
         }
 
         return new ArrayData(arraySize);
+    }
+
+    public static interface Strategy {
+        void store(Item storedItem, ArrayData arrayData, int index);
     }
 }

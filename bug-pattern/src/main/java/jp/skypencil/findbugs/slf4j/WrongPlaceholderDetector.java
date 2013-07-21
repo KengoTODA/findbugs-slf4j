@@ -3,6 +3,11 @@ package jp.skypencil.findbugs.slf4j;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import jp.skypencil.findbugs.slf4j.parameter.AbstractDetectorForParameterArray;
+import jp.skypencil.findbugs.slf4j.parameter.ArrayData;
+import jp.skypencil.findbugs.slf4j.parameter.ArrayDataHandler;
+import jp.skypencil.findbugs.slf4j.parameter.ThrowableHandler;
+
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableSet;
 
@@ -10,17 +15,12 @@ import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
 import edu.umd.cs.findbugs.OpcodeStack;
 import edu.umd.cs.findbugs.OpcodeStack.Item;
-import edu.umd.cs.findbugs.bcel.OpcodeStackDetector;
 
-public class WrongPlaceholderDetector extends OpcodeStackDetector {
+public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray {
     private static final Pattern PLACEHOLDER_PATTERN = Pattern
             .compile("(.?)(\\\\\\\\)*\\{\\}");
 
     private final BugReporter bugReporter;
-
-    private final ArrayDataHandler arrayDataHandler;
-
-    private final ThrowableHandler throwableHandler;
 
     private static final ImmutableSet<String> TARGET_METHOD_NAMES = ImmutableSet.of(
             "trace", "debug", "info", "warn", "error");
@@ -34,33 +34,16 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
 
     public WrongPlaceholderDetector(BugReporter bugReporter) {
         this.bugReporter = bugReporter;
-        this.throwableHandler = new ThrowableHandler();
-        this.arrayDataHandler = new ArrayDataHandler(throwableHandler);
     }
 
     @Override
-    public void sawOpcode(int seen) {
-        throwableHandler.sawOpcode(this, seen);
+    public void sawOpcode(int seen, ThrowableHandler throwableHandler) {
         if (seen == INVOKEINTERFACE) {
-            checkLogger();
+            checkLogger(throwableHandler);
         }
-        arrayDataHandler.sawOpcode(stack, seen);
     }
 
-    @Override
-    public void afterOpcode(int seen) {
-        ArrayData newUserValueToSet = arrayDataHandler.afterOpcode(stack, seen);
-
-        super.afterOpcode(seen);
-
-        if (newUserValueToSet != null) {
-            Item createdArray = stack.getStackItem(0);
-            createdArray.setUserValue(newUserValueToSet);
-        }
-        throwableHandler.afterOpcode(this, seen);
-    }
-
-    private void checkLogger() {
+    private void checkLogger(ThrowableHandler throwableHandler) {
         String signature = getSigConstantOperand();
         if (!Objects.equal("org/slf4j/Logger", getClassConstantOperand())
                 || !TARGET_METHOD_NAMES.contains(getNameConstantOperand())) {
@@ -77,7 +60,7 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
         int placeholderCount = countPlaceholder(formatString);
         int parameterCount;
         try {
-            parameterCount = countParameter(stack, signature);
+            parameterCount = countParameter(stack, signature, throwableHandler);
         } catch (IllegalStateException e) {
             // Using unknown array as parameter. In this case, we cannot check number of parameter.
             BugInstance bug = new BugInstance(this,
@@ -115,7 +98,7 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
         bugReporter.reportBug(bug);
     }
 
-    int countParameter(OpcodeStack stack, String methodSignature) {
+    int countParameter(OpcodeStack stack, String methodSignature, ThrowableHandler throwableHandler) {
         String[] signatures = splitSignature(methodSignature);
         if (Objects.equal(signatures[signatures.length - 1], "[Ljava/lang/Object;")) {
             ArrayData arrayData = (ArrayData) stack.getStackItem(0).getUserValue();
@@ -123,7 +106,7 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
                 throw new IllegalStateException("no array initializer found");
             }
             int parameterCount = arrayData.getSize();
-            if (arrayData.hasThrowableAtLast()) {
+            if (arrayData.isMarked()) {
                 --parameterCount;
             }
             return parameterCount;
@@ -192,5 +175,17 @@ public class WrongPlaceholderDetector extends OpcodeStackDetector {
         } else {
             throw new IllegalArgumentException();
         }
+    }
+
+    @Override
+    protected ArrayDataHandler.Strategy createArrayCheckStrategy() {
+        return new ArrayDataHandler.Strategy() {
+            @Override
+            public void store(Item storedItem, ArrayData data, int index) {
+                if (data != null && data.getSize() - 1 == index) {
+                    data.mark(getThrowableHandler().checkThrowable(storedItem));
+                }
+            }
+        };
     }
 }
