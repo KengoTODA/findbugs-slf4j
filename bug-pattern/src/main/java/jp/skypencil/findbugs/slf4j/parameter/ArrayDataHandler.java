@@ -1,4 +1,5 @@
-package jp.skypencil.findbugs.slf4j;
+package jp.skypencil.findbugs.slf4j.parameter;
+
 
 import org.apache.bcel.Constants;
 
@@ -8,7 +9,7 @@ import edu.umd.cs.findbugs.OpcodeStack.Item;
 /**
  * This class is responsible to create/update ArrayData instance in userValue.
  */
-class ArrayDataHandler {
+public class ArrayDataHandler {
     private final ThrowableHandler throwableHandler;
 
 	ArrayDataHandler (ThrowableHandler throwableHandler) {

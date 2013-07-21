@@ -1,6 +1,6 @@
-package jp.skypencil.findbugs.slf4j;
+package jp.skypencil.findbugs.slf4j.parameter;
 
-class ArrayData {
+public class ArrayData {
     private final int size;
     private boolean hasThrowableAtLast;
 
@@ -8,7 +8,7 @@ class ArrayData {
         this.size = size;
     }
 
-    int getSize() {
+    public int getSize() {
         return size;
     }
 
@@ -16,7 +16,7 @@ class ArrayData {
         this.hasThrowableAtLast = hasThrowableAtLast;
     }
 
-    boolean hasThrowableAtLast() {
+    public boolean hasThrowableAtLast() {
         return hasThrowableAtLast;
     }
 }

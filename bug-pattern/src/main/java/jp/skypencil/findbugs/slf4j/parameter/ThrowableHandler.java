@@ -1,6 +1,7 @@
-package jp.skypencil.findbugs.slf4j;
+package jp.skypencil.findbugs.slf4j.parameter;
 
 import static org.apache.bcel.Repository.lookupClass;
+import jp.skypencil.findbugs.slf4j.JavaType;
 
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.JavaClass;
@@ -11,11 +12,11 @@ import edu.umd.cs.findbugs.OpcodeStack.Item;
 import edu.umd.cs.findbugs.bcel.OpcodeStackDetector;
 import edu.umd.cs.findbugs.classfile.FieldDescriptor;
 
-class ThrowableHandler {
+public class ThrowableHandler {
     private static final String IS_THROWABLE = "IS_THROWABLE";
     private final JavaClass throwable;
 
-    ThrowableHandler() {
+    public ThrowableHandler() {
         try {
             this.throwable = lookupClass("java/lang/Throwable");
         } catch (ClassNotFoundException e) {
@@ -120,7 +121,7 @@ class ThrowableHandler {
     /**
      * @return true if given Item is throwable
      */
-    boolean checkThrowable(Item stackItem) {
+    public boolean checkThrowable(Item stackItem) {
         return IS_THROWABLE.equals(stackItem.getUserValue());
     }
 

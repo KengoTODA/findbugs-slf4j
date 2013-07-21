@@ -7,7 +7,7 @@ import org.apache.bcel.generic.Type;
 
 import com.google.common.collect.ImmutableSet;
 
-final class JavaType {
+public final class JavaType {
     private static final ImmutableSet<BasicType> PRIMITIVE_TYPES;
     private final String name;  // "java.lang.String" etc.
     private final JavaClass javaClass;
@@ -18,7 +18,7 @@ final class JavaType {
                 Type.LONG, Type.FLOAT, Type.DOUBLE);
     }
 
-    static JavaType from(JavaClass clazz) {
+    public static JavaType from(JavaClass clazz) {
         if (clazz == null) {
             return null;
         } else {
@@ -26,7 +26,7 @@ final class JavaType {
         }
     }
 
-    static JavaType from(Type type) {
+    public static JavaType from(Type type) {
         if (type == null || PRIMITIVE_TYPES.contains(type)) {
             return null;
         } else {
@@ -49,7 +49,7 @@ final class JavaType {
         return name;
     }
 
-    JavaClass toJavaClass() throws ClassNotFoundException {
+    public JavaClass toJavaClass() throws ClassNotFoundException {
         if (javaClass != null) {
             return javaClass;
         } else if (name.contains("[")){
