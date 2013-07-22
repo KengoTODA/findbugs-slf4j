@@ -150,6 +150,26 @@ class Foo {
 }
 ```
 
+## SLF4J_MANUALLY_PROVIDED_MESSAGE
+
+This pattern reports needless message which is returned by `Throwable#getMessage()`
+or `Throwable#getLocalizedMessage()`. Normally binding will call these methods
+when you provide throwable instance as the last argument, so you do not have to
+call them manually.
+
+```java
+class Foo {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+    void method() {
+        // invalid: needless 'e.getMessage()'
+        logger.info("Error occured. Message is {}", e.getMessage(), e);
+
+        // valid
+        logger.info("Error occured.", e);
+    }
+}
+```
+
 # how to use with Maven
 
 To use this product, please configure your findbugs-maven-plugin like below.
@@ -164,7 +184,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
             <plugin>
               <groupId>jp.skypencil.findbugs.slf4j</groupId>
               <artifactId>bug-pattern</artifactId>
-              <version>1.0.4</version>
+              <version>1.0.6-SNAPSHOT</version>
             </plugin>
           </plugins>
         </configuration>
@@ -229,6 +249,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
     - when use LDC to push class from constant pool
 - Switch version of SLF4J from 1.7.2 to 1.7.5
 - Start depending guava-libraries 14.0.1
+- SLF4J_MANUALLY_PROVIDED_MESSAGE bug pattern
 
 # copyright and license
 Copyright 2012-2013 Kengo TODA (eller86)

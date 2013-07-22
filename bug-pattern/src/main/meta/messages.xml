@@ -138,5 +138,24 @@ It should be one of {0}.
     </Details>
   </BugPattern>
 
+  <Detector class="jp.skypencil.findbugs.slf4j.ManualMessageDetector">
+    <Details>
+      Finds log which uses message returned from Throwable#getMessage and Throwable#getLocalizedMessage.
+    </Details>
+  </Detector>
+
+  <BugPattern type="SLF4J_MANUALLY_PROVIDED_MESSAGE">
+    <ShortDescription>Do not have to use message returned from Throwable#getMessage and Throwable#getLocalizedMessage.</ShortDescription>
+    <LongDescription>
+      Do not have to use message returned from Throwable#getMessage and Throwable#getLocalizedMessage.
+      It is enough to provide throwable instance as the last argument, then binding will log its message.
+    </LongDescription>
+    <Details>
+<![CDATA[
+<p>Do not have to use message returned from Throwable#getMessage and Throwable#getLocalizedMessage.</p>
+]]>
+    </Details>
+  </BugPattern>
+
   <BugCode abbrev="SLF4J">SLF4J</BugCode>
 </MessageCollection>
