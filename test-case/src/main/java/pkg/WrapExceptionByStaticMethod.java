@@ -9,7 +9,7 @@ public class WrapExceptionByStaticMethod {
     void makingExceptionByStaticMethod() {
         RuntimeException e = makeExceptionStatic();
         logger.error("Error ocurred", e);
-        logger.error("Error ocurred: {}", e.getMessage(), e);
+        logger.error("Error {}", "ocurred", e);
     }
 
     private static RuntimeException makeExceptionStatic() {

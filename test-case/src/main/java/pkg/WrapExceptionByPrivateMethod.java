@@ -9,7 +9,7 @@ public class WrapExceptionByPrivateMethod {
     void makingExceptionByPrivateMethod() {
         RuntimeException e = makeException();
         logger.error("Error ocurred", e);
-        logger.error("Error ocurred: {}", e.getMessage(), e);
+        logger.error("Error {}", "ocurred", e);
     }
 
     private RuntimeException makeException() {

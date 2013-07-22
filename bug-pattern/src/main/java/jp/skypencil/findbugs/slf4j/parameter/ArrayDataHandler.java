@@ -45,7 +45,7 @@ public class ArrayDataHandler {
         if (arrayIndex instanceof Number) {
             ArrayData data = (ArrayData) targetArray.getUserValue();
             Number index = (Number) arrayIndex;
-            strategy.store(storedValue, data, index.intValue());
+            store(storedValue, data, index.intValue());
         }
     }
 
@@ -62,6 +62,10 @@ public class ArrayDataHandler {
         }
 
         return new ArrayData(arraySize);
+    }
+
+    void store(Item storedItem, ArrayData arrayData, int index) {
+        strategy.store(storedItem, arrayData, index);
     }
 
     public static interface Strategy {
