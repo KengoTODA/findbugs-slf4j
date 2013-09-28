@@ -87,9 +87,10 @@ public class ThrowableHandler {
             // report method dump to debug #18
             // see https://github.com/eller86/findbugs-slf4j/issues/18
             String dump = detector.getMethod().getCode().toString();
+            int pc = detector.getPC();
             throw new IllegalArgumentException(String.format(
-                    "Illegal index (%d). Please report this dump:%n%s",
-                    index, dump));
+                    "Illegal index %d at PC %d. Please report this dump:%n%s",
+                    index, pc, dump));
         } else {
             // method argument
             return JavaType.from(arguments[index]);
