@@ -184,7 +184,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
             <plugin>
               <groupId>jp.skypencil.findbugs.slf4j</groupId>
               <artifactId>bug-pattern</artifactId>
-              <version>1.0.6</version>
+              <version>1.0.7</version>
             </plugin>
           </plugins>
         </configuration>
@@ -250,6 +250,11 @@ To use this product, please configure your findbugs-maven-plugin like below.
 - Switch version of SLF4J from 1.7.2 to 1.7.5
 - Start depending guava-libraries 14.0.1
 - SLF4J_MANUALLY_PROVIDED_MESSAGE bug pattern
+
+## 1.0.7
+
+- Solved missing library in Maven central (issue #24)
+- Improved log message to debug (issue #18)
 
 # copyright and license
 Copyright 2012-2013 Kengo TODA (eller86)
