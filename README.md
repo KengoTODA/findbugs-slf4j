@@ -184,7 +184,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
             <plugin>
               <groupId>jp.skypencil.findbugs.slf4j</groupId>
               <artifactId>bug-pattern</artifactId>
-              <version>1.0.7</version>
+              <version>1.0.8</version>
             </plugin>
           </plugins>
         </configuration>
@@ -255,6 +255,11 @@ To use this product, please configure your findbugs-maven-plugin like below.
 
 - Solved missing library in Maven central (issue #24)
 - Improved log message to debug (issue #18)
+
+## 1.0.8
+
+- Fixed runtime exception in detector for SLF4J_PLACE_HOLDER_MISMATCH (issue #18)
+
 
 # copyright and license
 Copyright 2012-2013 Kengo TODA (eller86)
