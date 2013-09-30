@@ -42,16 +42,7 @@ public class ThrowableHandler {
                 returnedThrowable.setUserValue(IS_THROWABLE);
             }
         } else if (seen == Constants.ALOAD || seen == Constants.ALOAD_0 || seen == Constants.ALOAD_1 || seen == Constants.ALOAD_2 || seen == Constants.ALOAD_3) {
-            final int index;
-            switch (seen) {
-            case Constants.ALOAD_0: index = 0; break;
-            case Constants.ALOAD_1: index = 1; break;
-            case Constants.ALOAD_2: index = 2; break;
-            case Constants.ALOAD_3: index = 3; break;
-            default:
-                index = detector.getIntConstant();
-            }
-            JavaType typeOfLocalVar = loadLocalVar(detector, index);
+            JavaType typeOfLocalVar = loadLocalVar(detector);
             if (typeOfLocalVar != null && typeOfLocalVar.isThrowable()) {
                 Item localThrowable = stack.getStackItem(0);
                 localThrowable.setUserValue(IS_THROWABLE);
@@ -69,7 +60,8 @@ public class ThrowableHandler {
         }
     }
 
-    private JavaType loadLocalVar(OpcodeStackDetector detector, int index) {
+    private JavaType loadLocalVar(OpcodeStackDetector detector) {
+        int index = detector.getRegisterOperand();
         boolean isStaticMethod = detector.getMethodDescriptor().isStatic();
         if (!isStaticMethod) {
             if (index == 0) {
