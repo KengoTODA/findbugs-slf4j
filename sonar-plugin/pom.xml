@@ -6,5 +6,4 @@
     <version>1.0.9-SNAPSHOT</version>
   </parent>
   <artifactId>sonar-plugin</artifactId>
-  <url>https://github.com/eller86/findbugs-slf4j</url>
 </project>
