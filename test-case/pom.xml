@@ -71,6 +71,12 @@
   </build>
   <dependencies>
     <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>bug-pattern</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>
@@ -95,6 +101,12 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.youdevise</groupId>
+      <artifactId>test-driven-detectors4findbugs</artifactId>
+      <version>1.0</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>
