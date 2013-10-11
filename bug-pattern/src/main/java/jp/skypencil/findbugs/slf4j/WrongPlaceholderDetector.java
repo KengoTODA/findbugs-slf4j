@@ -15,8 +15,10 @@ import com.google.common.base.Objects;
 import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
 import edu.umd.cs.findbugs.OpcodeStack;
+import edu.umd.cs.findbugs.OpcodeStack.CustomUserValue;
 import edu.umd.cs.findbugs.OpcodeStack.Item;
 
+@CustomUserValue
 public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray {
     private static final Pattern PLACEHOLDER_PATTERN = Pattern
             .compile("(.?)(\\\\\\\\)*\\{\\}");

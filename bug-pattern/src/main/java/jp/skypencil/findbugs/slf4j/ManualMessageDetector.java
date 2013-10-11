@@ -6,12 +6,14 @@ import com.google.common.base.Objects;
 
 import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
+import edu.umd.cs.findbugs.OpcodeStack.CustomUserValue;
 import edu.umd.cs.findbugs.OpcodeStack.Item;
 import jp.skypencil.findbugs.slf4j.parameter.AbstractDetectorForParameterArray;
 import jp.skypencil.findbugs.slf4j.parameter.ArrayData;
 import jp.skypencil.findbugs.slf4j.parameter.ArrayDataHandler.Strategy;
 import jp.skypencil.findbugs.slf4j.parameter.ThrowableHandler;
 
+@CustomUserValue
 public final class ManualMessageDetector extends AbstractDetectorForParameterArray {
     private static final String IS_MESSAGE = "IS_MESSAGE";
 
