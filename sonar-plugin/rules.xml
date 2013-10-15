@@ -1,50 +1,58 @@
 <rules>
   <rule key="SLF4J_PLACE_HOLDER_MISMATCH">
     <priority>BLOCKER</priority>
-    <name><![CDATA[Correctness - Count of placeholder does not equal to count of parameter]]></name>
-    <description><![CDATA[[SLF4J] Count of placeholder does not equal to count of parameter]]></description>
+    <name><![CDATA[CORRECTNESS - Count of placeholder does not equal to count of
+      parameter]]></name>
+    <description><![CDATA[[SLF4J] Count of placeholder does not equal to count of
+      parameter]]></description>
     <configKey><![CDATA[SLF4J_PLACE_HOLDER_MISMATCH]]></configKey>
   </rule>
   <rule key="SLF4J_FORMAT_SHOULD_BE_CONST">
-    <priority>BLOCKER</priority><!-- because this bug hides SLF4J_PLACE_HOLDER_MISMATCH and others -->
-    <name><![CDATA[Correctness - Format should be constant]]></name>
+    <priority>BLOCKER</priority>
+    <name><![CDATA[CORRECTNESS - Format should be constant]]></name>
     <description><![CDATA[[SLF4J] Format should be constant]]></description>
     <configKey><![CDATA[SLF4J_FORMAT_SHOULD_BE_CONST]]></configKey>
   </rule>
   <rule key="SLF4J_UNKNOWN_ARRAY">
     <priority>CRITICAL</priority>
-    <name><![CDATA[Correctness - Using unknown array as parameter]]></name>
+    <name><![CDATA[CORRECTNESS - Using unknown array as parameter]]></name>
     <description><![CDATA[[SLF4J] Using unknown array as parameter]]></description>
     <configKey><![CDATA[SLF4J_UNKNOWN_ARRAY]]></configKey>
   </rule>
+  <rule key="SLF4J_SIGN_ONLY_FORMAT">
+    <priority>MAJOR</priority>
+    <name><![CDATA[BAD_PRACTICE - Log format should contain non-sign character]]></name>
+    <description><![CDATA[[SLF4J] Log format should contain non-sign character]]></description>
+    <configKey><![CDATA[SLF4J_SIGN_ONLY_FORMAT]]></configKey>
+  </rule>
   <rule key="SLF4J_LOGGER_SHOULD_BE_PRIVATE">
     <priority>MAJOR</priority>
-    <name><![CDATA[Style - Logger should be private field]]></name>
+    <name><![CDATA[STYLE - Logger should be private field]]></name>
     <description><![CDATA[[SLF4J] Logger should be private field]]></description>
     <configKey><![CDATA[SLF4J_LOGGER_SHOULD_BE_PRIVATE]]></configKey>
   </rule>
   <rule key="SLF4J_LOGGER_SHOULD_BE_FINAL">
     <priority>MAJOR</priority>
-    <name><![CDATA[Style - Logger should be final field]]></name>
+    <name><![CDATA[STYLE - Logger should be final field]]></name>
     <description><![CDATA[[SLF4J] Logger should be final field]]></description>
     <configKey><![CDATA[SLF4J_LOGGER_SHOULD_BE_FINAL]]></configKey>
   </rule>
   <rule key="SLF4J_LOGGER_SHOULD_BE_NON_STATIC">
-    <priority>INFO</priority>
-    <name><![CDATA[Bad practice - Logger should be non-static field]]></name>
+    <priority>MAJOR</priority>
+    <name><![CDATA[BAD_PRACTICE - Logger should be non-static field]]></name>
     <description><![CDATA[[SLF4J] Logger should be non-static field]]></description>
     <configKey><![CDATA[SLF4J_LOGGER_SHOULD_BE_NON_STATIC]]></configKey>
   </rule>
   <rule key="SLF4J_ILLEGAL_PASSED_CLASS">
     <priority>CRITICAL</priority>
-    <name><![CDATA[Correctness - Illegal class is passed to LoggerFactory.getLogger(Class)]]></name>
+    <name><![CDATA[CORRECTNESS - Illegal class is passed to LoggerFactory.getLogger(Class)]]></name>
     <description><![CDATA[[SLF4J] Illegal class is passed to LoggerFactory.getLogger(Class)]]></description>
     <configKey><![CDATA[SLF4J_ILLEGAL_PASSED_CLASS]]></configKey>
   </rule>
-  <rule key="SLF4J_SIGN_ONLY_FORMAT">
+  <rule key="SLF4J_MANUALLY_PROVIDED_MESSAGE">
     <priority>MAJOR</priority>
-    <name><![CDATA[Bad practice - Log format should contain non-sign character]]></name>
-    <description><![CDATA[[SLF4J] Log format should contain non-sign character]]></description>
-    <configKey><![CDATA[SLF4J_SIGN_ONLY_FORMAT]]></configKey>
+    <name><![CDATA[BAD_PRACTICE - Do not have to use message returned from Throwable#getMessage and Throwable#getLocalizedMessage.]]></name>
+    <description><![CDATA[[SLF4J] Do not have to use message returned from Throwable#getMessage and Throwable#getLocalizedMessage.]]></description>
+    <configKey><![CDATA[SLF4J_MANUALLY_PROVIDED_MESSAGE]]></configKey>
   </rule>
 </rules>
