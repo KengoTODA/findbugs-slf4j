@@ -1,5 +1,5 @@
 # FindBugs bug pattern for SLF4J
-This product helps you to verify your product which uses SLF4J. Both of SLF4J 1.6 and 1.7 are supported. To use this plugin with Sonar, see [here](sonar-plugin/README.md).
+This product helps you to verify your product which uses SLF4J. Both of SLF4J 1.6 and 1.7 are supported. To use this plugin with SonarQube, see [here](sonar-plugin/README.md).
 
 [![Build Status](https://secure.travis-ci.org/eller86/findbugs-slf4j.png)](http://travis-ci.org/eller86/findbugs-slf4j)
 
@@ -263,7 +263,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
 ## 1.0.9
 
 - Fixed overlooking problem (issue #2 and #14)
-- Sonar plugin supports SLF4J_MANUALLY_PROVIDED_MESSAGE bug pattern
+- SonarQube plugin supports SLF4J_MANUALLY_PROVIDED_MESSAGE bug pattern
 
 # copyright and license
 Copyright 2012-2013 Kengo TODA (eller86)
