@@ -5,7 +5,7 @@ This product helps you to verify your product which uses SLF4J. Both of SLF4J 1.
 
 # bug pattern
 
-Currently this product provides 8 patterns.
+Currently this product provides 9 patterns.
 
 ## SLF4J_PLACE_HOLDER_MISMATCH
 
@@ -184,7 +184,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
             <plugin>
               <groupId>jp.skypencil.findbugs.slf4j</groupId>
               <artifactId>bug-pattern</artifactId>
-              <version>1.0.8</version>
+              <version>1.0.9</version>
             </plugin>
           </plugins>
         </configuration>
@@ -260,6 +260,10 @@ To use this product, please configure your findbugs-maven-plugin like below.
 
 - Fixed runtime exception in detector for SLF4J_PLACE_HOLDER_MISMATCH (issue #18)
 
+## 1.0.9
+
+- Fixed overlooking problem (issue #2 and #14)
+- Sonar plugin supports SLF4J_MANUALLY_PROVIDED_MESSAGE bug pattern
 
 # copyright and license
 Copyright 2012-2013 Kengo TODA (eller86)
