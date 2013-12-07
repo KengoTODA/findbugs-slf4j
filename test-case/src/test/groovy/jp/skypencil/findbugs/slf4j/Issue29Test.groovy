@@ -5,6 +5,8 @@ import org.junit.Test
 class Issue29Test {
   @Test
   void testToFindPlaceHolderMismatch() {
-    new XmlParser().expect(pkg.Issue29, [:]);
+    new XmlParser().expect(pkg.Issue29, [
+      'DLS_DEAD_LOCAL_STORE': 1
+    ]);
   }
 }
