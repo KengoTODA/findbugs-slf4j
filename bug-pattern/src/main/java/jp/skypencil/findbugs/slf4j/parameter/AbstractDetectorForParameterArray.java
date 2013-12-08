@@ -148,7 +148,7 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
     @Override
     @OverridingMethodsMustInvokeSuper
     public void afterOpcode(int seen) {
-        ArrayData newUserValueToSet = arrayDataHandler.afterOpcode(stack, seen);
+        ArrayData newUserValueToSet = arrayDataHandler.afterOpcode(stack, seen, getClassName(), getPC());
 
         super.afterOpcode(seen);
 
