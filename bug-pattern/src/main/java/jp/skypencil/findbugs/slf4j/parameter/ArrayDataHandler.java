@@ -29,8 +29,13 @@ public class ArrayDataHandler {
      *
      * @return non-null if seen == ANEWARRAY
      */
-    ArrayData afterOpcode(OpcodeStack stack, int seen) {
+    ArrayData afterOpcode(OpcodeStack stack, int seen, String className, int pc) {
         if (seen != Constants.ANEWARRAY) {
+            return null;
+        } else if (stack.isTop()) {
+            // see https://github.com/eller86/findbugs-slf4j/issues/29
+            System.err.printf("stack is TOP, cannot be analyzed. %s:%d%n",
+                    className, pc);
             return null;
         }
         return tryToDetectArraySize(stack);
