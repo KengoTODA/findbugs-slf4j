@@ -184,7 +184,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
             <plugin>
               <groupId>jp.skypencil.findbugs.slf4j</groupId>
               <artifactId>bug-pattern</artifactId>
-              <version>1.0.9</version>
+              <version>1.0.10</version>
             </plugin>
           </plugins>
         </configuration>
@@ -264,6 +264,10 @@ To use this product, please configure your findbugs-maven-plugin like below.
 
 - Fixed overlooking problem (issue #2 and #14)
 - SonarQube plugin supports SLF4J_MANUALLY_PROVIDED_MESSAGE bug pattern
+
+## 1.0.10
+
+- Fixed a bug which throws IllegalArgumentException (issue #29)
 
 # copyright and license
 Copyright 2012-2013 Kengo TODA (eller86)
