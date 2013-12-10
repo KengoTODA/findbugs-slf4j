@@ -3,6 +3,22 @@ This product helps you to verify your product which uses SLF4J. Both of SLF4J 1.
 
 [![Build Status](https://secure.travis-ci.org/eller86/findbugs-slf4j.png)](http://travis-ci.org/eller86/findbugs-slf4j)
 
+SLF4J is useful logging facade, but sometimes we mistake how to use.
+Can you find mistakes in following class? It is not so easy especially in huge product, this FindBugs plugin will help you to find.
+
+```java
+class Foo {
+    private static final Logger logger = LoggerFactory.getLogger(Bar.class);
+
+    void rethrow(String name, Throwable t) {
+        logger.info("Hello, {}!");
+        logger.warn("Now I will wrap and throw {}", t);
+        throw new RuntimeException(t);
+    }
+}
+```
+
+
 # bug pattern
 
 Currently this product provides 9 patterns.
