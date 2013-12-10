@@ -284,7 +284,8 @@ To use this product, please configure your findbugs-maven-plugin like below.
 ## 1.0.10
 
 - Fixed a bug which throws IllegalArgumentException (issue #29)
-- Explain abstract in README.md
+- Explain abstract in README.md (issue #28)
+- Supported Lombok (please disable SLF4J_LOGGER_SHOULD_BE_NON_STATIC)
 
 # copyright and license
 Copyright 2012-2013 Kengo TODA (eller86)
