@@ -39,6 +39,14 @@ public final class ManualMessageDetector extends AbstractDetectorForParameterArr
 
     @Override
     public void afterOpcode(int seen) {
+        if (getStack().isTop()) {
+            // see https://github.com/eller86/findbugs-slf4j/issues/29
+            System.err.printf("ManualMessageDetector: stack is TOP, cannot be analyzed. %s:%d%n",
+                    getClassName(), getPC());
+            super.afterOpcode(seen);
+            return;
+        }
+
         boolean isInvokingGetMessage = isInvokingGetMessage(seen);
         super.afterOpcode(seen);
 
@@ -48,10 +56,6 @@ public final class ManualMessageDetector extends AbstractDetectorForParameterArr
     }
 
     private boolean isInvokingGetMessage(int seen) {
-        if (seen == INVOKEVIRTUAL && getStack().getStackDepth() == 0) {
-            System.err.println(getNameConstantOperand());
-            System.err.println(getMethodDescriptorOperand());
-        }
         return seen == INVOKEVIRTUAL
                 && getThrowableHandler().checkThrowable(getStack().getStackItem(0))
                 && (Objects.equal("getMessage", getNameConstantOperand()) ||

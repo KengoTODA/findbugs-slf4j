@@ -34,7 +34,7 @@ public class ArrayDataHandler {
             return null;
         } else if (stack.isTop()) {
             // see https://github.com/eller86/findbugs-slf4j/issues/29
-            System.err.printf("stack is TOP, cannot be analyzed. %s:%d%n",
+            System.err.printf("ArrayDataHandler: stack is TOP, cannot be analyzed. %s:%d%n",
                     className, pc);
             return null;
         }

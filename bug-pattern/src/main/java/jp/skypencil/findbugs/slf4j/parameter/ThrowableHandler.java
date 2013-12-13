@@ -25,6 +25,12 @@ public class ThrowableHandler {
      */
     void afterOpcode(OpcodeStackDetector detector, int seen) {
         OpcodeStack stack = detector.getStack();
+        if (stack.isTop()) {
+            // see https://github.com/eller86/findbugs-slf4j/issues/29
+            System.err.printf("ThrowableHandler: stack is TOP, cannot be analyzed. %s:%d%n",
+                    detector.getClassName(), detector.getPC());
+            return;
+        }
         if (seen == Constants.NEW && JavaType.from(detector.getClassConstantOperand()).isThrowable()) {
             Item createdThrowable = stack.getStackItem(0);
             createdThrowable.setUserValue(IS_THROWABLE);
