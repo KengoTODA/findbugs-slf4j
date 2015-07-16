@@ -290,6 +290,12 @@ To use this product, please configure your findbugs-maven-plugin like below.
 
 - Fixed a bug which throws IllegalArgumentException (issue #29)
 
+## 1.1.0
+
+- Upgrade Findbugs to 3.0.1
+- Updated Maven plugins
+- Updated Dependencies
+
 # copyright and license
 
 Copyright 2012-2015 Kengo TODA

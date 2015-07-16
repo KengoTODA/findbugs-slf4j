@@ -3,7 +3,7 @@
   <parent>
     <groupId>jp.skypencil.findbugs.slf4j</groupId>
     <artifactId>findbugs-slf4j</artifactId>
-    <version>1.0.12-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
   </parent>
   <artifactId>test-case</artifactId>
   <properties>
@@ -14,7 +14,6 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>findbugs-maven-plugin</artifactId>
-        <version>2.5.2</version>
         <executions>
           <execution>
             <phase>pre-integration-test</phase>
@@ -37,7 +36,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.12</version>
         <executions>
           <execution>
             <id>default-test</id>
@@ -56,7 +54,6 @@
       <plugin>
         <groupId>org.codehaus.gmaven</groupId>
         <artifactId>gmaven-plugin</artifactId>
-        <version>1.5</version>
         <executions>
           <execution>
             <id>default-testCompile</id>
