@@ -7,7 +7,7 @@ import org.slf4j.Marker;
 /**
  * Simple class to reproduce issue 15.
  *
- * @see https://github.com/eller86/findbugs-slf4j/issues/15
+ * @see https://github.com/KengoTODA/findbugs-slf4j/issues/15
  */
 public class UsingMarker {
     private final Logger logger = LoggerFactory.getLogger(getClass());

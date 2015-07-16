@@ -6,7 +6,7 @@
     <version>1.0.12-SNAPSHOT</version>
   </parent>
   <artifactId>bug-pattern</artifactId>
-  <url>https://github.com/eller86/findbugs-slf4j</url>
+  <url>https://github.com/KengoTODA/findbugs-slf4j</url>
   <build>
     <plugins>
       <plugin>

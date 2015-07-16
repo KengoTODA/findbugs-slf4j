@@ -8,8 +8,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Simple class to reproduce issue 14.
- * 
- * @see https://github.com/eller86/findbugs-slf4j/issues/14
+ *
+ * @see https://github.com/KengoTODA/findbugs-slf4j/issues/14
  */
 public class Issue14 {
     private final Logger LOGGER = LoggerFactory.getLogger(Issue14.class);

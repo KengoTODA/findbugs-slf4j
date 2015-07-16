@@ -33,7 +33,7 @@ public class ArrayDataHandler {
         if (seen != Constants.ANEWARRAY) {
             return null;
         } else if (stack.isTop()) {
-            // see https://github.com/eller86/findbugs-slf4j/issues/29
+            // see https://github.com/KengoTODA/findbugs-slf4j/issues/29
             System.err.printf("ArrayDataHandler: stack is TOP, cannot be analyzed. %s:%d%n",
                     className, pc);
             return null;

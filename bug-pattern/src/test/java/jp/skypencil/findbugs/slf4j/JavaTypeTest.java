@@ -9,8 +9,8 @@ import org.junit.Test;
 
 public class JavaTypeTest {
     /**
-     * @throws ClassNotFoundException 
-     * @see https://github.com/eller86/findbugs-slf4j/issues/17
+     * @throws ClassNotFoundException
+     * @see https://github.com/KengoTODA/findbugs-slf4j/issues/17
      */
     @Test
     public void testIssue17() throws ClassNotFoundException {

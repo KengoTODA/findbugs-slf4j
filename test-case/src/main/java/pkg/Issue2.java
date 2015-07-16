@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Simple class to reproduce issue 2, but it works.
  *
- * @see https://github.com/eller86/findbugs-slf4j/issues/2
+ * @see https://github.com/KengoTODA/findbugs-slf4j/issues/2
  */
 public class Issue2 {
     private final Logger logger = LoggerFactory.getLogger(getClass());

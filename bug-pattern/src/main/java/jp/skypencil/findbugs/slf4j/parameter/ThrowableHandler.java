@@ -26,7 +26,7 @@ public class ThrowableHandler {
     void afterOpcode(OpcodeStackDetector detector, int seen) {
         OpcodeStack stack = detector.getStack();
         if (stack.isTop()) {
-            // see https://github.com/eller86/findbugs-slf4j/issues/29
+            // see https://github.com/KengoTODA/findbugs-slf4j/issues/29
             System.err.printf("ThrowableHandler: stack is TOP, cannot be analyzed. %s:%d%n",
                     detector.getClassName(), detector.getPC());
             return;
@@ -83,7 +83,7 @@ public class ThrowableHandler {
             return null;
         } else if (index < 0) {
             // report method dump to debug #18
-            // see https://github.com/eller86/findbugs-slf4j/issues/18
+            // see https://github.com/KengoTODA/findbugs-slf4j/issues/18
             String dump = detector.getMethod().getCode().toString();
             int pc = detector.getPC();
             throw new IllegalArgumentException(String.format(

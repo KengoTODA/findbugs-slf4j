@@ -40,7 +40,7 @@ public final class ManualMessageDetector extends AbstractDetectorForParameterArr
     @Override
     public void afterOpcode(int seen) {
         if (getStack().isTop()) {
-            // see https://github.com/eller86/findbugs-slf4j/issues/29
+            // see https://github.com/KengoTODA/findbugs-slf4j/issues/29
             System.err.printf("ManualMessageDetector: stack is TOP, cannot be analyzed. %s:%d%n",
                     getClassName(), getPC());
             super.afterOpcode(seen);
