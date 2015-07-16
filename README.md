@@ -200,7 +200,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
             <plugin>
               <groupId>jp.skypencil.findbugs.slf4j</groupId>
               <artifactId>bug-pattern</artifactId>
-              <version>1.0.10</version>
+              <version>1.0.11</version>
             </plugin>
           </plugins>
         </configuration>
@@ -283,12 +283,16 @@ To use this product, please configure your findbugs-maven-plugin like below.
 
 ## 1.0.10
 
-- Fixed a bug which throws IllegalArgumentException (issue #29)
 - Explain abstract in README.md (issue #28)
 - Supported Lombok (please disable SLF4J_LOGGER_SHOULD_BE_NON_STATIC)
 
+## 1.0.11
+
+- Fixed a bug which throws IllegalArgumentException (issue #29)
+
 # copyright and license
-Copyright 2012-2014 Kengo TODA
+
+Copyright 2012-2015 Kengo TODA
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
