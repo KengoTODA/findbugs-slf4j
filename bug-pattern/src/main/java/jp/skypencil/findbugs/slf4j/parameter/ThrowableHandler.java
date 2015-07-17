@@ -1,5 +1,7 @@
 package jp.skypencil.findbugs.slf4j.parameter;
 
+import java.util.BitSet;
+
 import jp.skypencil.findbugs.slf4j.JavaType;
 
 import org.apache.bcel.Constants;
@@ -13,10 +15,20 @@ import edu.umd.cs.findbugs.classfile.FieldDescriptor;
 public class ThrowableHandler {
     private static final String IS_THROWABLE = "IS_THROWABLE";
 
+    /**
+     * Bit is set only when local variable is marked as throwable.
+     */
+    private final BitSet isThrowable = new BitSet();
+
     void sawOpcode(OpcodeStackDetector detector, int seen) {
+        OpcodeStack stack = detector.getStack();
         if (detector.atCatchBlock()) {
             // the head of stack should be a Throwable instance
-            detector.getStack().getStackItem(0).setUserValue(IS_THROWABLE);
+            stack.getStackItem(0).setUserValue(IS_THROWABLE);
+        }
+        if (seen == Constants.ASTORE || seen == Constants.ASTORE_0 || seen == Constants.ASTORE_1 || seen == Constants.ASTORE_2 || seen == Constants.ASTORE_3) {
+            int index = indexOfLocalVariable(detector, seen);
+            isThrowable.set(index, checkThrowable(stack.getStackItem(0)));
         }
     }
 
@@ -49,7 +61,8 @@ public class ThrowableHandler {
             }
         } else if (seen == Constants.ALOAD || seen == Constants.ALOAD_0 || seen == Constants.ALOAD_1 || seen == Constants.ALOAD_2 || seen == Constants.ALOAD_3) {
             JavaType typeOfLocalVar = loadLocalVar(detector);
-            if (typeOfLocalVar != null && typeOfLocalVar.isThrowable()) {
+            if ((typeOfLocalVar != null && typeOfLocalVar.isThrowable())
+                    || isThrowable.get(indexOfLocalVariable(detector, seen))) {
                 Item localThrowable = stack.getStackItem(0);
                 localThrowable.setUserValue(IS_THROWABLE);
             }
@@ -63,6 +76,28 @@ public class ThrowableHandler {
                     localThrowable.setUserValue(IS_THROWABLE);
                 }
             }
+        }
+    }
+
+    private int indexOfLocalVariable(OpcodeStackDetector detector, int seen) {
+        switch (seen) {
+        case Constants.ASTORE_0:
+        case Constants.ALOAD_0:
+            return 0;
+        case Constants.ASTORE_1:
+        case Constants.ALOAD_1:
+            return 1;
+        case Constants.ASTORE_2:
+        case Constants.ALOAD_2:
+            return 2;
+        case Constants.ASTORE_3:
+        case Constants.ALOAD_3:
+            return 3;
+        case Constants.ASTORE:
+        case Constants.ALOAD:
+            return detector.getIntConstant();
+        default:
+            throw new IllegalArgumentException("Unknown opcode to load data from local variable" + seen);
         }
     }
 
@@ -100,6 +135,13 @@ public class ThrowableHandler {
      */
     public boolean checkThrowable(Item stackItem) {
         return IS_THROWABLE.equals(stackItem.getUserValue());
+    }
+
+    /**
+     * Clear data of local variables. Call when detector visit method.
+     */
+    public void visitMethod() {
+        isThrowable.clear();
     }
 
 }

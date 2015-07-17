@@ -82,6 +82,7 @@ public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray 
     }
 
     int countParameter(OpcodeStack stack, String methodSignature, ThrowableHandler throwableHandler) {
+        // fix issue 14
         String[] signatures = splitSignature(methodSignature);
         if (Objects.equal(signatures[signatures.length - 1], "[Ljava/lang/Object;")) {
             ArrayData arrayData = (ArrayData) stack.getStackItem(0).getUserValue();
