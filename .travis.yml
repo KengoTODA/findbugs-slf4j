@@ -3,7 +3,7 @@ jdk:
   - oraclejdk8
 env:
   matrix:
-    - SLF4J_VERSION=1.7.5
+    - SLF4J_VERSION=1.7.12
     - SLF4J_VERSION=1.6.6
 
 script: "mvn clean install -P build-with-${SLF4J_VERSION}"
