@@ -292,6 +292,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
 
 ## 1.1.0
 
+- Upgrade Java to 8
 - Upgrade Findbugs to 3.0.1
 - Updated Maven plugins
 - Updated Dependencies
