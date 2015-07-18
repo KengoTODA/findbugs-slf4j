@@ -21,6 +21,6 @@ public final class Issue29 {
         for (int i = 0; i < 10000; i++) {
             filteredCollection.add(String.valueOf(i));
         }
-        LoggerFactory.getLogger(getClass()).info("{}", t.getMessage());
+        LoggerFactory.getLogger(getClass()).info("{}", t.getMessage(), t);
     }
 }
