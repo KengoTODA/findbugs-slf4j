@@ -73,16 +73,14 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
         if (stackIndex == -1) {
             // generate ArrayData from items in stack
             String[] signatures = splitSignature(signature);
-            int parameterOffset = 0;
             int parameterCount = signatures.length - 1; // 1 means format is not a parameter
             if (signatures[0].equals("Lorg/slf4j/Marker;")) {
                 --parameterCount;
-                parameterOffset = 1;
             }
             ArrayData data = new ArrayData(parameterCount);
             for (int i = 0; i < data.getSize(); ++i) {
-                Item item = getStack().getStackItem(i + parameterOffset);
-                arrayDataHandler.store(item, data, i);
+                Item item = getStack().getStackItem(i);
+                arrayDataHandler.store(item, data, parameterCount - 1 - i);
             }
             return data;
         } else {
