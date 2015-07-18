@@ -200,7 +200,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
             <plugin>
               <groupId>jp.skypencil.findbugs.slf4j</groupId>
               <artifactId>bug-pattern</artifactId>
-              <version>1.1.1</version>
+              <version>1.2.0</version>
             </plugin>
           </plugins>
         </configuration>
@@ -300,7 +300,8 @@ To use this product, please configure your findbugs-maven-plugin like below.
 
 ## 1.2.0
 
-- `SLF4J_MANUALLY_PROVIDED_MESSAGE` should be disabled if parameter has no `Throwable` instance (issue #31)
+- Disabled `SLF4J_MANUALLY_PROVIDED_MESSAGE` if method parameter has no `Throwable` instance (issue #31)
+- Stop printing many WARNING in `ThrowableHandler` (issue #30)
 
 # copyright and license
 
