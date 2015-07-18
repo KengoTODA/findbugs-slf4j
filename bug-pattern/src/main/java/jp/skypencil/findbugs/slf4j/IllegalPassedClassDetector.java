@@ -12,9 +12,11 @@ import com.google.common.base.Objects;
 
 import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
+import edu.umd.cs.findbugs.OpcodeStack.CustomUserValue;
 import edu.umd.cs.findbugs.OpcodeStack.Item;
 import edu.umd.cs.findbugs.bcel.OpcodeStackDetector;
 
+@CustomUserValue
 public class IllegalPassedClassDetector extends OpcodeStackDetector {
     private final BugReporter bugReporter;
 
