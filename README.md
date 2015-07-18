@@ -194,13 +194,13 @@ To use this product, please configure your findbugs-maven-plugin like below.
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>findbugs-maven-plugin</artifactId>
-        <version>2.5.2</version>
+        <version>3.0.1</version>
         <configuration>
           <plugins>
             <plugin>
               <groupId>jp.skypencil.findbugs.slf4j</groupId>
               <artifactId>bug-pattern</artifactId>
-              <version>1.0.11</version>
+              <version>1.1.1</version>
             </plugin>
           </plugins>
         </configuration>
@@ -290,7 +290,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
 
 - Fixed a bug which throws IllegalArgumentException (issue #29)
 
-## 1.1.0
+## 1.1.0 and 1.1.1
 
 - Support SLF4J version 1.7.12
 - Upgrade Java to 8
