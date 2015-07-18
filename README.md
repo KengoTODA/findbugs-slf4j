@@ -298,6 +298,10 @@ To use this product, please configure your findbugs-maven-plugin like below.
 - Updated Maven plugins
 - Updated Dependencies
 
+## 1.2.0
+
+- `SLF4J_MANUALLY_PROVIDED_MESSAGE` should be disabled if parameter has no `Throwable` instance (issue #31)
+
 # copyright and license
 
 Copyright 2012-2015 Kengo TODA
