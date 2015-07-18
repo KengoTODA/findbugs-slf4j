@@ -6,8 +6,6 @@ import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
-import org.apache.bcel.classfile.Method;
-
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableSet;
@@ -49,19 +47,11 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
 
     @Override
     public final void sawOpcode(int seen) {
-        throwableHandler.sawOpcode(this, seen);
         try {
             checkEvents(seen);
-            sawOpcode(seen, throwableHandler);
         } finally {
             arrayDataHandler.sawOpcode(getStack(), seen);
         }
-    }
-
-    @Override
-    public void visitMethod(Method method) {
-        throwableHandler.visitMethod();
-        super.visitMethod(method);
     }
 
     private void checkEvents(int seen) {
@@ -152,8 +142,6 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
         }
     }
 
-    protected abstract void sawOpcode(int seen, ThrowableHandler throwableHandler);
-
     @Override
     @OverridingMethodsMustInvokeSuper
     public void afterOpcode(int seen) {
@@ -166,7 +154,6 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
             Item createdArray = stack.getStackItem(0);
             createdArray.setUserValue(newUserValueToSet);
         }
-        throwableHandler.afterOpcode(this, seen);
     }
 
     protected final BugReporter getBugReporter() {

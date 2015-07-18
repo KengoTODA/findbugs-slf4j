@@ -28,10 +28,6 @@ public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray 
     }
 
     @Override
-    public void sawOpcode(int seen, ThrowableHandler throwableHandler) {
-    }
-
-    @Override
     protected void onLog(@Nullable String format, @Nullable ArrayData arrayData) {
         if (format == null) {
             return;

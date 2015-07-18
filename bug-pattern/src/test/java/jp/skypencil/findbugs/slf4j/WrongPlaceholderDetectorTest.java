@@ -6,6 +6,8 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import jp.skypencil.findbugs.slf4j.parameter.ThrowableHandler;
 
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.JavaClass;
 import org.junit.Test;
 
 import edu.umd.cs.findbugs.OpcodeStack;
@@ -23,7 +25,7 @@ public class WrongPlaceholderDetectorTest {
     }
 
     @Test
-    public void testCountParameterWithoutArray() {
+    public void testCountParameterWithoutArray() throws ClassNotFoundException {
         WrongPlaceholderDetector detector = new WrongPlaceholderDetector(null);
         ThrowableHandler throwableHandler = new ThrowableHandler();
         OpcodeStack stack = mock(OpcodeStack.class);
@@ -37,7 +39,8 @@ public class WrongPlaceholderDetectorTest {
         assertThat(detector.countParameter(stack, "(Lorg/slf4j/Marker;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V", throwableHandler), is(2));
 
         Item exceptionInStack = mock(Item.class);
-        doReturn("IS_THROWABLE").when(exceptionInStack).getUserValue();
+        JavaClass throwable = Repository.lookupClass(Throwable.class);
+        doReturn(throwable).when(exceptionInStack).getJavaClass();
         doReturn(exceptionInStack).when(stack).getStackItem(0);
 
         assertThat(detector.countParameter(stack, "(Ljava/lang/String;Ljava/lang/Object;)V", throwableHandler), is(0));
