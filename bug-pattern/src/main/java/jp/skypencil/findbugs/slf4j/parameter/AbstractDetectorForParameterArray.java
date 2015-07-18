@@ -14,6 +14,7 @@ import com.google.common.collect.ImmutableSet;
 
 import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
+import edu.umd.cs.findbugs.OpcodeStack;
 import edu.umd.cs.findbugs.OpcodeStack.Item;
 import edu.umd.cs.findbugs.bcel.OpcodeStackDetector;
 
@@ -53,7 +54,7 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
             checkEvents(seen);
             sawOpcode(seen, throwableHandler);
         } finally {
-            arrayDataHandler.sawOpcode(stack, seen);
+            arrayDataHandler.sawOpcode(getStack(), seen);
         }
     }
 
@@ -156,6 +157,7 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
     @Override
     @OverridingMethodsMustInvokeSuper
     public void afterOpcode(int seen) {
+        OpcodeStack stack = getStack();
         ArrayData newUserValueToSet = arrayDataHandler.afterOpcode(stack, seen, getClassName(), getPC());
 
         super.afterOpcode(seen);
