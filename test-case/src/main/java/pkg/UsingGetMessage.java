@@ -8,7 +8,7 @@ public class UsingGetMessage {
 
     void method(Throwable t) {
         logger.info("My message is {}", t.getMessage(), t);
-        logger.info("My {} is {}", "message", t.getMessage(), t);
+        logger.info("My {} is {}", new Object[]{ "message", t.getMessage(), t });
         logger.info("My {} {} {}", new Object[]{ "message", "is", t.getMessage(), t });
     }
 }
