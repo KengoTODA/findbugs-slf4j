@@ -3,7 +3,7 @@
   <parent>
     <groupId>jp.skypencil.findbugs.slf4j</groupId>
     <artifactId>findbugs-slf4j</artifactId>
-    <version>1.1.2-SNAPSHOT</version>
+    <version>1.2.0</version>
   </parent>
   <artifactId>bug-pattern</artifactId>
   <url>https://github.com/KengoTODA/findbugs-slf4j</url>
