@@ -114,6 +114,15 @@
             <plugin>
               <groupId>org.codehaus.mojo</groupId>
               <artifactId>findbugs-maven-plugin</artifactId>
+              <configuration>
+                <plugins>
+                  <plugin>
+                    <groupId>jp.skypencil.guava</groupId>
+                    <artifactId>findbugs-plugin</artifactId>
+                    <version>1.0.1</version>
+                  </plugin>
+                </plugins>
+              </configuration>
             </plugin>
           </reportPlugins>
         </configuration>
