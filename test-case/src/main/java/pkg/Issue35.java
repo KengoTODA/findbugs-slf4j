@@ -15,7 +15,7 @@ public class Issue35 {
 
     void logMessage(final String a, final String b, final MyClass c) {
         final Y y = c.getX().getY();
-        log.error(MSG, "literal", a, b, y);
+        log.error(MSG, new Object[]{"literal", a, b, y});
     }
 
     private static interface X {
