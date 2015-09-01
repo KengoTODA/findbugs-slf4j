@@ -305,7 +305,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
 
 ## 1.2.1
 
-- Downgrade Java to 7, to support Java 7 users (issue #33)
+- Downgrade Java to 6, to support Java 6 users and Java 7 users (issue #33)
 
 # copyright and license
 
