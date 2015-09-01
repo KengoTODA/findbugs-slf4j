@@ -303,6 +303,10 @@ To use this product, please configure your findbugs-maven-plugin like below.
 - Disabled `SLF4J_MANUALLY_PROVIDED_MESSAGE` if method parameter has no `Throwable` instance (issue #31)
 - Stop printing many WARNING in `ThrowableHandler` (issue #30)
 
+## 1.2.1
+
+- Downgrade Java to 7, to support Java 7 users (issue #33)
+
 # copyright and license
 
 Copyright 2012-2015 Kengo TODA
