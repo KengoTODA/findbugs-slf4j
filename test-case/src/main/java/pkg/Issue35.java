@@ -13,9 +13,36 @@ public class Issue35 {
 
     public void message() {
         logMessage(MSG);
+        logMessageStatic(MSG);
+        logMessagePrivateCalledWithNonConstantValue(MSG);
+        logMessagePrivateCalledWithNonConstantValue(this.toString());
+        logMessageStaticPrivateCalledWithNonConstantValue(MSG);
+        logMessageStaticPrivateCalledWithNonConstantValue(this.toString());
+    }
+
+    // TODO count {} in constant value
+
+    public void logMessagePublic(String messageFromParameter) {
+        log.info(messageFromParameter); // NG, this is not private method
+    }
+
+    void logMessagePackage(String messageFromParameter) {
+        log.info(messageFromParameter); // NG, this is not private method
     }
 
     private void logMessage(String messageFromParameter) {
-        log.info(messageFromParameter);
+        log.info(messageFromParameter); // OK, because this parameter always constant value
+    }
+
+    private static void logMessageStatic(String messageFromParameter) {
+        LoggerFactory.getLogger(Issue35.class).info(messageFromParameter); // OK, because this parameter always constant value
+    }
+
+    private static void logMessageStaticPrivateCalledWithNonConstantValue(String messageFromParameter) {
+        LoggerFactory.getLogger(Issue35.class).info(messageFromParameter); // NG, because this parameter is not constant value
+    }
+
+    private void logMessagePrivateCalledWithNonConstantValue(String messageFromParameter) {
+        log.info(messageFromParameter); // NG, because this parameter is not constant value
     }
 }
