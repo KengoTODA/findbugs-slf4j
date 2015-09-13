@@ -200,7 +200,7 @@ To use this product, please configure your findbugs-maven-plugin like below.
             <plugin>
               <groupId>jp.skypencil.findbugs.slf4j</groupId>
               <artifactId>bug-pattern</artifactId>
-              <version>1.2.0</version>
+              <version>1.2.1</version>
             </plugin>
           </plugins>
         </configuration>
