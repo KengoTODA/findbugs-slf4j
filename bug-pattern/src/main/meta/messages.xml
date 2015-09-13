@@ -16,8 +16,8 @@
   <BugPattern type="SLF4J_PLACE_HOLDER_MISMATCH">
     <ShortDescription>Count of placeholder does not equal to count of
       parameter</ShortDescription>
-    <LongDescription>Count of placeholder({0}) does not equal to count of
-      parameter({1})</LongDescription>
+    <LongDescription>Count of placeholder({5}) does not equal to count of
+      parameter({4})</LongDescription>
     <Details>
 <![CDATA[
 <p>Count of placeholder should equal to count of parameter.</p>
