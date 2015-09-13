@@ -11,7 +11,7 @@ public class Issue35 {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    public void message() {
+    public void testConstantMessagePassedViaArgument() {
         logMessage(MSG);
         logMessageStatic(MSG);
         logMessagePrivateCalledWithNonConstantValue(MSG);
@@ -20,14 +20,19 @@ public class Issue35 {
         logMessageStaticPrivateCalledWithNonConstantValue(this.toString());
     }
 
-    // TODO count {} in constant value
+    public void testParameterAndThrowable() {
+        logMessageWithParameter("CONSTANT VALUE WITH PLACE HOLDER {}", this.toString());
+        logMessageWithInvalidParameter("CONSTANT VALUE WITH PLACE HOLDER {} {}", this.toString());
+        logMessageWithException(MSG, new RuntimeException());
+        logMessageWithInvalidException("CONSTANT VALUE WITH PLACE HOLDER {}", new RuntimeException());
+    }
 
     public void logMessagePublic(String messageFromParameter) {
-        log.info(messageFromParameter); // NG, this is not private method
+        log.info(messageFromParameter); // SLF4J_FORMAT_SHOULD_BE_CONST, this is not private method
     }
 
     void logMessagePackage(String messageFromParameter) {
-        log.info(messageFromParameter); // NG, this is not private method
+        log.info(messageFromParameter); // SLF4J_FORMAT_SHOULD_BE_CONST, this is not private method
     }
 
     private void logMessage(String messageFromParameter) {
@@ -39,10 +44,26 @@ public class Issue35 {
     }
 
     private static void logMessageStaticPrivateCalledWithNonConstantValue(String messageFromParameter) {
-        LoggerFactory.getLogger(Issue35.class).info(messageFromParameter); // NG, because this parameter is not constant value
+        LoggerFactory.getLogger(Issue35.class).info(messageFromParameter); // SLF4J_FORMAT_SHOULD_BE_CONST, because this parameter is not constant value
     }
 
     private void logMessagePrivateCalledWithNonConstantValue(String messageFromParameter) {
-        log.info(messageFromParameter); // NG, because this parameter is not constant value
+        log.info(messageFromParameter); // SLF4J_FORMAT_SHOULD_BE_CONST, because this parameter is not constant value
+    }
+
+    private void logMessageWithParameter(String messageFromParameter, String data) {
+        log.info(messageFromParameter, data); // OK
+    }
+
+    private void logMessageWithInvalidParameter(String messageFromParameter, String data) {
+        log.info(messageFromParameter, data); // SLF4J_PLACE_HOLDER_MISMATCH, because this parameter has two placeholders but we gave only one data
+    }
+
+    private void logMessageWithException(String messageFromParameter, Throwable throwable) {
+        log.info(messageFromParameter, throwable); // OK
+    }
+
+    private void logMessageWithInvalidException(String messageFromParameter, Throwable throwable) {
+        log.info(messageFromParameter, throwable); // SLF4J_PLACE_HOLDER_MISMATCH, because this parameter has one placeholder but we gave no data
     }
 }

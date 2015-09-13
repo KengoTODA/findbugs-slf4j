@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
@@ -46,6 +47,8 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
 
     private Table<Method, Integer, List<BugInstance>> potentialBugs;
     private Multimap<String, Integer> calledWithNonConstants;
+    private Table<String, Integer, List<Object>> calledWithConstants;
+
     private final BugReporter bugReporter;
     private final ThrowableHandler throwableHandler;
     private final ArrayDataHandler arrayDataHandler;
@@ -62,6 +65,7 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
     public void visitClassContext(ClassContext classContext) {
         potentialBugs = HashBasedTable.create();
         calledWithNonConstants = ArrayListMultimap.create();
+        calledWithConstants = HashBasedTable.create();
         super.visitClassContext(classContext);
         validatePrivateMethodCall();
     }
@@ -112,6 +116,13 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
                     Item item = getStack().getStackItem(i);
                     if (item.getConstant() == null) {
                         calledWithNonConstants.put(methodSignature, Integer.valueOf(i));
+                    } else {
+                        List<Object> list = calledWithConstants.get(methodSignature, Integer.valueOf(i));
+                        if (list == null) {
+                            list = Lists.newArrayList();
+                            calledWithConstants.put(methodSignature, Integer.valueOf(i), list);
+                        }
+                        list.add(item.getConstant());
                     }
                 }
             }
@@ -149,33 +160,26 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
         // formatString is the first string in argument
         int stackIndex = indexOf(signature, "Ljava/lang/String;");
         Item item = getStack().getStackItem(stackIndex);
-        /**
-         * 0 or greater value if item is `this` or argument. Otherwise -1.
-         */
-        int registerNumber = item.getRegisterNumber();
-        int boxed = Integer.valueOf(registerNumber);
         Object constant = item.getConstant();
         if (constant == null) {
             BugInstance bug = new BugInstance(this,
                     "SLF4J_FORMAT_SHOULD_BE_CONST", HIGH_PRIORITY)
             .addSourceLine(this).addClassAndMethod(this)
             .addCalledMethod(this);
-            if (registerNumber == -1 || !getMethod().isPrivate()) {
+            int argumentIndexOfLogFormat = getArgumentIndexOfLogFormat();
+            if (argumentIndexOfLogFormat == -1 || !getMethod().isPrivate()) {
                 bugReporter.reportBug(bug);
                 return null;
             } else {
                 // memorize bug instance, and validate it after we finish visiting class context.
                 Method method = this.getMethod();
-                if (method.isStatic()) {
-                    registerNumber++;
-                    boxed = registerNumber;
-                }
-                List<BugInstance> storedList = potentialBugs.get(method, boxed);
+                List<BugInstance> storedList = potentialBugs.get(method, argumentIndexOfLogFormat);
                 if (storedList == null) {
                     storedList = Lists.newArrayList();
-                    potentialBugs.put(method, boxed, storedList);
+                    potentialBugs.put(method, argumentIndexOfLogFormat, storedList);
                 }
                 storedList.add(bug);
+                return null;
             }
         }
 
@@ -183,6 +187,20 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
             return null;
         }
         return constant.toString();
+    }
+
+    protected final int getArgumentIndexOfLogFormat() {
+        int stackIndex = indexOf(getSigConstantOperand(), "Ljava/lang/String;");
+        Item item = getStack().getStackItem(stackIndex);
+        /**
+         * 0 or greater value if item is `this` or argument. Otherwise -1.
+         */
+        int argumentIndex = item.getRegisterNumber();
+        Method method = this.getMethod();
+        if (argumentIndex != -1 && method.isStatic()) {
+            argumentIndex++;
+        }
+        return argumentIndex;
     }
 
     @VisibleForTesting
@@ -232,6 +250,17 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
 
     protected final ThrowableHandler getThrowableHandler() {
         return throwableHandler;
+    }
+
+    protected final boolean isCalledWithNonConstants(Method method, Integer argumentIndex) {
+        String methodSignature = method.getName() + method.getSignature();
+        return calledWithNonConstants.containsEntry(methodSignature, argumentIndex);
+    }
+
+    @CheckForNull
+    protected final List<Object> getConstantsToCall(Method method, Integer argumentIndex) {
+        String methodSignature = method.getName() + method.getSignature();
+        return calledWithConstants.get(methodSignature, argumentIndex);
     }
 
     protected void onLog(@Nullable String format, @Nullable ArrayData arrayData) {
