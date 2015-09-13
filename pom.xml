@@ -7,7 +7,7 @@
   </parent>
   <groupId>jp.skypencil.findbugs.slf4j</groupId>
   <artifactId>findbugs-slf4j</artifactId>
-  <version>1.2.1-SNAPSHOT</version>
+  <version>1.2.1</version>
   <url>https://github.com/KengoTODA/findbugs-slf4j</url>
   <description>FindBugs plugin for SLF4J</description>
   <packaging>pom</packaging>
