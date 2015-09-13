@@ -41,7 +41,6 @@ public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray 
 
     @Override
     public void visitClassContext(ClassContext classContext) {
-        super.visitClassContext(classContext);
         potentialBugs = HashBasedTable.create();
         super.visitClassContext(classContext);
         validatePrivateMethodCall();
