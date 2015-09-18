@@ -99,4 +99,5 @@
 
 ## 1.2.2
 
+- SLF4J_SIGN_ONLY_FORMAT should work even if format is given as method parameter (issue #36)
 - Fix `Can't get stack offset 0 from []` bug (issue #37)
