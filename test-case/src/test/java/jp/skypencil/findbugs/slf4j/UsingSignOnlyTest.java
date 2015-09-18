@@ -8,7 +8,7 @@ import org.junit.Test;
 public class UsingSignOnlyTest {
   @Test
   public void test() {
-    Map<String, Integer> expected = Collections.singletonMap("SLF4J_SIGN_ONLY_FORMAT", 1);
+    Map<String, Integer> expected = Collections.singletonMap("SLF4J_SIGN_ONLY_FORMAT", 2);
     new XmlParser().expect(pkg.UsingSignOnly.class, expected);
   }
 }
