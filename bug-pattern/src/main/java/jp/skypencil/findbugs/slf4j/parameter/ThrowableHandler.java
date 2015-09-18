@@ -6,6 +6,7 @@ import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 
 import edu.umd.cs.findbugs.OpcodeStack.Item;
+import edu.umd.cs.findbugs.ba.AnalysisContext;
 
 public class ThrowableHandler {
     @Nonnull
@@ -31,7 +32,8 @@ public class ThrowableHandler {
             }
             return typeOfStack.instanceOf(THROWABLE);
         } catch (ClassNotFoundException e) {
-            throw new AssertionError("Unreachable");
+            AnalysisContext.reportMissingClass(e);
+            return false;
         }
     }
 
