@@ -96,3 +96,7 @@
 
 - Downgrade Java to 7, to support Java 7 users (issue #33)
 - SLF4J_FORMAT_SHOULD_BE_CONST should trace caller, to stop warning if all callers use constant value (issue #35)
+
+## 1.2.2
+
+- Fix `Can't get stack offset 0 from []` bug (issue #37)
