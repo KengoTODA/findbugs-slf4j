@@ -50,13 +50,14 @@ public final class ManualMessageDetector extends AbstractDetectorForParameterArr
         boolean isInvokingGetMessage = isInvokingGetMessage(seen);
         super.afterOpcode(seen);
 
-        if (isInvokingGetMessage) {
-            getStack().getStackItem(0).setSpecialKind(isMessage);
+        if (isInvokingGetMessage && !stack.isTop()) {
+            stack.getStackItem(0).setSpecialKind(isMessage);
         }
     }
 
     private boolean isInvokingGetMessage(int seen) {
         return seen == INVOKEVIRTUAL
+                && !stack.isTop()
                 && getThrowableHandler().checkThrowable(getStack().getStackItem(0))
                 && (Objects.equal("getMessage", getNameConstantOperand()) ||
                         Objects.equal("getLocalizedMessage", getNameConstantOperand()));
