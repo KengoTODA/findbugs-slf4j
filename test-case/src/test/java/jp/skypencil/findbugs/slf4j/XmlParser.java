@@ -18,9 +18,13 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
 class XmlParser {
-    void expect(Class<?> clazz, Map<String, Integer> expected) {
+    Multimap<String, String> expect(Class<?> clazz, Map<String, Integer> expected) {
         final String filePath = "pkg." + clazz.getSimpleName();
+        Multimap<String, String> longMessages = HashMultimap.create();
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory
                     .newInstance();
@@ -41,6 +45,14 @@ class XmlParser {
                     } else {
                         actual.put(bugType, counter + 1);
                     }
+                    NodeList children = bug.getChildNodes();
+                    for (int j = 0; j < children.getLength(); ++j) {
+                        Node child = children.item(j);
+                        if (!child.getNodeName().equals("LongMessage")) {
+                            continue;
+                        }
+                        longMessages.put(bugType, child.getTextContent());
+                    }
                 }
             }
             assertThat(actual, is(equalTo(expected)));
@@ -51,6 +63,7 @@ class XmlParser {
         } catch (IOException e) {
             throw new AssertionError(e);
         }
+        return longMessages;
     }
 
     private NamedNodeMap findClass(Node bug) {
