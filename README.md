@@ -1,10 +1,14 @@
 # FindBugs bug pattern for SLF4J
-This product helps you to verify your product which uses SLF4J. Both of SLF4J 1.6 and 1.7 are supported. To use this plugin with Sonar, see [here](sonar-plugin/README.md).
+
+This product helps you to verify usage of SLF4J 1.6 or 1.7. Both of Java7 and Java8 are supported.
+
+To use this plugin with Sonar, see [here](sonar-plugin/README.md).
 
 [![Build Status](https://secure.travis-ci.org/KengoTODA/findbugs-slf4j.png)](http://travis-ci.org/KengoTODA/findbugs-slf4j)
 
-SLF4J is useful logging facade, but sometimes we mistake how to use.
-Can you find mistakes in following class? It is not so easy especially in huge product, this FindBugs plugin will help you to find.
+## Motivation
+
+SLF4J is useful logging facade, but sometimes we mistake how to use. Can you find mistakes in following class? It is not so easy especially in huge product, this FindBugs plugin will help you to find.
 
 ```java
 class Foo {
@@ -19,7 +23,7 @@ class Foo {
 ```
 
 
-# Bug pattern
+# Provided bug patterns
 
 Currently this product provides 9 patterns.
 
