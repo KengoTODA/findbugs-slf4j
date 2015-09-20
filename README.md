@@ -1,6 +1,6 @@
 # FindBugs bug pattern for SLF4J
 
-This product helps you to verify usage of SLF4J 1.6 or 1.7. Both of Java7 and Java8 are supported.
+This product helps you to verify usage of SLF4J 1.6 and 1.7. Both of Java7 and Java8 are supported.
 
 To use this plugin with Sonar, see [here](sonar-plugin/README.md).
 
