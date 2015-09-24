@@ -1,10 +1,8 @@
 <rules>
   <rule key="SLF4J_PLACE_HOLDER_MISMATCH">
     <priority>BLOCKER</priority>
-    <name><![CDATA[CORRECTNESS - Count of placeholder does not equal to count of
-      parameter]]></name>
-    <description><![CDATA[[SLF4J] Count of placeholder does not equal to count of
-      parameter]]></description>
+    <name><![CDATA[CORRECTNESS - Count of placeholder is not equal to count of parameter]]></name>
+    <description><![CDATA[[SLF4J] Count of placeholder is not equal to count of parameter]]></description>
     <configKey><![CDATA[SLF4J_PLACE_HOLDER_MISMATCH]]></configKey>
   </rule>
   <rule key="SLF4J_FORMAT_SHOULD_BE_CONST">
