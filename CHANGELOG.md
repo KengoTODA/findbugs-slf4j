@@ -105,3 +105,7 @@
 ## 1.2.3
 
 - Fix broken bugInstance message (issue #36)
+
+## 1.2.4
+
+- Improve message of each bug patterns, and create unit tests to check messages (issue #39)
