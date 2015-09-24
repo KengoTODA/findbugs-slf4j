@@ -122,8 +122,7 @@ You cannot use array which is provided as method argument or returned from other
   <BugPattern type="SLF4J_ILLEGAL_PASSED_CLASS">
     <ShortDescription>Illegal class is passed to LoggerFactory.getLogger(Class)</ShortDescription>
     <LongDescription>
-      Illegal class is passed to LoggerFactory.getLogger(Class).
-      It should be one of {0}.
+      Illegal class is passed to LoggerFactory.getLogger(Class). It should be one of {0}.
     </LongDescription>
     <Details>
 <![CDATA[
