@@ -101,8 +101,7 @@ You cannot use array which is provided as method argument or returned from other
   <BugPattern type="SLF4J_LOGGER_SHOULD_BE_NON_STATIC">
     <ShortDescription>Logger should be non-static field</ShortDescription>
     <LongDescription>
-      Logger should be non-static field.
-      Change this field ({0}) to non-static field.
+      Logger should be non-static field. Change this field ({0}) to non-static field.
     </LongDescription>
     <Details>
 <![CDATA[
