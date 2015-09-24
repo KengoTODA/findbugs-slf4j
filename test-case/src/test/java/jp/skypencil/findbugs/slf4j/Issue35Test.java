@@ -18,6 +18,6 @@ public class Issue35Test {
     Multimap<String, String> longMessages = new XmlParser().expect(pkg.Issue35.class, expectedError);
     assertThat(longMessages).containsEntry("SLF4J_PLACE_HOLDER_MISMATCH", "Count of placeholder(2) is not equal to count of parameter(1)");
     assertThat(longMessages).containsEntry("SLF4J_PLACE_HOLDER_MISMATCH", "Count of placeholder(1) is not equal to count of parameter(0)");
-    assertThat(longMessages).containsEntry("SLF4J_FORMAT_SHOULD_BE_CONST", "Format should be constant");
+    assertThat(longMessages).containsEntry("SLF4J_FORMAT_SHOULD_BE_CONST", "Format should be constant. Use placeholder to reduce the needless cost of parameter construction. see http://www.slf4j.org/faq.html#logging_performance");
   }
 }

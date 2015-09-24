@@ -25,10 +25,10 @@
 
   <BugPattern type="SLF4J_FORMAT_SHOULD_BE_CONST">
     <ShortDescription>Format should be constant</ShortDescription>
-    <LongDescription>Format should be constant</LongDescription>
+    <LongDescription>Format should be constant. Use placeholder to reduce the needless cost of parameter construction. see http://www.slf4j.org/faq.html#logging_performance</LongDescription>
     <Details>
 <![CDATA[
-<p>Format should be constant</p>
+<p>Format should be constant. Use placeholder to reduce the needless cost of parameter construction. see <a href="http://www.slf4j.org/faq.html#logging_performance">official FAQ</a>.</p>
 ]]>
     </Details>
   </BugPattern>
