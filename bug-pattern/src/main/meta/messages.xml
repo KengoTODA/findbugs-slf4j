@@ -84,8 +84,7 @@ You cannot use array which is provided as method argument or returned from other
   <BugPattern type="SLF4J_LOGGER_SHOULD_BE_FINAL">
     <ShortDescription>Logger should be final field</ShortDescription>
     <LongDescription>
-      Logger should be final field.
-      Change this field ({0}) to final field.
+      Logger should be final field. Change this field ({0}) to final field.
     </LongDescription>
     <Details>
 <![CDATA[
