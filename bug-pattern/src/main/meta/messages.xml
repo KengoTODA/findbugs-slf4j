@@ -65,8 +65,7 @@ You cannot use array which is provided as method argument or returned from other
   <BugPattern type="SLF4J_LOGGER_SHOULD_BE_PRIVATE">
     <ShortDescription>Logger should be private field</ShortDescription>
     <LongDescription>
-      Logger should be private field.
-      Change this field ({0}) to private field.
+      Logger should be private field. Change this field ({0}) to private field.
     </LongDescription>
     <Details>
 <![CDATA[
