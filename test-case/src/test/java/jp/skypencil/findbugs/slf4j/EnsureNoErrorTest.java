@@ -1,7 +1,6 @@
 package jp.skypencil.findbugs.slf4j;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 
 import java.io.IOException;
 
@@ -26,7 +25,7 @@ public class EnsureNoErrorTest {
         Node errorsNode = errorsList.item(0);
         String errorCount = errorsNode.getAttributes().getNamedItem("errors").getNodeValue();
 
-        assertThat(errorCount, is("0"));
+        assertThat(errorCount).isEqualTo("0");
     }
 
 }
