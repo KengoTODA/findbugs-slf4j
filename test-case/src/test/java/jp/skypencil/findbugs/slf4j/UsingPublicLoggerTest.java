@@ -1,14 +1,20 @@
 package jp.skypencil.findbugs.slf4j;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import java.util.Collections;
 import java.util.Map;
 
 import org.junit.Test;
 
+import com.google.common.collect.Multimap;
+
 public class UsingPublicLoggerTest {
   @Test
   public void test() {
     Map<String, Integer> expected = Collections.singletonMap("SLF4J_LOGGER_SHOULD_BE_PRIVATE", 1);
-    new XmlParser().expect(pkg.UsingPublicLogger.class, expected);
+    Multimap<String, String> longMessages = new XmlParser().expect(pkg.UsingPublicLogger.class, expected);
+    assertThat(longMessages).containsEntry("SLF4J_LOGGER_SHOULD_BE_PRIVATE",
+            "Logger should be private field. Change this field (logger) to private field.");
   }
 }

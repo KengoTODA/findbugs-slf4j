@@ -51,7 +51,7 @@ class XmlParser {
                         if (!child.getNodeName().equals("LongMessage")) {
                             continue;
                         }
-                        longMessages.put(bugType, child.getTextContent());
+                        longMessages.put(bugType, child.getTextContent().trim());
                     }
                 }
             }

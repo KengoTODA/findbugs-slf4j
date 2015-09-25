@@ -14,10 +14,8 @@
   </Detector>
 
   <BugPattern type="SLF4J_PLACE_HOLDER_MISMATCH">
-    <ShortDescription>Count of placeholder does not equal to count of
-      parameter</ShortDescription>
-    <LongDescription>Count of placeholder({5}) does not equal to count of
-      parameter({4})</LongDescription>
+    <ShortDescription>Count of placeholder is not equal to count of parameter</ShortDescription>
+    <LongDescription>Count of placeholder({5}) is not equal to count of parameter({4})</LongDescription>
     <Details>
 <![CDATA[
 <p>Count of placeholder should equal to count of parameter.</p>
@@ -27,10 +25,10 @@
 
   <BugPattern type="SLF4J_FORMAT_SHOULD_BE_CONST">
     <ShortDescription>Format should be constant</ShortDescription>
-    <LongDescription>Format should be constant</LongDescription>
+    <LongDescription>Format should be constant. Use placeholder to reduce the needless cost of parameter construction. see http://www.slf4j.org/faq.html#logging_performance</LongDescription>
     <Details>
 <![CDATA[
-<p>Format should be constant</p>
+<p>Format should be constant. Use placeholder to reduce the needless cost of parameter construction. see <a href="http://www.slf4j.org/faq.html#logging_performance">official FAQ</a>.</p>
 ]]>
     </Details>
   </BugPattern>
@@ -38,8 +36,7 @@
   <BugPattern type="SLF4J_UNKNOWN_ARRAY">
     <ShortDescription>Using unknown array as parameter</ShortDescription>
     <LongDescription>
-      Using unknown array as parameter.
-      You cannot use array which is provided as method argument or returned from other method.
+      Using unknown array as parameter. You cannot use array which is provided as method argument or returned from other method, for better static analysis by findbugs-slf4j.
     </LongDescription>
     <Details>
 <![CDATA[
@@ -68,8 +65,7 @@ You cannot use array which is provided as method argument or returned from other
   <BugPattern type="SLF4J_LOGGER_SHOULD_BE_PRIVATE">
     <ShortDescription>Logger should be private field</ShortDescription>
     <LongDescription>
-      Logger should be private field.
-      Change this field ({0}) to private field.
+      Logger should be private field. Change this field ({0}) to private field.
     </LongDescription>
     <Details>
 <![CDATA[
@@ -87,8 +83,7 @@ You cannot use array which is provided as method argument or returned from other
   <BugPattern type="SLF4J_LOGGER_SHOULD_BE_FINAL">
     <ShortDescription>Logger should be final field</ShortDescription>
     <LongDescription>
-      Logger should be final field.
-      Change this field ({0}) to final field.
+      Logger should be final field. Change this field ({0}) to final field.
     </LongDescription>
     <Details>
 <![CDATA[
@@ -106,8 +101,7 @@ You cannot use array which is provided as method argument or returned from other
   <BugPattern type="SLF4J_LOGGER_SHOULD_BE_NON_STATIC">
     <ShortDescription>Logger should be non-static field</ShortDescription>
     <LongDescription>
-      Logger should be non-static field.
-      Change this field ({0}) to non-static field.
+      Logger should be non-static field. Change this field ({0}) to non-static field.
     </LongDescription>
     <Details>
 <![CDATA[
@@ -125,8 +119,7 @@ You cannot use array which is provided as method argument or returned from other
   <BugPattern type="SLF4J_ILLEGAL_PASSED_CLASS">
     <ShortDescription>Illegal class is passed to LoggerFactory.getLogger(Class)</ShortDescription>
     <LongDescription>
-      Illegal class is passed to LoggerFactory.getLogger(Class).
-      It should be one of {0}.
+      Illegal class is passed to LoggerFactory.getLogger(Class). It should be one of {0}.
     </LongDescription>
     <Details>
 <![CDATA[
@@ -145,8 +138,7 @@ It should be one of {0}.
   <BugPattern type="SLF4J_MANUALLY_PROVIDED_MESSAGE">
     <ShortDescription>Do not have to use message returned from Throwable#getMessage and Throwable#getLocalizedMessage.</ShortDescription>
     <LongDescription>
-      Do not have to use message returned from Throwable#getMessage and Throwable#getLocalizedMessage.
-      It is enough to provide throwable instance as the last argument, then binding will log its message.
+      Do not have to use message returned from Throwable#getMessage and Throwable#getLocalizedMessage. It is enough to provide throwable instance as the last argument, then binding will log its message.
     </LongDescription>
     <Details>
 <![CDATA[
