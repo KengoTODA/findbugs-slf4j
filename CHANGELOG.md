@@ -109,3 +109,4 @@
 ## 1.2.4
 
 - Improve message of each bug patterns, and create unit tests to check messages (issue #39)
+- Translate bug pattern message to Japanese (issue #41)
