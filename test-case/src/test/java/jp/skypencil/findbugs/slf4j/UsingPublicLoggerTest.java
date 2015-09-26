@@ -15,6 +15,6 @@ public class UsingPublicLoggerTest {
     Map<String, Integer> expected = Collections.singletonMap("SLF4J_LOGGER_SHOULD_BE_PRIVATE", 1);
     Multimap<String, String> longMessages = new XmlParser().expect(pkg.UsingPublicLogger.class, expected);
     assertThat(longMessages).containsEntry("SLF4J_LOGGER_SHOULD_BE_PRIVATE",
-            "Logger should be private field. Change this field (logger) to private field.");
+            "To prevent illegal usage, logger should be private field. Change this field (logger) to private field.");
   }
 }

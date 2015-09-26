@@ -43,8 +43,8 @@
   </rule>
   <rule key="SLF4J_ILLEGAL_PASSED_CLASS">
     <priority>CRITICAL</priority>
-    <name><![CDATA[CORRECTNESS - Illegal class is passed to LoggerFactory.getLogger(Class)]]></name>
-    <description><![CDATA[[SLF4J] Illegal class is passed to LoggerFactory.getLogger(Class)]]></description>
+    <name><![CDATA[CORRECTNESS - Illegal class is passed to LoggerFactory#getLogger(Class)]]></name>
+    <description><![CDATA[[SLF4J] Illegal class is passed to LoggerFactory#getLogger(Class)]]></description>
     <configKey><![CDATA[SLF4J_ILLEGAL_PASSED_CLASS]]></configKey>
   </rule>
   <rule key="SLF4J_MANUALLY_PROVIDED_MESSAGE">

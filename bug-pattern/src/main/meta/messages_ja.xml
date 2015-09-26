@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MessageCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="messagecollection.xsd">
+
+  <Plugin>
+    <ShortDescription>FindBugs SLF4J プラグイン</ShortDescription>
+    <Details>SLF4Jの使い方を自動検証するためのFindBugsプラグイン</Details>
+  </Plugin>
+
+  <Detector class="jp.skypencil.findbugs.slf4j.WrongPlaceholderDetector">
+    <Details>
+      不適切なフォーマットを利用しているログを発見するDetector
+    </Details>
+  </Detector>
+
+  <BugPattern type="SLF4J_PLACE_HOLDER_MISMATCH">
+    <ShortDescription>プレースホルダの数とパラメータの数が一致しません</ShortDescription>
+    <LongDescription>プレースホルダの数({5})とパラメータの数({4})が一致しません。</LongDescription>
+    <Details>
+<![CDATA[
+<p>プレースホルダの数とパラメータの数が一致しません</p>
+]]>
+    </Details>
+  </BugPattern>
+
+  <BugPattern type="SLF4J_FORMAT_SHOULD_BE_CONST">
+    <ShortDescription>フォーマットには定数を使うことが推奨されます</ShortDescription>
+    <LongDescription>フォーマットには定数を使うことが推奨されます。パラメータからの文字列生成処理を防ぐため、プレースホルダを使用してください。参照： http://www.slf4j.org/faq.html#logging_performance</LongDescription>
+    <Details>
+<![CDATA[
+<p>フォーマットには定数を使うことが推奨されます。パラメータからの文字列生成処理を防ぐため、プレースホルダを使用してください。参照： <a href="http://www.slf4j.org/faq.html#logging_performance">official FAQ</a>.</p>
+]]>
+    </Details>
+  </BugPattern>
+
+  <BugPattern type="SLF4J_UNKNOWN_ARRAY">
+    <ShortDescription>パラメータに未知の配列が使用されています</ShortDescription>
+    <LongDescription>
+      パラメータに未知の配列が使用されています。FindBugs SLF4J プラグインによる解析のため、他のメソッドから得た配列や引数として渡された配列は使用しないでください。
+    </LongDescription>
+    <Details>
+<![CDATA[
+<p>パラメータに未知の配列が使用されています。FindBugs SLF4J プラグインによる解析のため、他のメソッドから得た配列や引数として渡された配列は使用しないでください。</p>
+]]>
+    </Details>
+  </BugPattern>
+
+  <BugPattern type="SLF4J_SIGN_ONLY_FORMAT">
+    <ShortDescription>フォーマットには記号や空白以外の文字も使って説明を加えてください</ShortDescription>
+    <LongDescription>ログを読んで何の情報か理解できるように、フォーマット ({4})に記号や空白以外の文字も使って説明を加えてください。</LongDescription>
+    <Details>
+<![CDATA[
+<p>ログを読んで何の情報か理解できるように、フォーマットに記号や空白以外の文字も使って説明を加えてください。</p>
+]]>
+    </Details>
+  </BugPattern>
+
+  <Detector class="jp.skypencil.findbugs.slf4j.PublishedLoggerDetector">
+    <Details>
+      publicなLoggerを発見するDetector
+    </Details>
+  </Detector>
+
+  <BugPattern type="SLF4J_LOGGER_SHOULD_BE_PRIVATE">
+    <ShortDescription>Loggerはprivateフィールドにしてください</ShortDescription>
+    <LongDescription>
+      他クラスからの利用を防ぐため、Loggerのフィールド({0})はprivateにしてください。
+    </LongDescription>
+    <Details>
+<![CDATA[
+<p>他クラスからの利用を防ぐため、Loggerはprivateフィールドに入れてください。</p>
+]]>
+    </Details>
+  </BugPattern>
+
+  <Detector class="jp.skypencil.findbugs.slf4j.NonFinalLoggerDetector">
+    <Details>
+      finalでないLoggerを発見するDetector
+    </Details>
+  </Detector>
+
+  <BugPattern type="SLF4J_LOGGER_SHOULD_BE_FINAL">
+    <ShortDescription>Loggerはfinalフィールドにしてください</ShortDescription>
+    <LongDescription>
+      Loggerのフィールド({0})はfinalにしてください。
+    </LongDescription>
+    <Details>
+<![CDATA[
+<p>Loggerはfinalフィールドにしてください。</p>
+]]>
+    </Details>
+  </BugPattern>
+
+  <Detector class="jp.skypencil.findbugs.slf4j.StaticLoggerDetector">
+    <Details>
+      staticなLoggerを発見するDetector
+    </Details>
+  </Detector>
+
+  <BugPattern type="SLF4J_LOGGER_SHOULD_BE_NON_STATIC">
+    <ShortDescription>Loggerのフィールドはstaticにしないでください</ShortDescription>
+    <LongDescription>
+      Loggerのフィールド({0})はstaticにしないでください。
+    </LongDescription>
+    <Details>
+<![CDATA[
+<p>Loggerのフィールドはstaticにしないでください。</p>
+]]>
+    </Details>
+  </BugPattern>
+
+  <Detector class="jp.skypencil.findbugs.slf4j.IllegalPassedClassDetector">
+    <Details>
+      不適切なクラスを受け取るLoggerFactory#getLogger()を発見するDetector
+    </Details>
+  </Detector>
+
+  <BugPattern type="SLF4J_ILLEGAL_PASSED_CLASS">
+    <ShortDescription>LoggerFactory#getLogger()が不適切なクラスを受け取っています</ShortDescription>
+    <LongDescription>
+      LoggerFactory#getLogger()に不適切なクラスを渡しています。代わりに{0}のいずれかを渡してください。
+    </LongDescription>
+    <Details>
+<![CDATA[
+<p>LoggerFactory#getLogger()に不適切なクラスを渡しています。</p>
+]]>
+    </Details>
+  </BugPattern>
+
+  <Detector class="jp.skypencil.findbugs.slf4j.ManualMessageDetector">
+    <Details>
+      Throwable#getMessage()やThrowable#getLocalizedMessage()を使っているログを発見するDetector
+    </Details>
+  </Detector>
+
+  <BugPattern type="SLF4J_MANUALLY_PROVIDED_MESSAGE">
+    <ShortDescription>Throwable#getMessage()やThrowable#getLocalizedMessage()をパラメータとして渡す必要はありません。</ShortDescription>
+    <LongDescription>
+      Throwable#getMessage()やThrowable#getLocalizedMessage()をパラメータとして渡す必要はありません。Throwableインスタンスを最後のパラメータとして渡せば、ログに例外メッセージが出力されます。
+    </LongDescription>
+    <Details>
+<![CDATA[
+<p>Throwable#getMessage()やThrowable#getLocalizedMessage()をパラメータとして渡す必要はありません。</p>
+]]>
+    </Details>
+  </BugPattern>
+
+  <BugCode abbrev="SLF4J">SLF4J</BugCode>
+</MessageCollection>

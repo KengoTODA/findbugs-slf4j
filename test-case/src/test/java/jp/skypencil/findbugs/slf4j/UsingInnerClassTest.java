@@ -15,6 +15,6 @@ public class UsingInnerClassTest {
     Map<String, Integer> expected = Collections.singletonMap("SLF4J_ILLEGAL_PASSED_CLASS", 2);
     Multimap<String, String> longMessages = new XmlParser().expect(pkg.UsingInnerClass.class, expected);
     assertThat(longMessages).containsEntry("SLF4J_ILLEGAL_PASSED_CLASS",
-            "Illegal class is passed to LoggerFactory.getLogger(Class). It should be one of [pkg.UsingInnerClass].");
+            "Illegal class is passed to LoggerFactory#getLogger(Class). It should be one of [pkg.UsingInnerClass].");
   }
 }
