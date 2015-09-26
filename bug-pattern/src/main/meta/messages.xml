@@ -41,7 +41,7 @@
     <Details>
 <![CDATA[
 <p>Using unknown array as parameter.
-You cannot use array which is provided as method argument or returned from other method.</p>
+You cannot use array which is provided as method argument or returned from other method, for better static analysis by findbugs-slf4j.</p>
 ]]>
     </Details>
   </BugPattern>
@@ -65,11 +65,11 @@ You cannot use array which is provided as method argument or returned from other
   <BugPattern type="SLF4J_LOGGER_SHOULD_BE_PRIVATE">
     <ShortDescription>Logger should be private field</ShortDescription>
     <LongDescription>
-      Logger should be private field. Change this field ({0}) to private field.
+      To prevent illegal usage, logger should be private field. Change this field ({0}) to private field.
     </LongDescription>
     <Details>
 <![CDATA[
-<p>Logger should be private field.
+<p>To prevent illegal usage, logger should be private field.</p>
 ]]>
     </Details>
   </BugPattern>
@@ -87,7 +87,7 @@ You cannot use array which is provided as method argument or returned from other
     </LongDescription>
     <Details>
 <![CDATA[
-<p>Logger should be final field.
+<p>Logger should be final field.</p>
 ]]>
     </Details>
   </BugPattern>
@@ -105,26 +105,25 @@ You cannot use array which is provided as method argument or returned from other
     </LongDescription>
     <Details>
 <![CDATA[
-<p>Logger should be non-static field.
+<p>Logger should be non-static field.</p>
 ]]>
     </Details>
   </BugPattern>
 
   <Detector class="jp.skypencil.findbugs.slf4j.IllegalPassedClassDetector">
     <Details>
-      Finds illegal class which is passed to LoggerFactory.getLogger(Class)
+      Finds illegal class which is passed to LoggerFactory#getLogger(Class)
     </Details>
   </Detector>
 
   <BugPattern type="SLF4J_ILLEGAL_PASSED_CLASS">
-    <ShortDescription>Illegal class is passed to LoggerFactory.getLogger(Class)</ShortDescription>
+    <ShortDescription>Illegal class is passed to LoggerFactory#getLogger(Class)</ShortDescription>
     <LongDescription>
-      Illegal class is passed to LoggerFactory.getLogger(Class). It should be one of {0}.
+      Illegal class is passed to LoggerFactory#getLogger(Class). It should be one of {0}.
     </LongDescription>
     <Details>
 <![CDATA[
-<p>Illegal class is passed to LoggerFactory.getLogger(Class).
-It should be one of {0}.
+<p>Illegal class is passed to LoggerFactory#getLogger(Class).</p>
 ]]>
     </Details>
   </BugPattern>
