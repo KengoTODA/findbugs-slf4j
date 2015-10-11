@@ -1,6 +1,10 @@
 package jp.skypencil.findbugs.slf4j;
 import static org.apache.bcel.Repository.lookupClass;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.generic.BasicType;
@@ -11,9 +15,14 @@ import com.google.common.collect.ImmutableSet;
 import edu.umd.cs.findbugs.internalAnnotations.SlashedClassName;
 
 public final class JavaType {
+    @Nonnull
     private static final ImmutableSet<BasicType> PRIMITIVE_TYPES;
+    @Nonnull
     private static final JavaClass THROWABLE;
+
+    @Nonnull
     private final String name;  // "java.lang.String" etc.
+    @Nullable
     private final JavaClass javaClass;
 
     static {
@@ -27,6 +36,7 @@ public final class JavaType {
         }
     }
 
+    @CheckForNull
     public static JavaType from(@SlashedClassName String className) {
         JavaClass javaClass;
         try {
@@ -37,7 +47,8 @@ public final class JavaType {
         }
     }
 
-    public static JavaType from(JavaClass clazz) {
+    @CheckForNull
+    public static JavaType from(@Nullable JavaClass clazz) {
         if (clazz == null) {
             return null;
         } else {
@@ -45,7 +56,8 @@ public final class JavaType {
         }
     }
 
-    public static JavaType from(Type type) {
+    @CheckForNull
+    public static JavaType from(@Nullable Type type) {
         if (type == null || PRIMITIVE_TYPES.contains(type)) {
             return null;
         } else {

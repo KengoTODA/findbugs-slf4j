@@ -112,7 +112,7 @@ public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray 
         if (format == null) {
             int argumentIndexOfLogFormat = getArgumentIndexOfLogFormat();
             get(potentialPlaceHolderMismatch, getMethod(), argumentIndexOfLogFormat).add(new PotentialPlaceHolderMismatch(createPlaceHolderMismatchBugInstance(-1, parameterCount), parameterCount));
-            get(potentialSignOnlyFormat, getMethod(), argumentIndexOfLogFormat).add(new PotentialSignOnlyFormat(createSignOnlyFormatBugInstance(format)));
+            get(potentialSignOnlyFormat, getMethod(), argumentIndexOfLogFormat).add(new PotentialSignOnlyFormat(createSignOnlyFormatBugInstance(null)));
             return;
         }
         int placeholderCount = countPlaceholder(format);
@@ -127,6 +127,7 @@ public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray 
         }
     }
 
+    @Nonnull
     private BugInstance createSignOnlyFormatBugInstance(@Nullable String formatString) {
         BugInstance bug = new BugInstance(this,
                 "SLF4J_SIGN_ONLY_FORMAT", NORMAL_PRIORITY)
@@ -230,6 +231,7 @@ public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray 
         };
     }
 
+    @Nonnull
     private <R,C,E> List<E> get(Table<R,C,List<E>> table, R row, C column) {
         List<E> list = table.get(row, column);
         if (list == null) {
