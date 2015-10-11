@@ -27,15 +27,18 @@ import edu.umd.cs.findbugs.OpcodeStack;
 import edu.umd.cs.findbugs.OpcodeStack.Item;
 import edu.umd.cs.findbugs.ba.ClassContext;
 import edu.umd.cs.findbugs.bcel.OpcodeStackDetector;
+import edu.umd.cs.findbugs.internalAnnotations.StaticConstant;
 
 /**
  * <p>Basic detector to support detection about parameter array.
  * @author Kengo TODA
  */
 public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetector {
+    @StaticConstant
     private static final ImmutableSet<String> TARGET_METHOD_NAMES = ImmutableSet.of(
             "trace", "debug", "info", "warn", "error");
 
+    @StaticConstant
     // these methods do not use formatter
     private static final ImmutableSet<String> SIGS_WITHOUT_FORMAT = ImmutableSet.of(
             "(Ljava/lang/String;)V",
@@ -43,6 +46,7 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
             "(Ljava/lang/String;Ljava/lang/Throwable;)V",
             "(Lorg/slf4j/Maker;Ljava/lang/String;Ljava/lang/Throwable;)V");
 
+    @StaticConstant
     private static final Pattern SIGNATURE_PATTERN = Pattern.compile("^\\((.*)\\).*$");
 
     private Table<Method, Integer, List<BugInstance>> potentialBugs;
