@@ -12,6 +12,7 @@ import org.apache.bcel.generic.Type;
 
 import com.google.common.collect.ImmutableSet;
 
+import edu.umd.cs.findbugs.ba.AnalysisContext;
 import edu.umd.cs.findbugs.internalAnnotations.SlashedClassName;
 
 public final class JavaType {
@@ -32,6 +33,7 @@ public final class JavaType {
         try {
             THROWABLE = Repository.lookupClass(Throwable.class);
         } catch (ClassNotFoundException e) {
+            AnalysisContext.reportMissingClass(e);
             throw new AssertionError(e);
         }
     }
@@ -43,6 +45,7 @@ public final class JavaType {
             javaClass = Repository.lookupClass(className);
             return from(javaClass);
         } catch (ClassNotFoundException e) {
+            AnalysisContext.reportMissingClass(e);
             throw new IllegalStateException(e);
         }
     }
@@ -98,6 +101,7 @@ public final class JavaType {
             }
             return javaClass.instanceOf(THROWABLE);
         } catch (ClassNotFoundException e) {
+            AnalysisContext.reportMissingClass(e);
             throw new IllegalStateException(e);
         }
     }
