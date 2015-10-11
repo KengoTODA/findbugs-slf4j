@@ -26,6 +26,7 @@ import edu.umd.cs.findbugs.OpcodeStack;
 import edu.umd.cs.findbugs.OpcodeStack.CustomUserValue;
 import edu.umd.cs.findbugs.OpcodeStack.Item;
 import edu.umd.cs.findbugs.ba.ClassContext;
+import edu.umd.cs.findbugs.internalAnnotations.StaticConstant;
 
 @CustomUserValue
 public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray {
@@ -201,6 +202,7 @@ public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray 
         return count;
     }
 
+    @StaticConstant
     private static final Pattern SIGNATURE_PATTERN = Pattern.compile("^\\((.*)\\).*$");
 
     private String[] splitSignature(String methodSignature) {

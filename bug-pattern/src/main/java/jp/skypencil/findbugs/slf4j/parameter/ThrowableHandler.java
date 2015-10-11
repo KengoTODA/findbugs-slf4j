@@ -7,8 +7,10 @@ import org.apache.bcel.classfile.JavaClass;
 
 import edu.umd.cs.findbugs.OpcodeStack.Item;
 import edu.umd.cs.findbugs.ba.AnalysisContext;
+import edu.umd.cs.findbugs.internalAnnotations.StaticConstant;
 
 public class ThrowableHandler {
+    @StaticConstant
     @Nonnull
     private static final JavaClass THROWABLE;
 
