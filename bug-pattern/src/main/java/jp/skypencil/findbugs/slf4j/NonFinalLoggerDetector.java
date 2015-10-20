@@ -6,9 +6,9 @@ import com.google.common.base.Objects;
 
 import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
-import edu.umd.cs.findbugs.bcel.OpcodeStackDetector;
+import edu.umd.cs.findbugs.BytecodeScanningDetector;
 
-public class NonFinalLoggerDetector extends OpcodeStackDetector {
+public class NonFinalLoggerDetector extends BytecodeScanningDetector {
     private final BugReporter bugReporter;
 
     public NonFinalLoggerDetector(BugReporter bugReporter) {
@@ -26,9 +26,5 @@ public class NonFinalLoggerDetector extends OpcodeStackDetector {
                     .addClass(this);
             bugReporter.reportBug(bug);
         }
-    }
-
-    @Override
-    public void sawOpcode(int code) {
     }
 }
