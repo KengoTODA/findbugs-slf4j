@@ -1,13 +1,24 @@
 package jp.skypencil.findbugs.slf4j;
 
-import java.util.Iterator;
+import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import javax.annotation.Nonnull;
+
+/**
+ * Iterator to iterate codepoint in provided {@link CharSequence}.
+ * 
+ * @see java.lang.CharSequence#codePoints() Replacement in Java8
+ */
 final class CodepointIterator implements Iterator<Integer> {
-    private CharSequence sequence;
+    @Nonnull
+    private final CharSequence sequence;
     private int index;
 
-    CodepointIterator(CharSequence sequence) {
-        this.sequence = sequence;
+    CodepointIterator(@Nonnull CharSequence sequence) {
+        this.sequence = checkNotNull(sequence);
     }
 
     @Override
@@ -17,12 +28,21 @@ final class CodepointIterator implements Iterator<Integer> {
 
     @Override
     public Integer next() {
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        }
+
         final int result;
-        if (Character.isHighSurrogate(sequence.charAt(index))) {
-            result = (sequence.charAt(index) << 16) + sequence.charAt(index + 1);
+        final char ch = sequence.charAt(index);
+        if (Character.isHighSurrogate(ch)) {
+            final char ch2 = sequence.charAt(index + 1);
+            if (!Character.isLowSurrogate(ch2)) {
+                throw new IllegalStateException("character at " + (index + 1) + " should be low surrogate");
+            }
+            result = (ch << 16) + ch2;
             index += 2;
         } else {
-            result = sequence.charAt(index);
+            result = ch;
             index += 1;
         }
         return Integer.valueOf(result);
