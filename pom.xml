@@ -18,12 +18,12 @@
   </modules>
   <profiles>
     <profile>
-      <id>build-with-1.7.12</id>
+      <id>build-with-1.7.13</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <version.slf4j>1.7.12</version.slf4j>
+        <version.slf4j>1.7.13</version.slf4j>
       </properties>
     </profile>
     <profile>
