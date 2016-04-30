@@ -20,14 +20,16 @@
 
     <section class="main-content">
       <h1>
-<a id="findbugs-bug-pattern-for-slf4j" class="anchor" href="#findbugs-bug-pattern-for-slf4j" aria-hidden="true"><span class="octicon octicon-link"></span></a>FindBugs bug pattern for SLF4J</h1>
+<a id="findbugs-bug-pattern-for-slf4j" class="anchor" href="#findbugs-bug-pattern-for-slf4j" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>FindBugs bug pattern for SLF4J</h1>
 
 <p>This product helps you to verify usage of SLF4J 1.6 and 1.7. Both of Java7 and Java8 are supported.</p>
+
+<p>To use this plugin with Sonar, see <a href="sonar-plugin/README.md">here</a>.</p>
 
 <p><a href="http://travis-ci.org/KengoTODA/findbugs-slf4j"><img src="https://secure.travis-ci.org/KengoTODA/findbugs-slf4j.png" alt="Build Status"></a></p>
 
 <h2>
-<a id="motivation" class="anchor" href="#motivation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Motivation</h2>
+<a id="motivation" class="anchor" href="#motivation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Motivation</h2>
 
 <p>SLF4J is useful logging facade, but sometimes we mistake how to use. Can you find mistakes in following class? It is not so easy especially in huge product, this FindBugs plugin will help you to find.</p>
 
@@ -42,12 +44,12 @@
 }</pre></div>
 
 <h1>
-<a id="provided-bug-patterns" class="anchor" href="#provided-bug-patterns" aria-hidden="true"><span class="octicon octicon-link"></span></a>Provided bug patterns</h1>
+<a id="provided-bug-patterns" class="anchor" href="#provided-bug-patterns" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Provided bug patterns</h1>
 
 <p>Currently this product provides 9 patterns.</p>
 
 <h2>
-<a id="slf4j_place_holder_mismatch" class="anchor" href="#slf4j_place_holder_mismatch" aria-hidden="true"><span class="octicon octicon-link"></span></a>SLF4J_PLACE_HOLDER_MISMATCH</h2>
+<a id="slf4j_place_holder_mismatch" class="anchor" href="#slf4j_place_holder_mismatch" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SLF4J_PLACE_HOLDER_MISMATCH</h2>
 
 <p>This pattern checks how placeholder is used.
 Alert if count of placeholder does not match to count of parameter.</p>
@@ -73,7 +75,7 @@ Alert if count of placeholder does not match to count of parameter.</p>
 }</pre></div>
 
 <h2>
-<a id="slf4j_format_should_be_const" class="anchor" href="#slf4j_format_should_be_const" aria-hidden="true"><span class="octicon octicon-link"></span></a>SLF4J_FORMAT_SHOULD_BE_CONST</h2>
+<a id="slf4j_format_should_be_const" class="anchor" href="#slf4j_format_should_be_const" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SLF4J_FORMAT_SHOULD_BE_CONST</h2>
 
 <p>This pattern checks given format is CONST or not.
 Alert if format is not CONST.</p>
@@ -91,7 +93,7 @@ Alert if format is not CONST.</p>
 }</pre></div>
 
 <h2>
-<a id="slf4j_unknown_array" class="anchor" href="#slf4j_unknown_array" aria-hidden="true"><span class="octicon octicon-link"></span></a>SLF4J_UNKNOWN_ARRAY</h2>
+<a id="slf4j_unknown_array" class="anchor" href="#slf4j_unknown_array" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SLF4J_UNKNOWN_ARRAY</h2>
 
 <p>This pattern reports a bug if your code is using array which is provided as method argument or returned from other method.
 It makes our verification harder, so please stop using it.</p>
@@ -108,7 +110,7 @@ It makes our verification harder, so please stop using it.</p>
 }</pre></div>
 
 <h2>
-<a id="slf4j_logger_should_be_private" class="anchor" href="#slf4j_logger_should_be_private" aria-hidden="true"><span class="octicon octicon-link"></span></a>SLF4J_LOGGER_SHOULD_BE_PRIVATE</h2>
+<a id="slf4j_logger_should_be_private" class="anchor" href="#slf4j_logger_should_be_private" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SLF4J_LOGGER_SHOULD_BE_PRIVATE</h2>
 
 <p>This pattern reports non private field whose type is org.slf4j.Logger.</p>
 
@@ -121,7 +123,7 @@ It makes our verification harder, so please stop using it.</p>
 }</pre></div>
 
 <h2>
-<a id="slf4j_logger_should_be_final" class="anchor" href="#slf4j_logger_should_be_final" aria-hidden="true"><span class="octicon octicon-link"></span></a>SLF4J_LOGGER_SHOULD_BE_FINAL</h2>
+<a id="slf4j_logger_should_be_final" class="anchor" href="#slf4j_logger_should_be_final" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SLF4J_LOGGER_SHOULD_BE_FINAL</h2>
 
 <p>This pattern reports non final field whose type is org.slf4j.Logger.</p>
 
@@ -134,7 +136,7 @@ It makes our verification harder, so please stop using it.</p>
 }</pre></div>
 
 <h2>
-<a id="slf4j_logger_should_be_non_static" class="anchor" href="#slf4j_logger_should_be_non_static" aria-hidden="true"><span class="octicon octicon-link"></span></a>SLF4J_LOGGER_SHOULD_BE_NON_STATIC</h2>
+<a id="slf4j_logger_should_be_non_static" class="anchor" href="#slf4j_logger_should_be_non_static" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SLF4J_LOGGER_SHOULD_BE_NON_STATIC</h2>
 
 <p>This pattern reports static field whose type is org.slf4j.Logger.</p>
 
@@ -151,7 +153,7 @@ It makes our verification harder, so please stop using it.</p>
 }</pre></div>
 
 <h2>
-<a id="slf4j_illegal_passed_class" class="anchor" href="#slf4j_illegal_passed_class" aria-hidden="true"><span class="octicon octicon-link"></span></a>SLF4J_ILLEGAL_PASSED_CLASS</h2>
+<a id="slf4j_illegal_passed_class" class="anchor" href="#slf4j_illegal_passed_class" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SLF4J_ILLEGAL_PASSED_CLASS</h2>
 
 <p>This pattern reports that illegal class is passed to LoggerFactory.getLogger(Class)</p>
 
@@ -165,7 +167,7 @@ It makes our verification harder, so please stop using it.</p>
 }</pre></div>
 
 <h2>
-<a id="slf4j_sign_only_format" class="anchor" href="#slf4j_sign_only_format" aria-hidden="true"><span class="octicon octicon-link"></span></a>SLF4J_SIGN_ONLY_FORMAT</h2>
+<a id="slf4j_sign_only_format" class="anchor" href="#slf4j_sign_only_format" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SLF4J_SIGN_ONLY_FORMAT</h2>
 
 <p>This pattern reports that log format which contains only sign and spaces.
 To make log readable, you have to use letter to explain your log.</p>
@@ -182,7 +184,7 @@ To make log readable, you have to use letter to explain your log.</p>
 }</pre></div>
 
 <h2>
-<a id="slf4j_manually_provided_message" class="anchor" href="#slf4j_manually_provided_message" aria-hidden="true"><span class="octicon octicon-link"></span></a>SLF4J_MANUALLY_PROVIDED_MESSAGE</h2>
+<a id="slf4j_manually_provided_message" class="anchor" href="#slf4j_manually_provided_message" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SLF4J_MANUALLY_PROVIDED_MESSAGE</h2>
 
 <p>This pattern reports needless message which is returned by <code>Throwable#getMessage()</code>
 or <code>Throwable#getLocalizedMessage()</code>. Normally binding will call these methods
@@ -201,7 +203,7 @@ call them manually.</p>
 }</pre></div>
 
 <h1>
-<a id="how-to-use-with-maven" class="anchor" href="#how-to-use-with-maven" aria-hidden="true"><span class="octicon octicon-link"></span></a>how to use with Maven</h1>
+<a id="how-to-use-with-maven" class="anchor" href="#how-to-use-with-maven" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>how to use with Maven</h1>
 
 <p>To use this product, please configure your findbugs-maven-plugin like below.</p>
 
@@ -214,16 +216,21 @@ call them manually.</p>
             &lt;<span class="pl-ent">plugin</span>&gt;
               &lt;<span class="pl-ent">groupId</span>&gt;jp.skypencil.findbugs.slf4j&lt;/<span class="pl-ent">groupId</span>&gt;
               &lt;<span class="pl-ent">artifactId</span>&gt;bug-pattern&lt;/<span class="pl-ent">artifactId</span>&gt;
-              &lt;<span class="pl-ent">version</span>&gt;1.2.3&lt;/<span class="pl-ent">version</span>&gt;
+              &lt;<span class="pl-ent">version</span>&gt;1.2.4&lt;/<span class="pl-ent">version</span>&gt;
             &lt;/<span class="pl-ent">plugin</span>&gt;
           &lt;/<span class="pl-ent">plugins</span>&gt;
         &lt;/<span class="pl-ent">configuration</span>&gt;
       &lt;/<span class="pl-ent">plugin</span>&gt;</pre></div>
 
 <h1>
-<a id="copyright-and-license" class="anchor" href="#copyright-and-license" aria-hidden="true"><span class="octicon octicon-link"></span></a>Copyright and license</h1>
+<a id="change-log" class="anchor" href="#change-log" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Change log</h1>
 
-<p>Copyright 2012-2015 Kengo TODA</p>
+<p>See <a href="CHANGELOG.md">CHANGELOG.md</a> for detail.</p>
+
+<h1>
+<a id="copyright-and-license" class="anchor" href="#copyright-and-license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Copyright and license</h1>
+
+<p>Copyright 2012-2016 Kengo TODA</p>
 
 <p>Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
