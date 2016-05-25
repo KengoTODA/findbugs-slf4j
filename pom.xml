@@ -63,6 +63,7 @@
             <target>7</target>
             <encoding>${project.build.sourceEncoding}</encoding>
             <forceJavacCompilerUse>true</forceJavacCompilerUse>
+            <showWarnings>true</showWarnings>
           </configuration>
           <dependencies>
             <dependency>
