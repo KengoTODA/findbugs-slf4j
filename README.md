@@ -5,6 +5,7 @@ This product helps you to verify usage of SLF4J 1.6 and 1.7. Both of Java7 and J
 To use this plugin with Sonar, see [here](sonar-plugin/README.md).
 
 [![Build Status](https://secure.travis-ci.org/KengoTODA/findbugs-slf4j.png)](http://travis-ci.org/KengoTODA/findbugs-slf4j)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/jp.skypencil.findbugs.slf4j/findbugs-slf4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/jp.skypencil.findbugs.slf4j/findbugs-slf4j)
 
 ## Motivation
 
