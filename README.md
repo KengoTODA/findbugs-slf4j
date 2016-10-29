@@ -191,7 +191,7 @@ class Foo {
 }
 ```
 
-# how to use with Maven
+# How to use with Maven
 
 To use this product, please configure your findbugs-maven-plugin like below.
 
@@ -212,6 +212,26 @@ To use this product, please configure your findbugs-maven-plugin like below.
       </plugin>
 ```
 
+# How to use with Gradle
+
+To use these detectors from a Gradle build, please follow the example below:
+
+```gradle
+plugins {
+    id "findbugs"
+    id "java"
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "org.slf4j:slf4j-api:1.7.12"
+
+    findbugsPlugins "jp.skypencil.findbugs.slf4j:bug-pattern:1.2.4@jar"
+}
+```
 
 # Change log
 
