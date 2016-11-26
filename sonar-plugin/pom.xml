@@ -27,8 +27,8 @@
   </build>
   <dependencies>
     <dependency>
-      <groupId>com.google.code.findbugs</groupId>
-      <artifactId>findbugs</artifactId>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs</artifactId>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>

@@ -10,37 +10,6 @@
   <build>
     <plugins>
       <plugin>
-        <!--
-          Copy meta files to default outputDirectory at "prepare-package" phase.
-
-          Because of findbugs specification, an edu.umd.cs.findbugs.PluginDoesntContainMetadataException
-          instance would be thrown at "test" phase if we put these meta files on '/src/main/resources'.
-          We have to copy these meta files after testing.
-
-          See "How to build FindBugs plugin with Maven" thread in FindBugs mailing list
-          (findbugs-discuss@cs.umd.edu) to get detail and other solution.
-
-          Note: You should execute "clean" phase before you execute "test" phase.
-        -->
-        <artifactId>maven-resources-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.build.outputDirectory}</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>src/main/meta</directory>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
         <executions>
@@ -59,8 +28,9 @@
   </build>
   <dependencies>
     <dependency>
-      <groupId>com.google.code.findbugs</groupId>
-      <artifactId>findbugs</artifactId>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs</artifactId>
+      <version>3.1.0-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>

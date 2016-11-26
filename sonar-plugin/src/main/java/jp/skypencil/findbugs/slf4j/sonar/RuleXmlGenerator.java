@@ -30,7 +30,7 @@ public class RuleXmlGenerator {
             projectRoot = ".";
         }
         File metaDirectory = new File(PATH_JOINER.join(projectRoot,
-                "bug-pattern", "src", "main", "meta")); 
+                "bug-pattern", "src", "main", "resources")); 
         File findbugsFile = new File(metaDirectory, "findbugs.xml");
         File messageFile = new File(metaDirectory, "messages.xml");
         File output = new File(PATH_JOINER.join(projectRoot, "sonar-plugin"), "rules.xml");
