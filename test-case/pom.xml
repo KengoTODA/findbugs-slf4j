@@ -74,6 +74,10 @@
       <artifactId>guava</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>test-harness</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.youdevise</groupId>
       <artifactId>test-driven-detectors4findbugs</artifactId>
       <version>1.0</version>
