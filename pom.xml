@@ -17,6 +17,9 @@
     <module>sonar-plugin</module>
   </modules>
   <properties>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spotbugs.version>3.1.0-RC2</spotbugs.version>
   </properties>
   <profiles>
@@ -62,8 +65,8 @@
           <version>3.3</version>
           <configuration>
             <compilerId>javac-with-errorprone</compilerId>
-            <source>7</source>
-            <target>7</target>
+            <source>8</source>
+            <target>8</target>
             <encoding>${project.build.sourceEncoding}</encoding>
             <forceJavacCompilerUse>true</forceJavacCompilerUse>
             <showWarnings>true</showWarnings>
@@ -207,10 +210,22 @@
         <scope>test</scope>
       </dependency>
       <dependency>
+        <groupId>com.youdevise</groupId>
+        <artifactId>test-driven-detectors4findbugs</artifactId>
+        <version>1.0</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>test-harness</artifactId>
         <version>${spotbugs.version}</version>
         <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.16.8</version>
+        <scope>provided</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>

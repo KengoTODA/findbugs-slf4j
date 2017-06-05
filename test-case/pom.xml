@@ -80,13 +80,11 @@
     <dependency>
       <groupId>com.youdevise</groupId>
       <artifactId>test-driven-detectors4findbugs</artifactId>
-      <version>1.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.16.8</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
