@@ -5,6 +5,8 @@ import javax.annotation.Nonnull;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import edu.umd.cs.findbugs.OpcodeStack.Item;
 import edu.umd.cs.findbugs.ba.AnalysisContext;
 import edu.umd.cs.findbugs.internalAnnotations.StaticConstant;
@@ -12,7 +14,8 @@ import edu.umd.cs.findbugs.internalAnnotations.StaticConstant;
 public class ThrowableHandler {
     @StaticConstant
     @Nonnull
-    private static final JavaClass THROWABLE;
+    @VisibleForTesting
+    public static final JavaClass THROWABLE;
 
     static {
         try {

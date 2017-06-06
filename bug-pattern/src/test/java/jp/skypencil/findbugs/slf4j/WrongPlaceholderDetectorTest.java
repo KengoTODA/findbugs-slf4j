@@ -38,8 +38,7 @@ public class WrongPlaceholderDetectorTest {
         assertThat(detector.countParameter(stack, "(Lorg/slf4j/Marker;Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V", throwableHandler)).isEqualTo(2);
 
         Item exceptionInStack = mock(Item.class);
-        JavaClass throwable = Repository.lookupClass(Throwable.class);
-        doReturn(throwable).when(exceptionInStack).getJavaClass();
+        doReturn(ThrowableHandler.THROWABLE).when(exceptionInStack).getJavaClass();
         doReturn(exceptionInStack).when(stack).getStackItem(0);
 
         assertThat(detector.countParameter(stack, "(Ljava/lang/String;Ljava/lang/Object;)V", throwableHandler)).isEqualTo(0);

@@ -110,3 +110,7 @@
 
 - Improve message of each bug patterns, and create unit tests to check messages (issue #39)
 - Translate bug pattern message to Japanese (issue #41)
+
+## 1.3.0
+
+- Upgrade FindBugs to SpotBugs 3.1.0
