@@ -1,0 +1,22 @@
+subprojects {
+  apply plugin: 'java'
+
+  group = 'jp.skypencil.findbugs.slf4j'
+  version = '1.3.0-SNAPSHOT'
+
+  project.sourceCompatibility = 1.8
+  project.targetCompatibility = 1.8
+
+  tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+  }
+
+  repositories {
+    jcenter()
+  }
+}
+
+wrapper {
+  gradleVersion = '3.5'
+  distributionType = Wrapper.DistributionType.ALL
+}

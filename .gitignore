@@ -7,3 +7,5 @@ target
 deploy.sh
 pom.xml.releaseBackup
 release.properties
+.gradle
+build

@@ -1,0 +1,1 @@
+include ':bug-pattern', ':test-case', ':sonar-qube-plugin'
