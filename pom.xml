@@ -14,7 +14,7 @@
   <modules>
     <module>bug-pattern</module>
     <module>test-case</module>
-    <module>sonar-plugin</module>
+    <module>sonar-qube-plugin</module>
   </modules>
   <properties>
     <maven.compiler.target>1.8</maven.compiler.target>
