@@ -23,6 +23,19 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+        <artifactId>sonar-packaging-maven-plugin</artifactId>
+        <version>1.18.0.372</version>
+        <extensions>true</extensions>
+        <configuration>
+          <pluginName>FindBugsSlf4j</pluginName>
+          <pluginDescription><![CDATA[Verify usage of SLF4J]]></pluginDescription>
+          <pluginClass>jp.skypencil.findbugs.slf4j.sonar.FindBugsSlf4jPlugin</pluginClass>
+          <useChildFirstClassLoader>false</useChildFirstClassLoader>
+          <requirePlugins>findbugs:3.5</requirePlugins><!-- the version introduced SpotBugs 3.1 -->
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
@@ -33,6 +46,18 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.sonarsource.sonarqube</groupId>
+      <artifactId>sonar-plugin-api</artifactId>
+      <version>5.6.6</version><!-- LTS release -->
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.sonarsource.sonar-findbugs-plugin</groupId>
+      <artifactId>sonar-findbugs-plugin</artifactId>
+      <version>3.5</version><!-- the version introduced SpotBugs 3.1 -->
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 </project>
