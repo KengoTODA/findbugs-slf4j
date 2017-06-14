@@ -9,21 +9,6 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>java</goal>
-            </goals>
-            <configuration>
-              <mainClass>jp.skypencil.findbugs.slf4j.sonar.RuleXmlGenerator</mainClass>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
         <artifactId>sonar-packaging-maven-plugin</artifactId>
         <version>1.18.0.372</version>
@@ -35,6 +20,24 @@
           <useChildFirstClassLoader>false</useChildFirstClassLoader>
           <requirePlugins>findbugs:3.5</requirePlugins><!-- the version introduced SpotBugs 3.1 -->
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>jp.skypencil.sonarqube</groupId>
+        <artifactId>rule-xml-maven-plugin</artifactId>
+        <version>0.1.0</version>
+        <configuration>
+          <findbugs>../bug-pattern/src/main/resources/findbugs.xml</findbugs>
+          <messages>../bug-pattern/src/main/resources/messages.xml</messages>
+          <output>${project.build.outputDirectory}/jp/skypencil/findbugs/slf4j/sonar/rules.xml</output>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
