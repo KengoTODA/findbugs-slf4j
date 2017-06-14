@@ -42,7 +42,7 @@
   <scm>
     <connection>scm:git:git@github.com:KengoTODA/findbugs-slf4j.git</connection>
     <developerConnection>scm:git:git@github.com:KengoTODA/findbugs-slf4j.git</developerConnection>
-    <url>git@github.com:KengoTODA/findbugs-slf4j.git</url>
+    <url>https://github.com/KengoTODA/findbugs-slf4j</url>
   </scm>
   <developers>
     <developer>
@@ -57,6 +57,11 @@
       <url>http://www.apache.org/licenses/LICENSE-2.0</url>
     </license>
   </licenses>
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/KengoTODA/findbugs-slf4j/issues</url>
+  </issueManagement>
+  <inceptionYear>2012</inceptionYear>
   <build>
     <pluginManagement>
       <plugins>
