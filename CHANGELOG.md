@@ -114,3 +114,4 @@
 ## 1.3.0
 
 - Upgrade FindBugs to SpotBugs 3.1.0
+- Start providing SonarQube plugin

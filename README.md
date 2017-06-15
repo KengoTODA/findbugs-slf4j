@@ -239,7 +239,7 @@ See [CHANGELOG.md](CHANGELOG.md) for detail.
 
 # Copyright and license
 
-Copyright 2012-2016 Kengo TODA
+Copyright 2012-2017 Kengo TODA
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
