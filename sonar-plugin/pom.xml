@@ -20,16 +20,19 @@
           <pluginClass>jp.skypencil.findbugs.slf4j.sonar.FindBugsSlf4jPlugin</pluginClass>
           <useChildFirstClassLoader>false</useChildFirstClassLoader>
           <requirePlugins>findbugs:3.5</requirePlugins><!-- the version introduced SpotBugs 3.1 -->
+          <pluginUrl>https://github.com/KengoTODA/findbugs-slf4j</pluginUrl>
+          <pluginSourcesUrl>https://github.com/KengoTODA/findbugs-slf4j</pluginSourcesUrl>
         </configuration>
       </plugin>
       <plugin>
         <groupId>jp.skypencil.sonarqube</groupId>
         <artifactId>rule-xml-maven-plugin</artifactId>
-        <version>0.1.0</version>
+        <version>0.1.1</version>
         <configuration>
           <findbugs>../bug-pattern/src/main/resources/findbugs.xml</findbugs>
           <messages>../bug-pattern/src/main/resources/messages.xml</messages>
           <output>${project.build.outputDirectory}/jp/skypencil/findbugs/slf4j/sonar/rules.xml</output>
+          <tags>slf4j</tags>
         </configuration>
         <executions>
           <execution>
