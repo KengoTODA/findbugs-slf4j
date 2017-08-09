@@ -43,6 +43,44 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>xml-maven-plugin</artifactId>
+        <version>1.0.1</version>
+        <executions>
+          <execution>
+            <id>validate-spotbugs-configuration</id>
+            <goals>
+              <goal>validate</goal>
+            </goals>
+            <configuration>
+              <validationSets>
+                <validationSet>
+                  <dir>src/main/resources</dir>
+                  <includes>
+                    <include>findbugs.xml</include>
+                  </includes>
+                  <systemId>findbugsplugin.xsd</systemId>
+                </validationSet>
+                <validationSet>
+                  <dir>src/main/resources</dir>
+                  <includes>
+                    <include>messages.xml</include>
+                  </includes>
+                  <systemId>messagecollection.xsd</systemId>
+                </validationSet>
+              </validationSets>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs</artifactId>
+            <version>${spotbugs.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
