@@ -1,6 +1,6 @@
 package jp.skypencil.findbugs.slf4j;
 
-import static edu.umd.cs.findbugs.test.SpotBugsRule.containsExactly;
+import static edu.umd.cs.findbugs.test.CountMatcher.containsExactly;
 import static org.junit.Assert.assertThat;
 
 import java.nio.file.Paths;
@@ -21,6 +21,6 @@ public class GettingClassFromArrayTest {
   public void test() {
     BugCollection bugs = spotbugs.performAnalysis(Paths.get("target/test-classes/pkg/GettingClassFromArray.class"));
     BugInstanceMatcher matcher = new BugInstanceMatcherBuilder().bugType("UC_USELESS_VOID_METHOD").build();
-    assertThat(bugs, containsExactly(matcher, 1));
+    assertThat(bugs, containsExactly(1, matcher));
   }
 }
