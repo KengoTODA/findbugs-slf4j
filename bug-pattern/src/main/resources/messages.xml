@@ -13,6 +13,36 @@
     </Details>
   </Detector>
 
+  <Detector class="jp.skypencil.findbugs.slf4j.PublishedLoggerDetector">
+    <Details>
+      Finds published logger field.
+    </Details>
+  </Detector>
+
+  <Detector class="jp.skypencil.findbugs.slf4j.NonFinalLoggerDetector">
+    <Details>
+      Finds non-final logger field.
+    </Details>
+  </Detector>
+
+  <Detector class="jp.skypencil.findbugs.slf4j.StaticLoggerDetector">
+    <Details>
+      Finds static logger field.
+    </Details>
+  </Detector>
+
+  <Detector class="jp.skypencil.findbugs.slf4j.IllegalPassedClassDetector">
+    <Details>
+      Finds illegal class which is passed to LoggerFactory#getLogger(Class)
+    </Details>
+  </Detector>
+
+  <Detector class="jp.skypencil.findbugs.slf4j.ManualMessageDetector">
+    <Details>
+      Finds log which uses message returned from Throwable#getMessage and Throwable#getLocalizedMessage.
+    </Details>
+  </Detector>
+
   <BugPattern type="SLF4J_PLACE_HOLDER_MISMATCH">
     <ShortDescription>Count of placeholder is not equal to count of parameter</ShortDescription>
     <LongDescription>Count of placeholder({5}) is not equal to count of parameter({4})</LongDescription>
@@ -56,12 +86,6 @@ You cannot use array which is provided as method argument or returned from other
     </Details>
   </BugPattern>
 
-  <Detector class="jp.skypencil.findbugs.slf4j.PublishedLoggerDetector">
-    <Details>
-      Finds published logger field.
-    </Details>
-  </Detector>
-
   <BugPattern type="SLF4J_LOGGER_SHOULD_BE_PRIVATE">
     <ShortDescription>Logger should be private field</ShortDescription>
     <LongDescription>
@@ -73,12 +97,6 @@ You cannot use array which is provided as method argument or returned from other
 ]]>
     </Details>
   </BugPattern>
-
-  <Detector class="jp.skypencil.findbugs.slf4j.NonFinalLoggerDetector">
-    <Details>
-      Finds non-final logger field.
-    </Details>
-  </Detector>
 
   <BugPattern type="SLF4J_LOGGER_SHOULD_BE_FINAL">
     <ShortDescription>Logger should be final field</ShortDescription>
@@ -92,12 +110,6 @@ You cannot use array which is provided as method argument or returned from other
     </Details>
   </BugPattern>
 
-  <Detector class="jp.skypencil.findbugs.slf4j.StaticLoggerDetector">
-    <Details>
-      Finds static logger field.
-    </Details>
-  </Detector>
-
   <BugPattern type="SLF4J_LOGGER_SHOULD_BE_NON_STATIC">
     <ShortDescription>Logger should be non-static field</ShortDescription>
     <LongDescription>
@@ -110,12 +122,6 @@ You cannot use array which is provided as method argument or returned from other
     </Details>
   </BugPattern>
 
-  <Detector class="jp.skypencil.findbugs.slf4j.IllegalPassedClassDetector">
-    <Details>
-      Finds illegal class which is passed to LoggerFactory#getLogger(Class)
-    </Details>
-  </Detector>
-
   <BugPattern type="SLF4J_ILLEGAL_PASSED_CLASS">
     <ShortDescription>Illegal class is passed to LoggerFactory#getLogger(Class)</ShortDescription>
     <LongDescription>
@@ -127,12 +133,6 @@ You cannot use array which is provided as method argument or returned from other
 ]]>
     </Details>
   </BugPattern>
-
-  <Detector class="jp.skypencil.findbugs.slf4j.ManualMessageDetector">
-    <Details>
-      Finds log which uses message returned from Throwable#getMessage and Throwable#getLocalizedMessage.
-    </Details>
-  </Detector>
 
   <BugPattern type="SLF4J_MANUALLY_PROVIDED_MESSAGE">
     <ShortDescription>Do not have to use message returned from Throwable#getMessage and Throwable#getLocalizedMessage.</ShortDescription>
