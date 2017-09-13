@@ -4,7 +4,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
