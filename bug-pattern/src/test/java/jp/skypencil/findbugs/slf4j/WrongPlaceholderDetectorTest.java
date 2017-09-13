@@ -3,14 +3,12 @@ package jp.skypencil.findbugs.slf4j;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import jp.skypencil.findbugs.slf4j.parameter.ThrowableHandler;
 
-import org.apache.bcel.Repository;
-import org.apache.bcel.classfile.JavaClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import edu.umd.cs.findbugs.OpcodeStack;
 import edu.umd.cs.findbugs.OpcodeStack.Item;
+import jp.skypencil.findbugs.slf4j.parameter.ThrowableHandler;
 
 public class WrongPlaceholderDetectorTest {
     @Test
