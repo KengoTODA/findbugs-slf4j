@@ -3,7 +3,7 @@ package jp.skypencil.findbugs.slf4j;
 import static com.google.common.truth.Truth.assertThat;
 
 import org.apache.bcel.generic.Type;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class JavaTypeTest {
     /**

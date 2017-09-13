@@ -1,26 +1,23 @@
 package jp.skypencil.findbugs.slf4j;
 
-import static edu.umd.cs.findbugs.test.CountMatcher.containsExactly;
-import static org.junit.Assert.assertThat;
+import static com.google.common.truth.Truth.assertThat;
 
 import java.nio.file.Paths;
 
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import edu.umd.cs.findbugs.BugCollection;
-import edu.umd.cs.findbugs.test.SpotBugsRule;
-import edu.umd.cs.findbugs.test.matcher.BugInstanceMatcher;
-import edu.umd.cs.findbugs.test.matcher.BugInstanceMatcherBuilder;
+import edu.umd.cs.findbugs.BugInstance;
 
+@ExtendWith(SpotBugsExtension.class)
 public class GettingClassFromArrayTest {
-  @Rule
-  public SpotBugsRule spotbugs = new SpotBugsRule();
-
   @Test
-  public void test() {
+  public void test(SpotBugsRunner spotbugs) {
     BugCollection bugs = spotbugs.performAnalysis(Paths.get("target/test-classes/pkg/GettingClassFromArray.class"));
-    BugInstanceMatcher matcher = new BugInstanceMatcherBuilder().bugType("UC_USELESS_VOID_METHOD").build();
-    assertThat(bugs, containsExactly(1, matcher));
+    assertThat(bugs).hasSize(1);
+
+    BugInstance bug = bugs.getCollection().stream().findFirst().orElseThrow(AssertionError::new);
+    assertThat(bug.getType()).isEqualTo("UC_USELESS_VOID_METHOD");
   }
 }

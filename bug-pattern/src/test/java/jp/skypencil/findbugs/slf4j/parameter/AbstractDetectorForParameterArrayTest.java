@@ -3,7 +3,7 @@ package jp.skypencil.findbugs.slf4j.parameter;
 import static com.google.common.truth.Truth.assertThat;
 import static jp.skypencil.findbugs.slf4j.parameter.AbstractDetectorForParameterArray.indexOf;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AbstractDetectorForParameterArrayTest {
 

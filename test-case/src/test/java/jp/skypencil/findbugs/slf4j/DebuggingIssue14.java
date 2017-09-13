@@ -1,6 +1,6 @@
 package jp.skypencil.findbugs.slf4j;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import pkg.Issue14;
 

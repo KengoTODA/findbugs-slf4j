@@ -2,7 +2,7 @@ package jp.skypencil.findbugs.slf4j;
 
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Maps;
 

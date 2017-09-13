@@ -2,7 +2,7 @@ package jp.skypencil.findbugs.slf4j;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Multimap;
