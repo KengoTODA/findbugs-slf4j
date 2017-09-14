@@ -33,7 +33,6 @@
     <sonar.links.issue>https://github.com/KengoTODA/findbugs-slf4j/issues</sonar.links.issue>
     <sonar.junit.reportsPath/>
     <sonar.junit.reportPaths>test-case/target/surefire-reports,bug-pattern/target/surefire-reports</sonar.junit.reportPaths>
-    <sonar.sources>test-case/src/main/java,bug-pattern/src/main/java</sonar.sources>
     <sonar.jacoco.reportPaths>test-case/target/jacoco.exec,bug-pattern/target/jacoco.exec</sonar.jacoco.reportPaths>
   </properties>
   <profiles>
