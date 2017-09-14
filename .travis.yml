@@ -11,7 +11,7 @@ env:
     # SONAR_LOGIN value
     - secure: "WPUZZw4xCBXtNLCnwbGE+KxSf9O5TS3eyyD4fC/ZmFzHEqv8b3/dEXjQJRt7zsdN42UQX3ENDYJ6FcXbu9zUmWdKtYRWbtp7WVBaSj7/vbxtBVNtemzm7r1nMFehG+0oiS9G0rswfUnwg/lVUfaDZsKRgrVHLYe9jkcIYlZRleE="
 
-script: "mvn clean jacoco:prepare-agent verify -B -P build-with-${SLF4J_VERSION}"
+script: "mvn clean jacoco:prepare-agent verify -B -Dversion.slf4j=${SLF4J_VERSION}"
 after_success:
   - if [[ $SLF4J_VERSION == "1.7.21" ]]; then mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN; fi
 notifications:
