@@ -5,8 +5,15 @@ env:
   matrix:
     - SLF4J_VERSION=1.7.21
     - SLF4J_VERSION=1.6.6
+  global:
+    # GITHUB_TOKEN value
+    - secure: "ElXWOYoHApO2GCLqROuylyf1WuzNMAotrinpDp60iR144S05Cie5nFJoncmceErqQ9wG2S/mERuyaMf0Po+fHCcVBwWLEdyaTmDMZLuT6BrxY4BpL0WrqkDjmDP8Ay1XWgU6nL5ugk3BrJyrCpLRfX/EG9l6Or2zCEJ6x8KXB20="
+    # SONAR_LOGIN value
+    - secure: "WPUZZw4xCBXtNLCnwbGE+KxSf9O5TS3eyyD4fC/ZmFzHEqv8b3/dEXjQJRt7zsdN42UQX3ENDYJ6FcXbu9zUmWdKtYRWbtp7WVBaSj7/vbxtBVNtemzm7r1nMFehG+0oiS9G0rswfUnwg/lVUfaDZsKRgrVHLYe9jkcIYlZRleE="
 
-script: "mvn clean install -P build-with-${SLF4J_VERSION}"
+script: "mvn clean jacoco:prepare-agent verify -B -Dversion.slf4j=${SLF4J_VERSION}"
+after_success:
+  - if [[ $SLF4J_VERSION == "1.7.21" ]]; then mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN -pl '!sonar-plugin,!test-case'; fi
 notifications:
   email:
     recipients:
