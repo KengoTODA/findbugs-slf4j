@@ -21,6 +21,19 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spotbugs.version>3.1.0-RC4</spotbugs.version>
+    <jacoco.skip>true</jacoco.skip>
+    <sonar.skip>true</sonar.skip>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.projectKey>jp.skypencil.findbugs.slf4j</sonar.projectKey>
+    <sonar.language>java</sonar.language>
+    <sonar.organization>kengotoda-github</sonar.organization>
+    <sonar.links.homepage>https://github.com/KengoTODA/findbugs-slf4j</sonar.links.homepage>
+    <sonar.links.ci>https://travis-ci.org/KengoTODA/findbugs-slf4j</sonar.links.ci>
+    <sonar.links.issue>https://github.com/KengoTODA/findbugs-slf4j/issues</sonar.links.issue>
+    <sonar.junit.reportsPath/>
+    <sonar.junit.reportPaths>test-case/target/surefire-reports,bug-pattern/target/surefire-reports</sonar.junit.reportPaths>
+    <sonar.sources>test-case/src/main/java,bug-pattern/src/main/java</sonar.sources>
+    <sonar.jacoco.reportPaths>test-case/target/jacoco.exec,bug-pattern/target/jacoco.exec</sonar.jacoco.reportPaths>
   </properties>
   <profiles>
     <profile>
@@ -36,6 +49,36 @@
       <id>build-with-1.6.6</id>
       <properties>
         <version.slf4j>1.6.6</version.slf4j>
+      </properties>
+    </profile>
+    <profile>
+      <id>pre-merge</id>
+      <activation>
+        <property>
+          <name>env.TRAVIS_EVENT_TYPE</name>
+          <value>pull_request</value>
+        </property>
+      </activation>
+      <properties>
+        <sonar.skip>false</sonar.skip>
+        <sonar.analysis.mode>preview</sonar.analysis.mode>
+        <sonar.github.oauth>${env.GITHUB_TOKEN}</sonar.github.oauth>
+        <sonar.github.pullRequest>${env.TRAVIS_PULL_REQUEST}</sonar.github.pullRequest>
+        <sonar.github.repository>${env.TRAVIS_REPO_SLUG}</sonar.github.repository>
+        <jacoco.skip>false</jacoco.skip>
+      </properties>
+    </profile>
+    <profile>
+      <id>post-merge</id>
+      <activation>
+        <property>
+          <name>env.TRAVIS_BRANCH</name>
+          <value>develop</value>
+        </property>
+      </activation>
+      <properties>
+        <sonar.skip>false</sonar.skip>
+        <jacoco.skip>false</jacoco.skip>
       </properties>
     </profile>
   </profiles>
@@ -177,6 +220,16 @@
             </plugin>
           </reportPlugins>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.3.0.603</version>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.7.9</version>
       </plugin>
     </plugins>
   </build>
