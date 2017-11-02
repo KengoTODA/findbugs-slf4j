@@ -115,3 +115,8 @@
 
 - Upgrade FindBugs to SpotBugs 3.1.0
 - Start providing SonarQube plugin
+
+## 1.4.0
+
+- Upgrade findbugs-maven-plugin to spotbugs-maven-plugin
+- Upgrade several dependencies
