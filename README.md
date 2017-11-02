@@ -193,13 +193,13 @@ class Foo {
 
 # How to use with Maven
 
-To use this product, please configure your findbugs-maven-plugin like below.
+To use this product, please configure your spotbugs-maven-plugin like below.
 
 ```xml
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <version>3.0.1</version>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>3.1.0-RC7</version>
         <configuration>
           <plugins>
             <plugin>

@@ -27,7 +27,7 @@ class XmlParser {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory
                     .newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-            Document doc = docBuilder.parse("target/findbugsXml.xml");
+            Document doc = docBuilder.parse("target/spotbugsXml.xml");
             NodeList bugs = doc.getElementsByTagName("BugInstance");
             Map<String, Integer> actual = new HashMap<String, Integer>();
 

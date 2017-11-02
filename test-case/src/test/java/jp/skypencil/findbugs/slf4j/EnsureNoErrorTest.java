@@ -20,7 +20,7 @@ public class EnsureNoErrorTest {
     public void test() throws SAXException, IOException, ParserConfigurationException {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-        Document doc = docBuilder.parse("target/findbugsXml.xml");
+        Document doc = docBuilder.parse("target/spotbugsXml.xml");
         NodeList errorsList = doc.getElementsByTagName("Errors");
         Node errorsNode = errorsList.item(0);
         String errorCount = errorsNode.getAttributes().getNamedItem("errors").getNodeValue();
