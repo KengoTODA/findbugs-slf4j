@@ -136,13 +136,6 @@
           <groupId>org.sonarsource.scanner.maven</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
           <version>3.3.0.603</version>
-          <dependencies>
-            <dependency>
-              <groupId>org.kohsuke</groupId>
-              <artifactId>github-api</artifactId>
-              <version>1.90</version>
-            </dependency>
-          </dependencies>
         </plugin>
         <plugin>
           <groupId>org.jacoco</groupId>
