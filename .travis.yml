@@ -14,7 +14,7 @@ env:
 
 script: "mvn clean jacoco:prepare-agent verify -Dversion.slf4j=${SLF4J_VERSION}"
 after_success:
-  - if [[ $SLF4J_VERSION == "1.7.25" ]]; then mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN -am -pl bug-pattern -X; fi
+  - if [[ $SLF4J_VERSION == "1.7.25" ]]; then mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN -am -pl bug-pattern; fi
 notifications:
   email:
     recipients:
