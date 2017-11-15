@@ -21,7 +21,6 @@
     <jacoco.skip>true</jacoco.skip>
     <sonar.skip>true</sonar.skip>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    <sonar.projectKey>jp.skypencil.findbugs.slf4j</sonar.projectKey>
     <sonar.organization>kengotoda-github</sonar.organization>
     <sonar.links.homepage>https://github.com/KengoTODA/findbugs-slf4j</sonar.links.homepage>
     <sonar.links.ci>https://travis-ci.org/KengoTODA/findbugs-slf4j</sonar.links.ci>
