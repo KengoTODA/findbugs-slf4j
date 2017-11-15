@@ -13,7 +13,7 @@ env:
     - secure: "WPUZZw4xCBXtNLCnwbGE+KxSf9O5TS3eyyD4fC/ZmFzHEqv8b3/dEXjQJRt7zsdN42UQX3ENDYJ6FcXbu9zUmWdKtYRWbtp7WVBaSj7/vbxtBVNtemzm7r1nMFehG+0oiS9G0rswfUnwg/lVUfaDZsKRgrVHLYe9jkcIYlZRleE="
 
 install: true
-script: "mvn clean jacoco:prepare-agent verify -Dversion.slf4j=${SLF4J_VERSION}" -Dgpg.skip
+script: "mvn clean jacoco:prepare-agent verify -Dversion.slf4j=${SLF4J_VERSION} -Dgpg.skip"
 after_success:
   - if [[ $SLF4J_VERSION == "1.7.25" ]]; then mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN -am -pl bug-pattern; fi
 notifications:
