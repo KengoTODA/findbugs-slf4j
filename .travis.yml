@@ -1,4 +1,12 @@
 language: java
+sudo: false
+addons:
+  sonarcloud:
+    organization: "kengotoda-github"
+    token:
+      secure: "JSmDHb3Y+z2nAV1/6xMnLwDc48aCqd9U4wnnAuyBHi0BQM5wuc8nIKpu4nguczvl/yYgfma/sjIO05jnZHDTVUagvlUKZMh1lIilkY4nwbJ1EJvVxv9a4me5IzN35xTUGxVWNOL5GHoByKkDtXXrZgsT1pBGroVjQx1LRLSmt3M="
+    github_token:
+      secure: "gsIAhhDD6MtMjxkyTveDUFIxR1gJcze8BsEhWcUD8eMjF3OJh7+XMos6KdywRZ+PDpR6yUU8Ok9ZooZYRPcxkBvQ3w2jLRvm+uQYp0WMumRJvi/QBbfhiq1zY1LycIwhUvUKIvbQG6kJBxTRw1TcVAXdAcvahS0aHwKFCdzl0AE="
 jdk:
   - oraclejdk8
 env:
@@ -6,17 +14,15 @@ env:
     - SLF4J_VERSION=1.8.0-beta0
     - SLF4J_VERSION=1.7.25
     - SLF4J_VERSION=1.6.6
-  global:
-    # GITHUB_TOKEN value
-    - secure: "ElXWOYoHApO2GCLqROuylyf1WuzNMAotrinpDp60iR144S05Cie5nFJoncmceErqQ9wG2S/mERuyaMf0Po+fHCcVBwWLEdyaTmDMZLuT6BrxY4BpL0WrqkDjmDP8Ay1XWgU6nL5ugk3BrJyrCpLRfX/EG9l6Or2zCEJ6x8KXB20="
-    # SONAR_LOGIN value
-    - secure: "WPUZZw4xCBXtNLCnwbGE+KxSf9O5TS3eyyD4fC/ZmFzHEqv8b3/dEXjQJRt7zsdN42UQX3ENDYJ6FcXbu9zUmWdKtYRWbtp7WVBaSj7/vbxtBVNtemzm7r1nMFehG+0oiS9G0rswfUnwg/lVUfaDZsKRgrVHLYe9jkcIYlZRleE="
-
 install: true
 script: "mvn clean jacoco:prepare-agent verify -Dversion.slf4j=${SLF4J_VERSION} -Dgpg.skip -B"
 after_success:
-  - if [[ $SLF4J_VERSION == "1.7.25" ]]; then mvn sonar:sonar -Dsonar.login=$SONAR_LOGIN -B; fi
+  - if [[ $SLF4J_VERSION == "1.7.25" ]]; then mvn sonar:sonar -B; fi
 notifications:
   email:
     recipients:
       - skypencil+travis@gmail.com
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
