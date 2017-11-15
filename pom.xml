@@ -26,8 +26,8 @@
     <sonar.links.ci>https://travis-ci.org/KengoTODA/findbugs-slf4j</sonar.links.ci>
     <sonar.links.issue>https://github.com/KengoTODA/findbugs-slf4j/issues</sonar.links.issue>
     <sonar.junit.reportsPath/>
-    <sonar.junit.reportPaths>${project.basedir}/bug-pattern/target/surefire-reports,${project.basedir}/test-case/target/surefire-reports</sonar.junit.reportPaths>
-    <sonar.jacoco.reportPaths>${project.basedir}/bug-pattern/target/jacoco.exec,${project.basedir}/test-case/target/jacoco.exec</sonar.jacoco.reportPaths>
+    <sonar.junit.reportPaths>${session.executionRootDirectory}/bug-pattern/target/surefire-reports,${session.executionRootDirectory}/test-case/target/surefire-reports</sonar.junit.reportPaths>
+    <sonar.jacoco.reportPaths>${session.executionRootDirectory}/bug-pattern/target/jacoco.exec,${session.executionRootDirectory}/test-case/target/jacoco.exec</sonar.jacoco.reportPaths>
   </properties>
   <scm>
     <connection>scm:git:git@github.com:KengoTODA/findbugs-slf4j.git</connection>
