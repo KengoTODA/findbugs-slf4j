@@ -11,6 +11,8 @@
         <Detector class="jp.skypencil.findbugs.slf4j.StaticLoggerDetector" reports="SLF4J_LOGGER_SHOULD_BE_NON_STATIC" speed="fast" />
         <Detector class="jp.skypencil.findbugs.slf4j.IllegalPassedClassDetector" reports="SLF4J_ILLEGAL_PASSED_CLASS" speed="fast" />
         <Detector class="jp.skypencil.findbugs.slf4j.ManualMessageDetector" reports="SLF4J_MANUALLY_PROVIDED_MESSAGE,SLF4J_FORMAT_SHOULD_BE_CONST" speed="fast" />
+        <Detector class="jp.skypencil.findbugs.slf4j.ManualGetStackTraceDetector" reports="SLF4J_GET_STACK_TRACE" speed="fast" />
+
         <BugPattern type="SLF4J_PLACE_HOLDER_MISMATCH" abbrev="SLF4J" category="CORRECTNESS" />
         <BugPattern type="SLF4J_FORMAT_SHOULD_BE_CONST" abbrev="SLF4J" category="CORRECTNESS" />
         <BugPattern type="SLF4J_UNKNOWN_ARRAY" abbrev="SLF4J" category="CORRECTNESS" />
@@ -20,5 +22,6 @@
         <BugPattern type="SLF4J_ILLEGAL_PASSED_CLASS" abbrev="SLF4J" category="CORRECTNESS" />
         <BugPattern type="SLF4J_SIGN_ONLY_FORMAT" abbrev="SLF4J" category="BAD_PRACTICE" />
         <BugPattern type="SLF4J_MANUALLY_PROVIDED_MESSAGE" abbrev="SLF4J" category="BAD_PRACTICE" />
+        <BugPattern type="SLF4J_GET_STACK_TRACE" abbrev="SLF4J" category="BAD_PRACTICE" />
 
 </FindbugsPlugin>
