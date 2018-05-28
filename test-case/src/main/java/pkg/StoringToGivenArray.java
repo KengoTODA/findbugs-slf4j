@@ -1,8 +1,7 @@
 package pkg;
 
-
 public class StoringToGivenArray {
-    void method(Object[] array) {
-        array[0] = "";
-    }
+  void method(Object[] array) {
+    array[0] = "";
+  }
 }

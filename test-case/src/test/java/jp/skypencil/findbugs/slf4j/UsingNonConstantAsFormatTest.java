@@ -1,10 +1,8 @@
 package jp.skypencil.findbugs.slf4j;
 
-import java.util.Map;
-
-import org.junit.jupiter.api.Test;
-
 import com.google.common.collect.Maps;
+import java.util.Map;
+import org.junit.jupiter.api.Test;
 
 public class UsingNonConstantAsFormatTest {
   @Test

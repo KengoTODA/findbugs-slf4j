@@ -9,12 +9,12 @@ import org.slf4j.LoggerFactory;
  * @see https://github.com/KengoTODA/findbugs-slf4j/issues/2
  */
 public class Issue2 {
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+  private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    void method() {
-        final RuntimeException ex = new RuntimeException();
-        final Integer num = 4;
-        final String str = "fred";
-        logger.debug(str + " barney={}, {}, {}, {}", num, ex);
-    }
+  void method() {
+    final RuntimeException ex = new RuntimeException();
+    final Integer num = 4;
+    final String str = "fred";
+    logger.debug(str + " barney={}, {}, {}, {}", num, ex);
+  }
 }
