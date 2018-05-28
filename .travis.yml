@@ -15,9 +15,9 @@ env:
     - SLF4J_VERSION=1.7.25
     - SLF4J_VERSION=1.6.6
 install: true
-script: "mvn clean jacoco:prepare-agent verify -Dversion.slf4j=${SLF4J_VERSION} -Dgpg.skip -B"
+script: "./mvnw clean jacoco:prepare-agent verify -Dversion.slf4j=${SLF4J_VERSION} -Dgpg.skip -B"
 after_success:
-  - if [[ $SLF4J_VERSION == "1.7.25" ]]; then mvn sonar:sonar -B; fi
+  - if [[ $SLF4J_VERSION == "1.7.25" ]]; then ./mvnw sonar:sonar -B; fi
 notifications:
   email:
     recipients:
