@@ -120,3 +120,7 @@
 
 - Upgrade findbugs-maven-plugin to spotbugs-maven-plugin
 - Upgrade several dependencies
+
+## 1.4.1
+
+- Upgrade maven-javadoc-plugin, lombok and errorprone to avoid NullPointerException and ExceptionInInitializerError
