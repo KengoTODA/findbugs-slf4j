@@ -1,5 +1,7 @@
 package jp.skypencil.findbugs.slf4j;
 
+import static org.apache.bcel.Const.INVOKEVIRTUAL;
+
 import com.google.common.base.Objects;
 import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;

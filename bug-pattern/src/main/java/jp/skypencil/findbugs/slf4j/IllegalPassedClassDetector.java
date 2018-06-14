@@ -1,5 +1,10 @@
 package jp.skypencil.findbugs.slf4j;
 
+import static org.apache.bcel.Const.CONSTANT_Class;
+import static org.apache.bcel.Const.INVOKESTATIC;
+import static org.apache.bcel.Const.INVOKEVIRTUAL;
+import static org.apache.bcel.Const.LDC;
+import static org.apache.bcel.Const.LDC_W;
 import static org.apache.bcel.Repository.lookupClass;
 
 import com.google.common.base.Objects;

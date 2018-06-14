@@ -124,3 +124,4 @@
 ## 1.4.1
 
 - Upgrade maven-javadoc-plugin, lombok and errorprone to avoid NullPointerException and ExceptionInInitializerError
+- Support SpotBugs 3.1.5 that deletes several constant fields
