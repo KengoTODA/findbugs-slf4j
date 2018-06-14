@@ -7,16 +7,24 @@ import static org.apache.bcel.Const.LDC;
 import static org.apache.bcel.Const.LDC_W;
 import static org.apache.bcel.Repository.lookupClass;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
+import org.apache.bcel.classfile.ClassFormatException;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.generic.Type;
+
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
+
 import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
 import edu.umd.cs.findbugs.OpcodeStack.CustomUserValue;
 import edu.umd.cs.findbugs.OpcodeStack.Item;
+import edu.umd.cs.findbugs.ba.AnalysisContext;
 import edu.umd.cs.findbugs.bcel.OpcodeStackDetector;
-import java.util.Deque;
-import java.util.LinkedList;
-import org.apache.bcel.classfile.Constant;
-import org.apache.bcel.generic.Type;
+import edu.umd.cs.findbugs.classfile.DescriptorFactory;
+import edu.umd.cs.findbugs.internalAnnotations.SlashedClassName;
 
 @CustomUserValue
 public class IllegalPassedClassDetector extends OpcodeStackDetector {
@@ -47,14 +55,20 @@ public class IllegalPassedClassDetector extends OpcodeStackDetector {
     }
 
     JavaType storedClass;
+    @SlashedClassName
+    String storedClassName = getClassConstantOperand();
     try {
-      String storedClassName = getClassConstantOperand();
       storedClass = findClass(storedClassName);
+    } catch (ClassFormatException e) {
+      AnalysisContext.reportMissingClass(DescriptorFactory.createClassDescriptor(storedClassName));
+      storedClass = null;
     } finally {
       super.afterOpcode(code);
     }
-    Item returnedClass = getStack().getStackItem(0);
-    returnedClass.setUserValue(storedClass);
+    if (storedClass != null) {
+      Item returnedClass = getStack().getStackItem(0);
+      returnedClass.setUserValue(storedClass);
+    }
   }
 
   private void memorizeResultOfGetClassMethod(int code) {
@@ -71,7 +85,8 @@ public class IllegalPassedClassDetector extends OpcodeStackDetector {
     returnedClass.setUserValue(classOfCaller);
   }
 
-  private JavaType findClass(String storedClassName) {
+  @VisibleForTesting
+  JavaType findClass(@SlashedClassName String storedClassName) throws ClassFormatException {
     try {
       return JavaType.from(lookupClass(storedClassName));
     } catch (ClassNotFoundException e) {
