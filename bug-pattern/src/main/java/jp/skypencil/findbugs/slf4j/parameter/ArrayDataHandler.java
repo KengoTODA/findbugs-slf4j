@@ -2,7 +2,7 @@ package jp.skypencil.findbugs.slf4j.parameter;
 
 import edu.umd.cs.findbugs.OpcodeStack;
 import edu.umd.cs.findbugs.OpcodeStack.Item;
-import org.apache.bcel.Constants;
+import org.apache.bcel.Const;
 
 /** This class is responsible to create/update ArrayData instance in userValue. */
 public class ArrayDataHandler {
@@ -13,7 +13,7 @@ public class ArrayDataHandler {
   }
 
   void sawOpcode(OpcodeStack stack, int seen) {
-    if (seen == Constants.AASTORE) {
+    if (seen == Const.AASTORE) {
       checkStoredInstance(stack);
     }
   }
@@ -25,7 +25,7 @@ public class ArrayDataHandler {
    * @return non-null if seen == ANEWARRAY
    */
   ArrayData afterOpcode(OpcodeStack stack, int seen, String className, int pc) {
-    if (seen != Constants.ANEWARRAY) {
+    if (seen != Const.ANEWARRAY) {
       return null;
     } else if (stack.isTop()) {
       // see https://github.com/KengoTODA/findbugs-slf4j/issues/29
