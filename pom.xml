@@ -336,5 +336,17 @@
         <jacoco.skip>false</jacoco.skip>
       </properties>
     </profile>
+    <profile>
+      <id>deploy</id>
+      <activation>
+        <property>
+          <name>env.TRAVIS_TAG</name>
+        </property>
+      </activation>
+      <properties>
+        <sonar.skip>false</sonar.skip>
+        <jacoco.skip>false</jacoco.skip>
+      </properties>
+    </profile>
   </profiles>
 </project>
