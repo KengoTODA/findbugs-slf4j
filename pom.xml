@@ -17,7 +17,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spotbugs.version>3.1.5</spotbugs.version>
-    <spotless.version>1.0.0.BETA5</spotless.version>
+    <spotless.version>1.13.0</spotless.version>
     <version.slf4j>1.7.25</version.slf4j>
     <jacoco.skip>true</jacoco.skip>
     <sonar.skip>true</sonar.skip>
