@@ -19,16 +19,6 @@
     <spotbugs.version>3.1.5</spotbugs.version>
     <spotless.version>1.13.0</spotless.version>
     <version.slf4j>1.7.25</version.slf4j>
-    <jacoco.skip>true</jacoco.skip>
-    <sonar.skip>true</sonar.skip>
-    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    <sonar.organization>kengotoda-github</sonar.organization>
-    <sonar.links.homepage>https://github.com/KengoTODA/findbugs-slf4j</sonar.links.homepage>
-    <sonar.links.ci>https://travis-ci.org/KengoTODA/findbugs-slf4j</sonar.links.ci>
-    <sonar.links.issue>https://github.com/KengoTODA/findbugs-slf4j/issues</sonar.links.issue>
-    <sonar.junit.reportsPath/>
-    <sonar.junit.reportPaths>${session.executionRootDirectory}/bug-pattern/target/surefire-reports,${session.executionRootDirectory}/test-case/target/surefire-reports</sonar.junit.reportPaths>
-    <sonar.jacoco.reportPaths>${session.executionRootDirectory}/bug-pattern/target/jacoco.exec,${session.executionRootDirectory}/test-case/target/jacoco.exec</sonar.jacoco.reportPaths>
   </properties>
   <scm>
     <connection>scm:git:git@github.com:KengoTODA/findbugs-slf4j.git</connection>
@@ -305,48 +295,4 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <profiles>
-    <profile>
-      <id>pre-merge</id>
-      <activation>
-        <property>
-          <name>env.TRAVIS_EVENT_TYPE</name>
-          <value>pull_request</value>
-        </property>
-      </activation>
-      <properties>
-        <sonar.skip>false</sonar.skip>
-        <sonar.analysis.mode>preview</sonar.analysis.mode>
-        <sonar.github.oauth>${env.GITHUB_TOKEN}</sonar.github.oauth>
-        <sonar.github.pullRequest>${env.TRAVIS_PULL_REQUEST}</sonar.github.pullRequest>
-        <sonar.github.repository>${env.TRAVIS_REPO_SLUG}</sonar.github.repository>
-        <jacoco.skip>false</jacoco.skip>
-      </properties>
-    </profile>
-    <profile>
-      <id>post-merge</id>
-      <activation>
-        <property>
-          <name>env.TRAVIS_BRANCH</name>
-          <value>master</value>
-        </property>
-      </activation>
-      <properties>
-        <sonar.skip>false</sonar.skip>
-        <jacoco.skip>false</jacoco.skip>
-      </properties>
-    </profile>
-    <profile>
-      <id>deploy</id>
-      <activation>
-        <property>
-          <name>env.TRAVIS_TAG</name>
-        </property>
-      </activation>
-      <properties>
-        <sonar.skip>false</sonar.skip>
-        <jacoco.skip>false</jacoco.skip>
-      </properties>
-    </profile>
-  </profiles>
 </project>

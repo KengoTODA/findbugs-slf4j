@@ -6,8 +6,6 @@ addons:
     organization: "kengotoda-github"
     token:
       secure: "JSmDHb3Y+z2nAV1/6xMnLwDc48aCqd9U4wnnAuyBHi0BQM5wuc8nIKpu4nguczvl/yYgfma/sjIO05jnZHDTVUagvlUKZMh1lIilkY4nwbJ1EJvVxv9a4me5IzN35xTUGxVWNOL5GHoByKkDtXXrZgsT1pBGroVjQx1LRLSmt3M="
-    github_token:
-      secure: "gsIAhhDD6MtMjxkyTveDUFIxR1gJcze8BsEhWcUD8eMjF3OJh7+XMos6KdywRZ+PDpR6yUU8Ok9ZooZYRPcxkBvQ3w2jLRvm+uQYp0WMumRJvi/QBbfhiq1zY1LycIwhUvUKIvbQG6kJBxTRw1TcVAXdAcvahS0aHwKFCdzl0AE="
 jdk:
   - oraclejdk8
 env:
