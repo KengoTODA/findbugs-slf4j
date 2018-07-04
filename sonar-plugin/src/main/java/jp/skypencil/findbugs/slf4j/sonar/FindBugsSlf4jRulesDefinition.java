@@ -1,8 +1,8 @@
 package jp.skypencil.findbugs.slf4j.sonar;
 
-import org.sonar.api.resources.Java;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
+import org.sonar.plugins.java.Java;
 
 public class FindBugsSlf4jRulesDefinition implements RulesDefinition {
   public static final String REPOSITORY_KEY = "findbugs-slf4j";
