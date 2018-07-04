@@ -15,6 +15,7 @@ public class UsingMarker {
   void method() {
     Marker marker = null;
     logger.error(marker, "Hello, marker");
+    logger.error(marker, "Hello, {}");
     logger.error(marker, "Hello, {}", "world");
   }
 }
