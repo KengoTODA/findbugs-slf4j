@@ -16,7 +16,7 @@ env:
 install: true
 script:
   - ./mvnw org.jacoco:jacoco-maven-plugin:prepare-agent verify -Dversion.slf4j=${SLF4J_VERSION} -Dgpg.skip -B
-  - if [[ $SLF4J_VERSION == "1.7.25" ]]; then ./mvnw sonar:sonar -B; fi
+  - if [[ $SLF4J_VERSION == "1.7.25" && $TRAVIS_SECURE_ENV_VARS == "true" ]]; then ./mvnw sonar:sonar -B; fi
 notifications:
   email:
     recipients:
