@@ -20,6 +20,7 @@ script:
 jobs:
   include:
     - stage: analysis
+      if: fork = false
       script:
         - ./mvnw org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar -Dgpg.skip -B
 notifications:
