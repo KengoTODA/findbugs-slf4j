@@ -20,7 +20,7 @@ script:
 jobs:
   include:
     - stage: analysis
-      if: fork = false
+      if: ( type = pull_request and head_repo =~ ^KengoTODA/ ) or ( type != pull_request and repo =~ ^KengoTODA/ )
       script:
         - ./mvnw org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar -Dgpg.skip -B
 notifications:
