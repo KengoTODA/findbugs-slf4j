@@ -18,5 +18,6 @@ public class UsingMarker {
     logger.error(marker, "Hello, marker");
     logger.error(marker, "Hello, {}");
     logger.error(marker, "Hello, {}", "world");
+    logger.error(marker, "Hello, {}", new RuntimeException());
   }
 }
