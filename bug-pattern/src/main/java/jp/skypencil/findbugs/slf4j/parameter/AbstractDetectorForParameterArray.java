@@ -43,7 +43,6 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
   private static final ImmutableSet<String> SIGS_WITHOUT_FORMAT =
       ImmutableSet.of(
           "(Ljava/lang/String;)V",
-          "(Lorg/slf4j/Marker;Ljava/lang/String;)V",
           "(Ljava/lang/String;Ljava/lang/Throwable;)V",
           "(Lorg/slf4j/Marker;Ljava/lang/String;Ljava/lang/Throwable;)V");
 
