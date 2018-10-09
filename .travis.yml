@@ -8,15 +8,21 @@ addons:
       secure: "JSmDHb3Y+z2nAV1/6xMnLwDc48aCqd9U4wnnAuyBHi0BQM5wuc8nIKpu4nguczvl/yYgfma/sjIO05jnZHDTVUagvlUKZMh1lIilkY4nwbJ1EJvVxv9a4me5IzN35xTUGxVWNOL5GHoByKkDtXXrZgsT1pBGroVjQx1LRLSmt3M="
 jdk:
   - oraclejdk8
+  - oraclejdk9
 env:
   matrix:
-    - SLF4J_VERSION=1.8.0-beta2
     - SLF4J_VERSION=1.7.25
+    - SLF4J_VERSION=1.8.0-beta2
     - SLF4J_VERSION=1.6.6
 install: true
 script:
-  - ./mvnw org.jacoco:jacoco-maven-plugin:prepare-agent verify -Dversion.slf4j=${SLF4J_VERSION} -Dgpg.skip -B
-  - if [[ $SLF4J_VERSION == "1.7.25" ]]; then ./mvnw sonar:sonar -B; fi
+  - ./mvnw verify -Dversion.slf4j=${SLF4J_VERSION} -Dgpg.skip -B
+jobs:
+  include:
+    - stage: analysis
+      if: ( type = pull_request and head_repo =~ ^KengoTODA/ ) or ( type != pull_request and repo =~ ^KengoTODA/ )
+      script:
+        - ./mvnw org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar -Dgpg.skip -B
 notifications:
   email:
     recipients:
