@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.skypencil.findbugs.slf4j</groupId>
   <artifactId>findbugs-slf4j</artifactId>
-  <version>1.4.2-SNAPSHOT</version>
+  <version>1.4.2</version>
   <url>https://github.com/KengoTODA/findbugs-slf4j</url>
   <description>FindBugs plugin for SLF4J</description>
   <packaging>pom</packaging>

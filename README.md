@@ -1,8 +1,8 @@
 # FindBugs bug pattern for SLF4J
 
-This product helps you to verify usage of SLF4J 1.6 and 1.7. Both of Java7 and Java8 are supported.
+This product helps you to verify usage of SLF4J 1.6, 1.7 and 1.8. Works with Java8 and later.
 
-To use this plugin with Sonar, see [here](sonar-plugin/README.md).
+To use this plugin with SonarQube, see [here](sonar-plugin/README.md).
 
 [![Build Status](https://secure.travis-ci.org/KengoTODA/findbugs-slf4j.png)](http://travis-ci.org/KengoTODA/findbugs-slf4j)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=jp.skypencil.findbugs.slf4j%3Afindbugs-slf4j&metric=alert_status)](https://sonarcloud.io/dashboard?id=jp.skypencil.findbugs.slf4j%3Afindbugs-slf4j)
@@ -200,13 +200,13 @@ To use this product, please configure your spotbugs-maven-plugin like below.
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>3.1.0-RC8</version>
+        <version>3.1.6</version>
         <configuration>
           <plugins>
             <plugin>
               <groupId>jp.skypencil.findbugs.slf4j</groupId>
               <artifactId>bug-pattern</artifactId>
-              <version>1.4.0</version>
+              <version>1.4.2</version>
             </plugin>
           </plugins>
         </configuration>
@@ -219,18 +219,17 @@ To use these detectors from a Gradle build, please follow the example below:
 
 ```gradle
 plugins {
-    id "findbugs"
-    id "java"
+  id "java"
+  id "com.github.spotbugs" version "1.6.4"
 }
 
 repositories {
-    jcenter()
+  jcenter()
 }
 
 dependencies {
-    compile "org.slf4j:slf4j-api:1.7.12"
-
-    findbugsPlugins "jp.skypencil.findbugs.slf4j:bug-pattern:1.2.4@jar"
+  compile "org.slf4j:slf4j-api:1.7.25"
+  spotbugsPlugins "jp.skypencil.findbugs.slf4j:bug-pattern:1.4.2@jar"
 }
 ```
 
@@ -240,7 +239,7 @@ See [CHANGELOG.md](CHANGELOG.md) for detail.
 
 # Copyright and license
 
-Copyright 2012-2017 Kengo TODA
+Copyright 2012-2018 Kengo TODA
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

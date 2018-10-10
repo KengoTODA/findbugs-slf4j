@@ -2,7 +2,7 @@
 
 This changelog follows [Keep a Changelog v1.0.0](https://keepachangelog.com/en/1.0.0/).
 
-## Unreleased
+## 1.4.2 - 2018-10-10
 ### Fixed
 
 - False negative around logging method with `Marker` instances ([#105](https://github.com/KengoTODA/findbugs-slf4j/pull/105))
