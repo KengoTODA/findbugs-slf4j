@@ -39,13 +39,6 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
       ImmutableSet.of("trace", "debug", "info", "warn", "error");
 
   @StaticConstant
-  // these methods do not use formatter
-  private static final ImmutableSet<String> SIGS_WITHOUT_FORMAT =
-      ImmutableSet.of(
-          "(Ljava/lang/String;)V",
-          "(Ljava/lang/String;Ljava/lang/Throwable;)V");
-
-  @StaticConstant
   private static final Pattern SIGNATURE_PATTERN = Pattern.compile("^\\((.*)\\).*$");
 
   private Table<Method, Integer, List<BugInstance>> potentialBugs;
@@ -187,9 +180,6 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
       }
     }
 
-    if (SIGS_WITHOUT_FORMAT.contains(signature)) {
-      return null;
-    }
     return constant.toString();
   }
 
