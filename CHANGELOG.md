@@ -3,10 +3,18 @@
 This changelog follows [Keep a Changelog v1.0.0](https://keepachangelog.com/en/1.0.0/).
 
 ## Unreleased
+
+### Added
+
+- Support for new SonarQube v6.7 LTS
+
 ### Changed
 
 - Bump up sonar-findbugs to v3.8, and sonar-java to 5.6.1.15064
-- Bump up SonarQube API to v6.7.1 LTS
+
+### Removed
+
+- Support for old SonarQube v5.6 LTS
 
 ## 1.4.2 - 2018-10-10
 ### Fixed
