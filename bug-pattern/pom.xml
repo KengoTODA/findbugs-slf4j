@@ -126,5 +126,13 @@
       <groupId>com.youdevise</groupId>
       <artifactId>test-driven-detectors4findbugs</artifactId>
     </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+    </dependency>
   </dependencies>
 </project>
