@@ -2,6 +2,7 @@ target
 .project
 .classpath
 .settings
+.factorypath
 .DS_Store
 *~
 deploy.sh
