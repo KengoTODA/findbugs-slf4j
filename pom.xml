@@ -19,7 +19,7 @@
     <spotbugs.version>3.1.12</spotbugs.version>
     <spotless.version>1.20.0</spotless.version>
     <version.slf4j>1.7.26</version.slf4j>
-    <junit.version>5.4.0</junit.version>
+    <junit.version>5.4.1</junit.version>
   </properties>
   <scm>
     <connection>scm:git:git@github.com:KengoTODA/findbugs-slf4j.git</connection>
