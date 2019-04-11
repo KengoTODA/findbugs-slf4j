@@ -7,6 +7,7 @@ This changelog follows [Keep a Changelog v1.0.0](https://keepachangelog.com/en/1
 ### Added
 
 - Support for new SonarQube v6.7 LTS
+- add new SLF4J_GET_STACK_TRACE bug pattern
 
 ### Changed
 

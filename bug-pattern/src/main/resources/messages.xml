@@ -43,6 +43,12 @@
     </Details>
   </Detector>
 
+  <Detector class="jp.skypencil.findbugs.slf4j.ManualGetStackTraceDetector">
+    <Details>
+      Finds log which uses Throwable#getStackTrace.
+    </Details>
+  </Detector>
+
   <BugPattern type="SLF4J_PLACE_HOLDER_MISMATCH">
     <ShortDescription>Count of placeholder is not equal to count of parameter</ShortDescription>
     <LongDescription>Count of placeholder({5}) is not equal to count of parameter({4})</LongDescription>
@@ -142,6 +148,18 @@ You cannot use array which is provided as method argument or returned from other
     <Details>
 <![CDATA[
 <p>Do not have to use message returned from Throwable#getMessage and Throwable#getLocalizedMessage.</p>
+]]>
+    </Details>
+  </BugPattern>
+
+  <BugPattern type="SLF4J_GET_STACK_TRACE">
+    <ShortDescription>Do not use Throwable#getStackTrace.</ShortDescription>
+    <LongDescription>
+      Do not have use Throwable#getStackTrace. It is enough to provide throwable instance as the last argument, then binding will log its message.
+    </LongDescription>
+    <Details>
+<![CDATA[
+<p>Do not use Throwable#getStackTrace.</p>
 ]]>
     </Details>
   </BugPattern>

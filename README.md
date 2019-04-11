@@ -192,6 +192,26 @@ class Foo {
 }
 ```
 
+## SLF4J_GET_STACK_TRACE
+
+This pattern reports on the use of `Throwable#getStackTrace()`.  This is most
+typically wrong and a misunderstanding of the slf4j API, as normally you just
+provide the Throwable instance as the last argument, instead of using getStackTrace().
+
+```java
+class Foo {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+    void method() {
+        // invalid: needless 'e.getStackTrace()'
+        logger.info("Error occured. Stack is {}", e.getStackTrace());
+
+        // valid
+        logger.info("Error occured.", e);
+    }
+}
+```
+
+
 # How to use with Maven
 
 To use this product, please configure your spotbugs-maven-plugin like below.
