@@ -3,7 +3,7 @@
   <parent>
     <groupId>jp.skypencil.findbugs.slf4j</groupId>
     <artifactId>findbugs-slf4j</artifactId>
-    <version>1.5.0-SNAPSHOT</version>
+    <version>1.5.0</version>
   </parent>
   <artifactId>bug-pattern</artifactId>
   <name>findbugs-slf4j bug pattern</name>
