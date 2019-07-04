@@ -45,15 +45,13 @@ public class Issue35 {
   private static void logMessageStaticPrivateCalledWithNonConstantValue(
       String messageFromParameter) {
     LoggerFactory.getLogger(Issue35.class)
-        .info(
-            messageFromParameter); // SLF4J_FORMAT_SHOULD_BE_CONST, because this parameter is not
-                                   // constant value
+        .info(messageFromParameter); // SLF4J_FORMAT_SHOULD_BE_CONST, because this parameter is not
+    // constant value
   }
 
   private void logMessagePrivateCalledWithNonConstantValue(String messageFromParameter) {
-    log.info(
-        messageFromParameter); // SLF4J_FORMAT_SHOULD_BE_CONST, because this parameter is not
-                               // constant value
+    log.info(messageFromParameter); // SLF4J_FORMAT_SHOULD_BE_CONST, because this parameter is not
+    // constant value
   }
 
   private void logMessageWithParameter(String messageFromParameter, String data) {
@@ -64,7 +62,7 @@ public class Issue35 {
     log.info(
         messageFromParameter,
         data); // SLF4J_PLACE_HOLDER_MISMATCH, because this parameter has two placeholders but we
-               // gave only one data
+    // gave only one data
   }
 
   private void logMessageWithException(String messageFromParameter, Throwable throwable) {
@@ -75,6 +73,6 @@ public class Issue35 {
     log.info(
         messageFromParameter,
         throwable); // SLF4J_PLACE_HOLDER_MISMATCH, because this parameter has one placeholder but
-                    // we gave no data
+    // we gave no data
   }
 }

@@ -7,16 +7,8 @@ import static org.apache.bcel.Const.LDC;
 import static org.apache.bcel.Const.LDC_W;
 import static org.apache.bcel.Repository.lookupClass;
 
-import java.util.Deque;
-import java.util.LinkedList;
-
-import org.apache.bcel.classfile.ClassFormatException;
-import org.apache.bcel.classfile.Constant;
-import org.apache.bcel.generic.Type;
-
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
-
 import edu.umd.cs.findbugs.BugInstance;
 import edu.umd.cs.findbugs.BugReporter;
 import edu.umd.cs.findbugs.OpcodeStack.CustomUserValue;
@@ -25,6 +17,11 @@ import edu.umd.cs.findbugs.ba.AnalysisContext;
 import edu.umd.cs.findbugs.bcel.OpcodeStackDetector;
 import edu.umd.cs.findbugs.classfile.DescriptorFactory;
 import edu.umd.cs.findbugs.internalAnnotations.SlashedClassName;
+import java.util.Deque;
+import java.util.LinkedList;
+import org.apache.bcel.classfile.ClassFormatException;
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.generic.Type;
 
 @CustomUserValue
 public class IllegalPassedClassDetector extends OpcodeStackDetector {
@@ -55,8 +52,7 @@ public class IllegalPassedClassDetector extends OpcodeStackDetector {
     }
 
     JavaType storedClass;
-    @SlashedClassName
-    String storedClassName = getClassConstantOperand();
+    @SlashedClassName String storedClassName = getClassConstantOperand();
     try {
       storedClass = findClass(storedClassName);
     } catch (ClassFormatException e) {
