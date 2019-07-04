@@ -7,7 +7,7 @@ addons:
       secure: "JSmDHb3Y+z2nAV1/6xMnLwDc48aCqd9U4wnnAuyBHi0BQM5wuc8nIKpu4nguczvl/yYgfma/sjIO05jnZHDTVUagvlUKZMh1lIilkY4nwbJ1EJvVxv9a4me5IzN35xTUGxVWNOL5GHoByKkDtXXrZgsT1pBGroVjQx1LRLSmt3M="
 jdk:
   - openjdk8
-  - openjdk11
+#  - openjdk11
 env:
   matrix:
     - SLF4J_VERSION=1.7.26
