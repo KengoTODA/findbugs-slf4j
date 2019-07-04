@@ -2,7 +2,7 @@
 
 This changelog follows [Keep a Changelog v1.0.0](https://keepachangelog.com/en/1.0.0/).
 
-## Unreleased
+## 1.5.0 - 2019-07-04
 
 ### Added
 

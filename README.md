@@ -200,13 +200,13 @@ To use this product, please configure your spotbugs-maven-plugin like below.
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>3.1.6</version>
+        <version>3.1.12</version>
         <configuration>
           <plugins>
             <plugin>
               <groupId>jp.skypencil.findbugs.slf4j</groupId>
               <artifactId>bug-pattern</artifactId>
-              <version>1.4.2</version>
+              <version>1.5.0</version>
             </plugin>
           </plugins>
         </configuration>
