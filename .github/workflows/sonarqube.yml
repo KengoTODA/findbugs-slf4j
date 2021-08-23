@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           java-version: 11
-          distributions: temurin
+          distribution: temurin
       - run: |
          ./mvnw org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar -Dgpg.skip -B
         env:
