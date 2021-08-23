@@ -21,6 +21,6 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           java-version: 11
-          distributions: temurin
+          distribution: temurin
       - run: |
          ./mvnw verify -Dversion.slf4j=${{ matrix.slf4j }} -Dgpg.skip -B
