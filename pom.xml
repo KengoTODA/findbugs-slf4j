@@ -19,7 +19,7 @@
     <spotbugs.version>4.0.6</spotbugs.version>
     <spotless.version>2.0.1</spotless.version>
     <version.slf4j>1.7.30</version.slf4j>
-    <junit.version>5.6.2</junit.version>
+    <junit.version>5.7.2</junit.version>
   </properties>
   <scm>
     <connection>scm:git:git@github.com:KengoTODA/findbugs-slf4j.git</connection>
@@ -75,13 +75,13 @@
             <dependency>
               <groupId>com.google.errorprone</groupId>
               <artifactId>error_prone_core</artifactId>
-              <version>2.3.4</version>
+              <version>2.9.0</version>
             </dependency>
           </dependencies>
         </plugin>
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>3.1.0</version>
+          <version>3.2.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
