@@ -40,7 +40,7 @@ public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray 
     potentialPlaceHolderMismatch = HashBasedTable.create();
     potentialSignOnlyFormat = HashBasedTable.create();
     super.visitClassContext(classContext);
-    validatePrivateMethodCall();
+    validatePrivateMethodInvocation();
   }
 
   /**
@@ -48,7 +48,7 @@ public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray 
    *
    * @see https://github.com/KengoTODA/findbugs-slf4j/issues/35
    */
-  private void validatePrivateMethodCall() {
+  private void validatePrivateMethodInvocation() {
     for (Cell<Method, Integer, List<PotentialPlaceHolderMismatch>> cell :
         potentialPlaceHolderMismatch.cellSet()) {
       Method method = cell.getRowKey();
