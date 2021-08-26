@@ -200,7 +200,7 @@ public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray 
   @StaticConstant
   private static final Pattern SIGNATURE_PATTERN = Pattern.compile("^\\((.*)\\).*$");
 
-  private String[] splitSignature(String methodSignature) {
+  private static String[] splitSignature(String methodSignature) {
     final Matcher matcher = SIGNATURE_PATTERN.matcher(methodSignature);
     if (matcher.find()) {
       String[] arguments = matcher.group(1).split(";");
