@@ -13,8 +13,7 @@
     <module>sonar-plugin</module>
   </modules>
   <properties>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.release>8</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spotbugs.version>4.0.6</spotbugs.version>
     <spotless.version>2.0.1</spotless.version>
@@ -51,33 +50,6 @@
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.1</version>
-          <configuration>
-            <compilerId>javac-with-errorprone</compilerId>
-            <source>8</source>
-            <target>8</target>
-            <encoding>${project.build.sourceEncoding}</encoding>
-            <forceJavacCompilerUse>true</forceJavacCompilerUse>
-            <showWarnings>true</showWarnings>
-            <compilerArgs>
-              <!--
-                workaround to avoid the bug in errorprone
-                https://github.com/google/error-prone/issues/780#issuecomment-357952383
-              -->
-              <arg>-Xep:ParameterName:OFF</arg>
-            </compilerArgs>
-          </configuration>
-          <dependencies>
-            <dependency>
-              <groupId>org.codehaus.plexus</groupId>
-              <artifactId>plexus-compiler-javac-errorprone</artifactId>
-              <version>2.8.6</version>
-            </dependency>
-            <dependency>
-              <groupId>com.google.errorprone</groupId>
-              <artifactId>error_prone_core</artifactId>
-              <version>2.3.4</version>
-            </dependency>
-          </dependencies>
         </plugin>
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
@@ -123,7 +95,7 @@
         <plugin>
           <groupId>org.sonarsource.scanner.maven</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
-          <version>3.7.0.1746</version>
+          <version>3.9.0.2155</version>
         </plugin>
         <plugin>
           <groupId>org.jacoco</groupId>
