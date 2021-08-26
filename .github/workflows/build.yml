@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           cache: maven
-          java-version: 8
+          java-version: 11
           distribution: temurin
       - run: |
          ./mvnw verify -Dversion.slf4j=${{ matrix.slf4j }} -Dgpg.skip -B
