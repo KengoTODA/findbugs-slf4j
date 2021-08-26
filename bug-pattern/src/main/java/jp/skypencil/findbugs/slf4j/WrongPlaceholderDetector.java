@@ -46,7 +46,7 @@ public class WrongPlaceholderDetector extends AbstractDetectorForParameterArray 
   /**
    * Check all private method invocation, to detect {@code SLF4J_PLACE_HOLDER_MISMATCH}.
    *
-   * @see https://github.com/KengoTODA/findbugs-slf4j/issues/35
+   * @see <a href="https://github.com/KengoTODA/findbugs-slf4j/issues/35">GitHub issue</a>
    */
   private void validatePrivateMethodInvocation() {
     for (Cell<Method, Integer, List<PotentialPlaceHolderMismatch>> cell :
