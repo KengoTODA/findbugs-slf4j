@@ -4,7 +4,6 @@ This product helps you to verify usage of SLF4J 1.6, 1.7 and 1.8. Works with Jav
 
 To use this plugin with SonarQube, see [here](sonar-plugin/README.md). To detect problems at compile time, see [errorprone-slf4j](https://github.com/KengoTODA/errorprone-slf4j).
 
-[![Build Status](https://secure.travis-ci.org/KengoTODA/findbugs-slf4j.png)](http://travis-ci.org/KengoTODA/findbugs-slf4j)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=jp.skypencil.findbugs.slf4j%3Afindbugs-slf4j&metric=alert_status)](https://sonarcloud.io/dashboard?id=jp.skypencil.findbugs.slf4j%3Afindbugs-slf4j)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/jp.skypencil.findbugs.slf4j/findbugs-slf4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/jp.skypencil.findbugs.slf4j/findbugs-slf4j)
 
