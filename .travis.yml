@@ -15,13 +15,13 @@ env:
     - SLF4J_VERSION=1.6.6
 install: true
 script:
-  - ./mvnw verify -Dversion.slf4j=${SLF4J_VERSION} -Dgpg.skip -B
+  - ./mvn -T 1C verify -Dversion.slf4j=${SLF4J_VERSION} -Dgpg.skip -B
 jobs:
   include:
     - stage: analysis
       if: ( type = pull_request and head_repo =~ ^KengoTODA/ ) or ( type != pull_request and repo =~ ^KengoTODA/ )
       script:
-        - ./mvnw org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar -Dgpg.skip -B
+        - ./mvn -T 1C org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar -Dgpg.skip -B
 notifications:
   email:
     recipients:
