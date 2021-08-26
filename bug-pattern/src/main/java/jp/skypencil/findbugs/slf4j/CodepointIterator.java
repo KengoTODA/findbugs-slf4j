@@ -1,6 +1,7 @@
 package jp.skypencil.findbugs.slf4j;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 final class CodepointIterator implements Iterator<Integer> {
   private CharSequence sequence;
@@ -17,6 +18,9 @@ final class CodepointIterator implements Iterator<Integer> {
 
   @Override
   public Integer next() {
+    if (index >= sequence.length()) {
+      throw new NoSuchElementException();
+    }
     final int result;
     if (Character.isHighSurrogate(sequence.charAt(index))) {
       result = (sequence.charAt(index) << 16) + sequence.charAt(index + 1);
