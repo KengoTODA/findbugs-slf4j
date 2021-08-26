@@ -69,7 +69,7 @@ public abstract class AbstractDetectorForParameterArray extends OpcodeStackDetec
   /**
    * Check all private method invocation, to detect {@code SLF4J_FORMAT_SHOULD_BE_CONST}.
    *
-   * @see https://github.com/KengoTODA/findbugs-slf4j/issues/35
+   * @see <a href="https://github.com/KengoTODA/findbugs-slf4j/issues/35">GitHub issue</a>
    */
   private void validatePrivateMethodCall() {
     for (Cell<Method, Integer, List<BugInstance>> cell : potentialBugs.cellSet()) {
