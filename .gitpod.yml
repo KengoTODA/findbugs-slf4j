@@ -1,0 +1,4 @@
+image: eclipse-temurin:8
+tasks:
+  - init: ./mvnw dependency:go-offline
+    command: ./mvnw -v
