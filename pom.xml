@@ -17,7 +17,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spotbugs.version>4.0.6</spotbugs.version>
     <spotless.version>2.0.1</spotless.version>
-    <version.slf4j>1.7.30</version.slf4j>
+    <version.slf4j>1.7.32</version.slf4j>
     <junit.version>5.7.2</junit.version>
   </properties>
   <scm>
@@ -229,7 +229,7 @@
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>4.13.1</version>
+        <version>4.13.2</version>
         <scope>test</scope>
       </dependency>
       <dependency>
