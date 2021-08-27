@@ -16,7 +16,7 @@
     <maven.compiler.release>8</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spotbugs.version>4.0.6</spotbugs.version>
-    <spotless.version>2.0.1</spotless.version>
+    <spotless.version>2.12.3</spotless.version>
     <version.slf4j>1.7.32</version.slf4j>
     <junit.version>5.7.2</junit.version>
   </properties>
@@ -63,7 +63,7 @@
         <plugin>
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
-          <version>4.0.4</version>
+          <version>4.3.0</version>
           <dependencies>
             <dependency>
               <groupId>com.github.spotbugs</groupId>
@@ -100,7 +100,7 @@
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.8.5</version>
+          <version>0.8.7</version>
         </plugin>
         <plugin>
           <groupId>com.diffplug.spotless</groupId>
