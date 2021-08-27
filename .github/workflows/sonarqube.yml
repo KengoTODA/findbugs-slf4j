@@ -23,7 +23,7 @@ jobs:
           -Dsonar.projectKey=jp.skypencil.findbugs.slf4j:findbugs-slf4j \
           -Dsonar.organization=kengotoda-github \
           -Dsonar.host.url=https://sonarcloud.io \
-          ${PR_NUMBER:+ -Dsonar.pullrequest.key=$PR_NUMBER }
+          ${PR_NUMBER:+ -Dsonar.pullrequest.key=$PR_NUMBER -Dsonar.pullrequest.branch=${{ github.event.pull_request.head.ref }} }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_LOGIN }}
