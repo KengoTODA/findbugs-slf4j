@@ -16,9 +16,9 @@
     <maven.compiler.release>8</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spotbugs.version>4.4.1</spotbugs.version>
-    <spotless.version>2.13.1</spotless.version>
+    <spotless.version>2.17.5</spotless.version>
     <version.slf4j>1.7.32</version.slf4j>
-    <junit.version>5.7.2</junit.version>
+    <junit.version>5.8.0</junit.version>
   </properties>
   <scm>
     <connection>scm:git:git@github.com:KengoTODA/findbugs-slf4j.git</connection>
@@ -63,7 +63,7 @@
         <plugin>
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
-          <version>4.3.0</version>
+          <version>4.5.0.0</version>
           <dependencies>
             <dependency>
               <groupId>com.github.spotbugs</groupId>
