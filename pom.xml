@@ -15,7 +15,7 @@
   <properties>
     <maven.compiler.release>8</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spotbugs.version>4.4.1</spotbugs.version>
+    <spotbugs.version>4.6.0</spotbugs.version>
     <spotless.version>2.17.5</spotless.version>
     <version.slf4j>1.7.32</version.slf4j>
     <junit.version>5.8.2</junit.version>
@@ -241,7 +241,7 @@
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
-        <version>4.1.0</version>
+        <version>4.4.0</version>
         <scope>test</scope>
       </dependency>
       <dependency>
