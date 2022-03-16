@@ -17,7 +17,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spotbugs.version>4.6.0</spotbugs.version>
     <spotless.version>2.17.5</spotless.version>
-    <version.slf4j>1.7.32</version.slf4j>
+    <version.slf4j>1.7.36</version.slf4j>
     <junit.version>5.8.2</junit.version>
   </properties>
   <scm>
@@ -277,7 +277,7 @@
       <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
-        <version>1.18.20</version>
+        <version>1.18.22</version>
         <scope>provided</scope>
       </dependency>
     </dependencies>
