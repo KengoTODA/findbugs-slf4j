@@ -8,6 +8,15 @@
   <artifactId>sonar-findbugs-slf4j-plugin</artifactId>
   <name>findbugs-slf4j sonar plugin</name>
   <packaging>sonar-plugin</packaging>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <scope>provided</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <build>
     <plugins>
       <plugin>
